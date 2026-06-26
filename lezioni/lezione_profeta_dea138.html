@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson Plan — Segui il profeta, egli conosce la retta via (DeA 1:38)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.4em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.85em;
+      opacity: 0.85;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid #c9922a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: #c9922a;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .section-header:hover { opacity: 0.8; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: #1a3a5c;
+      font-weight: bold;
+      margin-left: -8px;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      overflow: visible;
+    }
+    .section.collapsed .section-header { margin-bottom: 0; }
+    .section.collapsed > :not(.section-header) {
+      display: none;
+    }
+
+    .section-badge {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+
+    .section-time {
+      background: #e8f0fb;
+      color: #1a3a5c;
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+
+    h2 {
+      font-size: 1.05em;
+      color: #1a3a5c;
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 0.9em;
+      color: #555;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: sans-serif;
+    }
+
+    p { margin-bottom: 10px; }
+
+    .question {
+      background: #eef4ff;
+      border-left: 4px solid #1a3a5c;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.78em;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid #c9922a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .scripture-inline cite {
+      display: block;
+      margin-top: 4px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.82em;
+      color: #c9922a;
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid #2a7a2a;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: sans-serif;
+    }
+
+    .tip-box::before {
+      content: "💡 Nota per il docente: ";
+      font-weight: bold;
+      color: #2a7a2a;
+    }
+
+    .summary-box {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .summary-box p { margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      font-family: sans-serif;
+    }
+
+    th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0d8cc;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed #c9922a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #888;
+      margin-top: 24px;
+      font-family: sans-serif;
+    }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+    }
+
+    /* Bottom Sheet FAB */
+    .bottom-sheet-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .bottom-sheet-fab:hover { background: #254f7a; }
+    .bottom-sheet-fab .fab-icon { font-size: 1.1em; }
+
+    .teacher-study-fab {
+      bottom: 76px;
+      background: #2a7a2a;
+    }
+    .teacher-study-fab:hover { background: #356f35; }
+
+    /* Overlay */
+    .bottom-sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+    .bottom-sheet-overlay.active { display: block; }
+
+    /* Bottom Sheet Panel */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+    .bottom-sheet.active { transform: translateY(0); }
+
+    .bottom-sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+      cursor: grab;
+    }
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+    }
+    .bottom-sheet-title {
+      font-family: sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: #1a3a5c;
+    }
+    .bottom-sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+    .bottom-sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .bottom-sheet-body a {
+      color: #1a3a5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .bottom-sheet-body a:hover { color: #c9922a; }
+
+    .ai-warning {
+      background: #fff3cd;
+      border-left: 4px solid #c9922a;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: sans-serif;
+      color: #5a3d00;
+    }
+
+    .ai-warning strong {
+      display: block;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.78em;
+    }
+
+    .book-badge {
+      display: inline-block;
+      border-radius: 10px;
+      padding: 2px 7px;
+      font-size: 0.75em;
+      font-weight: bold;
+      white-space: nowrap;
+      font-family: sans-serif;
+      background: #e8f0fb;
+      color: #1a3a5c;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>«Segui il profeta, egli conosce la retta via»</h1>
+  <p>Fiducia nel Profeta e Rivelazione Personale<br/>
+  <strong>Dottrina e Alleanze 1:38</strong></p>
+  <p style="margin-top:8px; font-size:0.78em; opacity:0.7;">Lesson Plan · Classe · 2026</p>
+</header>
+
+<div class="verse-box">
+  «Ciò che io il Signore ho detto, l'ho detto, e non mi scuso; e sebbene i cieli e la terra passino, la mia parola non passerà, ma sarà tutta adempiuta; che sia dalla mia propria voce o dalla voce dei miei servitori è lo stesso.»
+  <cite>— Dottrina e Alleanze 1:38</cite>
+</div>
+
+<!-- OBIETTIVO -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Obiettivo</span>
+  </div>
+  <div class="section-content">
+    <p>Far emergere questa domanda onesta: <em>«Se i profeti possono sbagliare, perché dovremmo seguirli come se fosse Dio a parlare?»</em></p>
+    <p>Guidare gli studenti verso una risposta radicata nelle scritture, <strong>senza minimizzare la tensione reale</strong>.</p>
+  </div>
+</div>
+
+<!-- PARTE 1 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 1</span>
+    <h2>Apertura</h2>
+    <span class="section-time">5–10 min</span>
+  </div>
+
+  <div class="question">
+    <strong>Domanda di apertura</strong>
+    «Avete mai ricevuto un consiglio da un genitore, un insegnante o un leader che non capivate del tutto in quel momento, ma poi si è rivelato giusto?»
+  </div>
+
+  <div class="tip-box">
+    Lascia condividere 2–3 esperienze, poi fai il collegamento verso l'argomento centrale.
+  </div>
+
+  <p>Collegamento verso la lezione:</p>
+  <p>«Oggi parliamo di qualcosa di simile, ma su scala più grande: come ci relazioniamo alla voce del profeta quando non capiamo — o addirittura quando sembra che possa sbagliare?»</p>
+</div>
+
+<!-- PARTE 2 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 2</span>
+    <h2>Il Versetto al Centro</h2>
+    <span class="section-time">5 min</span>
+  </div>
+
+  <p>Leggi lentamente DeA 1:38 ad alta voce.</p>
+
+  <div class="question">
+    <strong>Q1 — Comprensione iniziale</strong>
+    «Cosa vi colpisce di questo versetto? Cosa sembra facile da accettare? Cosa invece vi crea qualche dubbio o domanda?»
+  </div>
+
+  <div class="tip-box">
+    Lascia emergere l'imbarazzo o il dubbio — è il punto di ingresso reale della lezione.
+  </div>
+
+  <div class="question">
+    <strong>Q2 — La domanda onesta</strong>
+    «Se il Signore dice che ascoltare i suoi servitori è come ascoltare Lui… ma i suoi servitori sono esseri umani fallibili — cosa succede quando un leader sbaglia? Abbiamo già detto la cosa sbagliata usando il nome di Dio?»
+  </div>
+</div>
+
+<!-- PARTE 3 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 3</span>
+    <h2>La Tensione Reale</h2>
+    <span class="section-time">10 min</span>
+  </div>
+
+  <div class="tip-box">
+    Non evitare questa tensione. Ammettila apertamente con gli studenti.
+  </div>
+
+  <p>«Questa tensione è reale. La Bibbia stessa ce lo conferma — Pietro sbagliò, Giona fuggì, Mosè non poté entrare nella terra promessa. I profeti sono uomini.»</p>
+
+  <div class="scripture-inline">
+    «Ma quando Pietro venne ad Antiochia, gli resistetti in faccia perché era da condannare.»
+    <cite>— Galati 2:11</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «Maledetto sia colui che pone fiducia nel braccio della carne.»
+    <cite>— 2 Nefi 28:31</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q3 — Ragionamento</strong>
+    «Allora c'è differenza tra un profeta che parla come uomo e un profeta che parla come strumento di Dio? Come facciamo a distinguerli?»
+  </div>
+</div>
+
+<!-- PARTE 4 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 4</span>
+    <h2>La Chiave — DeA 68:3–4</h2>
+    <span class="section-time">10 min</span>
+  </div>
+
+  <div class="scripture-inline">
+    «…le cui parole voi riceverete, come se fosse dalla mia propria bocca… Poiché pronunciando le parole di Cristo, <strong>se lo fanno quando mossi dallo Spirito Santo</strong>, quelle parole saranno scrittura, saranno volontà del Signore…»
+    <cite>— Dottrina e Alleanze 68:3–4</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q4 — Analisi del testo</strong>
+    «Notate una condizione in questo versetto? Quando è che le loro parole hanno questo peso?»
+  </div>
+
+  <div class="tip-box">
+    Guida verso: «quando mossi dallo Spirito Santo» — non ogni parola in assoluto, ma quando parlano per ispirazione.
+  </div>
+
+  <div class="question">
+    <strong>Q5 — Conseguenza pratica</strong>
+    «Questo significa che dobbiamo essere passivi e accettare tutto ciecamente? O c'è qualcosa che Dio si aspetta da noi?»
+  </div>
+</div>
+
+<!-- PARTE 5 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 5</span>
+    <h2>Non Fede Cieca, ma Fede Attiva</h2>
+    <span class="section-time">10 min</span>
+  </div>
+
+  <div class="scripture-inline">
+    «…studia la questione nella tua mente; poi devi chiedermi se è giusta, e se è giusta farò sì che il tuo petto bruci in te; pertanto, sentirai che è giusto.»
+    <cite>— Dottrina e Alleanze 9:8</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «…chiedete a Dio, il Padre Eterno, nel nome di Cristo, se queste cose non sono vere; e se chiederete con cuore sincero, con reale intento, avendo fede in Cristo, egli vi manifesterà la verità di esse per il potere dello Spirito Santo.»
+    <cite>— Moroni 10:4</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q6 — Inversione della prospettiva</strong>
+    «E se il punto non fosse 'fidarsi ciecamente del profeta'… ma sviluppare una relazione con lo Spirito Santo abbastanza forte da ricevere la tua conferma personale di ciò che il profeta insegna?»
+  </div>
+
+  <div class="question">
+    <strong>Q7 — Domanda provocatoria</strong>
+    «Qualcuno di voi ha mai pregato per ricevere conferma di ciò che il Presidente Nelson ha insegnato? O avete semplicemente accettato — o rifiutato — senza chiedere a Dio?»
+  </div>
+</div>
+
+<!-- PARTE 6 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 6</span>
+    <h2>Perché il Sistema Funziona</h2>
+    <span class="section-time">10 min</span>
+  </div>
+
+  <div class="scripture-inline">
+    «Certo, il Signore Dio non fa nulla senza rivelare il suo segreto ai suoi servitori, i profeti.»
+    <cite>— Amos 3:7</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q8 — Sul carattere di Dio</strong>
+    «Perché Dio usa i profeti invece di parlare direttamente a tutti? Cosa ci dice questo del suo carattere?»
+  </div>
+
+  <div class="scripture-inline">
+    «In verità, in verità vi dico: chi riceve colui che io mando, riceve me; e chi riceve me, riceve colui che mi ha mandato.»
+    <cite>— Giovanni 13:20</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q9 — Il piano di Dio</strong>
+    «Se Gesù stesso ha usato questa logica, cosa ci dice su come funziona il piano di Dio per comunicare con i suoi figli?»
+  </div>
+
+  <div class="scripture-inline">
+    «Sì, ascoltate come se venissero dalla mia propria bocca, con tutta pazienza e fede. Poiché seguendo questi principi, le porte dell'inferno non prevarranno su di voi…»
+    <cite>— Dottrina e Alleanze 21:4–6</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q10 — Conclusiva</strong>
+    «Dio promette che le porte dell'inferno non prevarranno. Questo è un impegno da parte Sua che il sistema funziona. Come cambia questo la vostra relazione con l'insegnamento del profeta?»
+  </div>
+</div>
+
+<!-- PARTE 7 -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 7</span>
+    <h2>Sintesi e Chiusura</h2>
+    <span class="section-time">5 min</span>
+  </div>
+
+  <div class="summary-box">
+    <p>Non ci viene chiesto di seguire ciecamente un uomo.</p>
+    <p>Ci viene chiesto di seguire Dio, che ha scelto di comunicare attraverso uomini chiamati e sostenuti da Lui — e che ci ha dato lo Spirito Santo come conferma personale.</p>
+    <p><em>La fallibilità dei profeti non è un bug nel sistema — è la prova che Dio può compiere cose meravigliose attraverso vasi fragili. E questo ci dà speranza per noi stessi.</em></p>
+  </div>
+
+  <h3>Riflessione finale (in silenzio o su carta)</h3>
+  <div class="reflection">
+    «C'è qualcosa che il profeta ha insegnato recentemente che non ho ancora portato davanti al Signore in preghiera? Cosa cambia se lo faccio questa settimana?»
+  </div>
+</div>
+
+<!-- PARTE 8 — DIRIGENTI LOCALI -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-badge">Parte 8</span>
+    <h2>E se il Problema è il Dirigente Locale?</h2>
+    <span class="section-time">10–15 min</span>
+  </div>
+
+  <p>Seguire il Profeta è spesso più facile — è lontano, parla raramente, e quando parla lo fa con grande peso. Ma il vescovo, il presidente di ramo, il presidente di palo… li vediamo ogni domenica. Conosciamo i loro difetti. Possiamo arrabbiarci con loro.</p>
+
+  <div class="question">
+    <strong>Q11 — La domanda pratica</strong>
+    «C'è differenza, secondo voi, tra seguire il Profeta e seguire il vostro vescovo? Perché può essere più difficile con il secondo?»
+  </div>
+
+  <div class="tip-box">
+    Lascia emergere le esperienze personali — questa è spesso la ferita reale dietro le domande teoriche. Non correggere subito, ascolta.
+  </div>
+
+  <h3>Il Sistema ha Livelli di Autorità</h3>
+  <p>DeA 1:38 parla di «servitori» al plurale — ma non tutti i servitori hanno lo stesso livello di chiavi e responsabilità. La Chiesa è organizzata in modo che nessun leader locale abbia l'ultima parola da solo.</p>
+
+  <div class="scripture-inline">
+    «…ognuno in suo grado, ognuno nel suo luogo ordinato…»
+    <cite>— Dottrina e Alleanze 107:26 (cfr. tutto il cap. 107 sull'organizzazione dei presiedenti)</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «…è necessario obbedire a Dio piuttosto che agli uomini.»
+    <cite>— Atti 5:29</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q12 — Il principio di Atti 5:29</strong>
+    «Gli apostoli stessi hanno detto questo al Sinedrio — un'autorità religiosa riconosciuta. Quando è legittimo dire 'obbedisco a Dio piuttosto che a quest'uomo'? E come si fa senza cadere nell'orgoglio?»
+  </div>
+
+  <h3>E se Dicono Cose Contrarie al Vangelo?</h3>
+
+  <div class="scripture-inline">
+    «Ma anche se noi, o un angelo del cielo, vi annunziasse un vangelo diverso da quello che vi abbiamo annunziato, sia egli anatema.»
+    <cite>— Galati 1:8</cite>
+  </div>
+
+  <p>Paolo qui è chiaro: il vangelo rivelato è fisso — <strong>nessuno ha l'autorità di cambiarlo</strong>, nemmeno un angelo. Quindi se un dirigente locale insegna qualcosa di contrario a esso, non è il vangelo a essere sbagliato: è lui che sta sbagliando. I dirigenti <em>possono</em> errare — ma i loro errori non toccano la verità del vangelo. La fedeltà è alle scritture e ai principi stabiliti, non alla persona.</p>
+
+  <div class="scripture-inline">
+    «Lo spirito di contesa non è di me, ma è del diavolo, che è il padre della contesa, e semina nel cuore degli uomini il desiderio di contendere con ira.»
+    <cite>— 3 Nefi 11:29</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q13 — La tensione pratica</strong>
+    «Come si fa a non essere d'accordo con un dirigente senza seminare discordia? C'è una differenza tra 'resistere in spirito di contesa' e 'avanzare una preoccupazione con rispetto'?»
+  </div>
+
+  <h3>Il Dovere di Verificare — Non è Ribellione, è Nobiltà</h3>
+  <p>Le scritture non chiedono al membro di accettare tutto ciecamente. Verificare è un obbligo, non un'opzione.</p>
+
+  <div class="scripture-inline">
+    «Carissimi, non credete a ogni spirito, ma <strong>provate gli spiriti</strong> per sapere se sono da Dio, perché molti falsi profeti sono venuti nel mondo.»
+    <cite>— 1 Giovanni 4:1</cite>
+  </div>
+
+  <p>Il verbo greco <em>δοκιμάζετε</em> è un imperativo — non un suggerimento. Dio ordina al credente di esaminare.</p>
+
+  <div class="scripture-inline">
+    «Questi erano più nobili di quelli di Tessalonica, perché ricevettero la parola con ogni prontezza, <strong>esaminando ogni giorno le Scritture</strong> per vedere se le cose stavano così.»
+    <cite>— Atti 17:11 (i Bereani)</cite>
+  </div>
+
+  <div class="tip-box">
+    I Bereani verificano Paolo — l'apostolo — sulle scritture, e questo viene lodato come nobiltà. Non è irrispettoso verso il leader: è rispetto verso Dio.
+  </div>
+
+  <div class="scripture-inline">
+    «…sappiate sempre se è di Dio.»
+    <cite>— Dottrina e Alleanze 50:31–33</cite>
+  </div>
+
+  <div class="question">
+    <strong>Q13b — Capovolgimento</strong>
+    «Se esaminare le parole di un apostolo come Paolo è definito "nobile" dalle scritture, cosa vi dice questo del vostro diritto — e dovere — di verificare ciò che insegna un dirigente locale?»
+  </div>
+
+  <h3>Riconoscere l'Errore Senza Farsi Guerra</h3>
+  <p>Puoi avere ragione nel contenuto e torto nel metodo. Le scritture distinguono chiaramente tra i due.</p>
+
+  <div class="scripture-inline">
+    «Giovanni gli disse: Maestro, abbiamo visto qualcuno che scacciava demoni in tuo nome, e glielo abbiamo vietato perché non ci seguiva. Ma Gesù disse: Non glielo vietate… perché chi non è contro di noi è per noi.»
+    <cite>— Marco 9:38–40</cite>
+  </div>
+
+  <p>Gli apostoli avevano tecnicamente ragione sul principio dell'autorità — ma Gesù li corresse sul metodo. La preoccupazione per l'"ordine" non giustifica bloccare il bene che altri stanno facendo.</p>
+
+  <div class="scripture-inline">
+    «Chi sei tu per giudicare il servo di un altro? Egli sta o cade davanti al suo Signore.»
+    <cite>— Romani 14:4</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «L'ira dell'uomo non compie la giustizia di Dio.»
+    <cite>— Giacomo 1:20</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «…solo mediante la persuasione, la pazienza, la dolcezza e la mansuetudine, l'amore non simulato; mediante la bontà e la conoscenza pura…»
+    <cite>— Dottrina e Alleanze 121:41–42</cite>
+  </div>
+
+  <div class="tip-box">
+    DeA 121:41–42 è rivolto ai leader su come esercitare l'autorità — ma lo stesso spirito descrive come un membro dovrebbe rispondere quando un leader sbaglia. Il tono non cambia a seconda di chi ha ragione.
+  </div>
+
+  <div class="question">
+    <strong>Q13c — Applicazione personale</strong>
+    «Quando avete riconosciuto un errore di un leader, qual è stata la vostra prima reazione interiore? Come cambierebbe la situazione se la reazione fosse quella di Giacomo 1:20 invece dell'ira?»
+  </div>
+
+  <h3>Il Processo Corretto — Non il Silenzio, Non la Rivolta</h3>
+  <p>Le scritture non ci chiedono né di tacere sempre né di ribellarci pubblicamente. C'è una via di mezzo:</p>
+
+  <div class="scripture-inline">
+    «Inoltre, se il tuo fratello ti offende, va' e rimproveralo tra te e lui solo; se ti ascolta, hai guadagnato tuo fratello. Ma se non ti ascolta, prendi ancora con te una o due persone… E se non le ascolterà nemmeno, dillo alla chiesa.»
+    <cite>— Matteo 18:15–17</cite>
+  </div>
+
+  <div class="scripture-inline">
+    «E quando Alma non poté giudicare da solo queste cose, portò le loro cause davanti al Signore suo Dio.»
+    <cite>— Mosiah 26:13</cite>
+  </div>
+
+  <div class="tip-box">
+    Quando non sai come agire: vai prima da Dio, poi parla privatamente con il dirigente, poi — se necessario — con l'autorità superiore. Non sui social, non nei corridoi.
+  </div>
+
+  <div class="question">
+    <strong>Q14 — Applicazione</strong>
+    «Se un dirigente locale ti desse un consiglio che ti sembra sbagliato, o addirittura contrario al vangelo, quali sarebbero i tuoi passi concreti? Cosa faresti prima di tutto?»
+  </div>
+
+  <h3>La Responsabilità di Chi Guida</h3>
+
+  <div class="scripture-inline">
+    «…quando noi impariamo che i diritti del sacerdozio sono inseparabilmente connessi con le potenze del cielo, e che le potenze del cielo non possono essere controllate né gestite, se non nei principi di rettitudine… il Signore i suoi diritti del sacerdozio gli saranno tolti.»
+    <cite>— Dottrina e Alleanze 121:36–37</cite>
+  </div>
+
+  <p>Dio stesso si riserva di correggere i leader che sbagliano. Non siamo noi i giudici ultimi — ma possiamo portare le nostre preoccupazioni con spirito di umiltà a Lui e, quando appropriato, alle autorità competenti.</p>
+
+  <div class="summary-box">
+    <p><strong>Sintesi di questa parte:</strong></p>
+    <p>Seguire un dirigente locale non significa obbedienza cieca. Significa:<br/>
+    1. Pregare prima di reagire<br/>
+    2. Verificare che il suo consiglio sia coerente con le scritture e la dottrina stabilita<br/>
+    3. Se c'è un problema reale, parlargli privatamente con rispetto<br/>
+    4. Se persiste, rivolgersi all'autorità superiore<br/>
+    5. Non seminare discordia — ma non ignorare nemmeno ciò che lo Spirito ci indica</p>
+  </div>
+
+  <h3>Riflessione personale</h3>
+  <div class="reflection">
+    «C'è un dirigente con cui faccio fatica in questo momento? Ho portato questa situazione davanti a Dio in preghiera? Ho cercato di capire la sua prospettiva, oppure ho solo reagito?»
+  </div>
+</div>
+
+<footer>
+  Lezione preparata per uso personale · DeA 1:38 · 2026
+</footer>
+
+<!-- FAB buttons -->
+<button class="bottom-sheet-fab teacher-study-fab" id="teacherStudyFab" onclick="openSheet('teacherStudySheet')">
+  <span class="fab-icon">📝</span> Studio
+</button>
+
+<button class="bottom-sheet-fab" id="scripturesFab" onclick="openSheet('scripturesSheet')">
+  <span class="fab-icon">📖</span> Scritture
+</button>
+
+<!-- Overlay -->
+<div class="bottom-sheet-overlay" id="overlay" onclick="closeSheet()"></div>
+
+<!-- Bottom Sheet -->
+<div class="bottom-sheet" id="scripturesSheet">
+  <div class="bottom-sheet-handle-row" id="sheetHandle">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">📖 Scritture della Lezione</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Parte</th>
+          <th>Tema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/1?lang=ita&id=p38#p38" target="_blank" rel="noopener">DeA 1:38</a></td><td><span class="book-badge">P.2</span></td><td>La voce dei servitori = la voce di Dio</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/68?lang=ita&id=p3-p4#p3" target="_blank" rel="noopener">DeA 68:3–4</a></td><td><span class="book-badge">P.4</span></td><td>Condizione: «quando mossi dallo Spirito»</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/9?lang=ita&id=p8#p8" target="_blank" rel="noopener">DeA 9:8</a></td><td><span class="book-badge">P.5</span></td><td>Studio + preghiera = conferma personale</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/21?lang=ita&id=p4-p6#p4" target="_blank" rel="noopener">DeA 21:4–6</a></td><td><span class="book-badge">P.6</span></td><td>Promessa di protezione nel seguire il profeta</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/amos/3?lang=ita&id=p7#p7" target="_blank" rel="noopener">Amos 3:7</a></td><td><span class="book-badge">P.6</span></td><td>Dio rivela i segreti ai profeti</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/13?lang=ita&id=p20#p20" target="_blank" rel="noopener">Giovanni 13:20</a></td><td><span class="book-badge">P.6</span></td><td>Ricevere i servitori = ricevere Cristo</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/gal/2?lang=ita&id=p11#p11" target="_blank" rel="noopener">Galati 2:11</a></td><td><span class="book-badge">P.3</span></td><td>I profeti sono uomini fallibili</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/moro/10?lang=ita&id=p4-p5#p4" target="_blank" rel="noopener">Moroni 10:4–5</a></td><td><span class="book-badge">P.5</span></td><td>La conferma dello Spirito è personale</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/28?lang=ita&id=p31#p31" target="_blank" rel="noopener">2 Nefi 28:31</a></td><td><span class="book-badge">P.3</span></td><td>Non fidarsi del braccio della carne</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/5?lang=ita&id=p29#p29" target="_blank" rel="noopener">Atti 5:29</a></td><td><span class="book-badge">P.8</span></td><td>Obbedire a Dio piuttosto che agli uomini</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/gal/1?lang=ita&id=p8#p8" target="_blank" rel="noopener">Galati 1:8</a></td><td><span class="book-badge">P.8</span></td><td>Nessuno ha autorità di cambiare il vangelo rivelato</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=ita&id=p29#p29" target="_blank" rel="noopener">3 Nefi 11:29</a></td><td><span class="book-badge">P.8</span></td><td>Lo spirito di contesa non è di Dio</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/18?lang=ita&id=p15-p17#p15" target="_blank" rel="noopener">Matteo 18:15–17</a></td><td><span class="book-badge">P.8</span></td><td>Come affrontare il disaccordo con un fratello</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/26?lang=ita&id=p13#p13" target="_blank" rel="noopener">Mosiah 26:13</a></td><td><span class="book-badge">P.8</span></td><td>Portare le cause difficili davanti a Dio</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/121?lang=ita&id=p36-p37#p36" target="_blank" rel="noopener">DeA 121:36–37</a></td><td><span class="book-badge">P.8</span></td><td>Il priesthood mal usato viene tolto</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/107?lang=ita" target="_blank" rel="noopener">DeA 107</a></td><td><span class="book-badge">P.8</span></td><td>I livelli e le responsabilità dell'autorità</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/1-jn/4?lang=ita&id=p1#p1" target="_blank" rel="noopener">1 Giovanni 4:1</a></td><td><span class="book-badge">P.8</span></td><td>Imperativo di provare gli spiriti</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/acts/17?lang=ita&id=p11#p11" target="_blank" rel="noopener">Atti 17:11</a></td><td><span class="book-badge">P.8</span></td><td>I Bereani verificano Paolo — lodati come nobili</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/50?lang=ita&id=p31-p33#p31" target="_blank" rel="noopener">DeA 50:31–33</a></td><td><span class="book-badge">P.8</span></td><td>Dovere di sapere se è di Dio</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/mark/9?lang=ita&id=p38-p40#p38" target="_blank" rel="noopener">Marco 9:38–40</a></td><td><span class="book-badge">P.8</span></td><td>Ragione nel contenuto, torto nel metodo</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/rom/14?lang=ita&id=p4#p4" target="_blank" rel="noopener">Romani 14:4</a></td><td><span class="book-badge">P.8</span></td><td>Il giudizio finale spetta a Dio, non a noi</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/james/1?lang=ita&id=p20#p20" target="_blank" rel="noopener">Giacomo 1:20</a></td><td><span class="book-badge">P.8</span></td><td>L'ira non compie la giustizia di Dio</td></tr>
+        <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/121?lang=ita&id=p41-p42#p41" target="_blank" rel="noopener">DeA 121:41–42</a></td><td><span class="book-badge">P.8</span></td><td>Il tono giusto: persuasione, dolcezza, amore</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Teacher Study Bottom Sheet -->
+<div class="bottom-sheet" id="teacherStudySheet">
+  <div class="bottom-sheet-handle-row">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">📝 Studio per l'insegnante</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <div class="tip-box">
+      La parte più importante della lezione è la preparazione spirituale dell'insegnante e la compagnia dello Spirito Santo. Questo schema è solo uno strumento per aiutare quella preparazione, non un sostituto della rivelazione personale.
+    </div>
+
+    <div class="ai-warning">
+      <strong>Avvertenza su contenuti generati con I.A.</strong>
+      Questo materiale è stato preparato come aiuto personale per lo studio e l'insegnamento. Non è dottrina ufficiale della Chiesa, non sostituisce le Scritture, i manuali ufficiali, le parole dei profeti viventi o la guida dei dirigenti autorizzati, e non deve essere venduto, presentato o distribuito come dottrina della Chiesa o come materiale ufficiale.
+    </div>
+
+    <h3>Prima di insegnare</h3>
+    <p>Rileggi le scritture principali già presenti nella tabella: DeA 1:38, DeA 68:3–4, DeA 21:4–6, Moroni 10:4–5 e DeA 121:41–42. Cerca non solo le risposte dottrinali, ma anche il tono con cui il Signore invita, corregge e rassicura.</p>
+
+    <h3>Discorso consigliato</h3>
+    <p><a href="https://www.churchofjesuschrist.org/study/general-conference/2018/04/revelation-for-the-church-revelation-for-our-lives?lang=ita" target="_blank" rel="noopener">Russell M. Nelson, «Rivelazione per la Chiesa, rivelazione per la nostra vita»</a>.</p>
+
+    <h3>Domande personali</h3>
+    <div class="question">
+      <strong>Preparazione spirituale</strong>
+      «Che cosa devo capire meglio io, prima di chiedere agli studenti di avere fiducia nei profeti e nello Spirito?»
+    </div>
+    <div class="question">
+      <strong>Sensibilità pastorale</strong>
+      «Ci sono studenti che potrebbero aver vissuto delusioni con dirigenti locali? Come posso lasciare spazio alla loro esperienza senza trasformare la lezione in contesa?»
+    </div>
+    <div class="question">
+      <strong>Invito finale</strong>
+      «Quale invito semplice posso dare per aiutare ciascuno a cercare una conferma personale questa settimana?»
+    </div>
+  </div>
+</div>
+
+<script>
+  // Initialize collapsible sections
+  document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(function (section) {
+      const header = section.querySelector('.section-header');
+      if (!header) return;
+
+      // Add toggle icon if not present
+      if (!header.querySelector('.section-toggle')) {
+        const toggle = document.createElement('span');
+        toggle.className = 'section-toggle';
+        toggle.textContent = '▼';
+        header.insertBefore(toggle, header.firstChild);
+      }
+
+      // Add click handler
+      header.addEventListener('click', function () {
+        section.classList.toggle('collapsed');
+      });
+    });
+  });
+
+  let activeSheet = null;
+
+  function openSheet(sheetId) {
+    closeSheet();
+    activeSheet = document.getElementById(sheetId);
+    activeSheet.classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet() {
+    if (activeSheet) {
+      activeSheet.classList.remove('active');
+      activeSheet.style.transform = '';
+      activeSheet = null;
+    }
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Drag down from the handle only. Sheet content remains scrollable.
+  (function () {
+    const handles = document.querySelectorAll('.bottom-sheet-handle-row');
+    let startY = 0;
+    let draggingSheet = null;
+
+    handles.forEach(function (handle) {
+      handle.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+        draggingSheet = handle.closest('.bottom-sheet');
+      }, { passive: true });
+
+      handle.addEventListener('touchmove', function (e) {
+        if (!draggingSheet) return;
+        const dy = e.touches[0].clientY - startY;
+        if (dy > 0) draggingSheet.style.transform = 'translateY(' + dy + 'px)';
+      }, { passive: true });
+
+      handle.addEventListener('touchend', function (e) {
+        if (!draggingSheet) return;
+        const dy = e.changedTouches[0].clientY - startY;
+        draggingSheet.style.transform = '';
+        if (dy > 80) closeSheet();
+        draggingSheet = null;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

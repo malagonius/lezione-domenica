@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gesù Cristo porta gioia – Giovani Donne</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.4em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.85em;
+      opacity: 0.85;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid #c9922a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite,
+    .scripture-inline cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: #c9922a;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .section-header:hover { opacity: 0.8; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: #1a3a5c;
+      font-weight: bold;
+      margin-left: -8px;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge {
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+
+    .section-badge {
+      background: #1a3a5c;
+      color: #fff;
+    }
+
+    .section-time,
+    .book-badge {
+      background: #e8f0fb;
+      color: #1a3a5c;
+    }
+
+    h2 {
+      font-size: 1.05em;
+      color: #1a3a5c;
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 0.9em;
+      color: #555;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: sans-serif;
+    }
+
+    p { margin-bottom: 10px; }
+
+    ul {
+      margin: 6px 0 10px 18px;
+      font-size: 0.93em;
+    }
+    ul li { margin-bottom: 4px; }
+
+    .question {
+      background: #eef4ff;
+      border-left: 4px solid #1a3a5c;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.78em;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid #c9922a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid #2a7a2a;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: sans-serif;
+    }
+
+    .tip-box::before {
+      content: "Nota per il docente: ";
+      font-weight: bold;
+      color: #2a7a2a;
+    }
+
+    .activity-box {
+      background: #f4f0ff;
+      border-left: 4px solid #6a3fa0;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+    }
+
+    .activity-box strong {
+      color: #6a3fa0;
+      font-size: 0.82em;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .summary-box {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .summary-box p { margin-bottom: 6px; }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed #c9922a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      font-family: sans-serif;
+    }
+
+    th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0d8cc;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #888;
+      margin-top: 24px;
+      font-family: sans-serif;
+      padding-bottom: 100px;
+    }
+
+    .bottom-sheet-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .bottom-sheet-fab:hover { background: #254f7a; }
+    .bottom-sheet-fab .fab-icon { font-size: 1.1em; }
+    .bottom-sheet-fab.teacher-fab {
+      bottom: 74px;
+      background: #2a7a2a;
+    }
+    .bottom-sheet-fab.teacher-fab:hover { background: #246724; }
+
+    .bottom-sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+    .bottom-sheet-overlay.active { display: block; }
+
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+    .bottom-sheet.active { transform: translateY(0); }
+
+    .bottom-sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+      cursor: grab;
+    }
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+    }
+    .bottom-sheet-title {
+      font-family: sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: #1a3a5c;
+    }
+    .bottom-sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+    .bottom-sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .bottom-sheet-body a {
+      color: #1a3a5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .bottom-sheet-body a:hover { color: #c9922a; }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Gesù Cristo porta gioia</h1>
+  <p>«Vi ho detto queste cose, affinché la mia gioia rimanga in voi, e la vostra gioia sia completa.»<br />
+  <strong>Giovanni 15:11</strong></p>
+  <p style="margin-top:8px; font-size:0.78em; opacity:0.7;">Lesson Plan · Giovani Donne · 2025</p>
+</header>
+
+<div class="verse-box">
+  «Adamo cadde perché gli uomini fossero; e gli uomini sono <em>affinché possano avere gioia</em>.»
+  <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=ita&id=p25#p25" target="_blank" rel="noopener" style="color:#c9922a;">2 Nefi 2:25</a></cite>
+</div>
+
+<!-- OBIETTIVO -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Obiettivo</span>
+  </div>
+  <div class="section-content">
+    <p>Aiutare le giovani donne a capire che la vera gioia non dipende dalle circostanze esterne, ma viene da Gesù Cristo e dal seguirLo con fedeltà.</p>
+    <p style="font-size:0.88em; color:#555; font-family:sans-serif;">Questa lezione si svolge in circa 30 minuti: icebreaker → scoperta del capitolo → discussione → riflessione pratica → testimonianza.</p>
+  </div>
+</section>
+
+<!-- PARTE 1: ICEBREAKER -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 1</span>
+    <h2>Cosa ci rende davvero felici?</h2>
+    <span class="section-time">5 min</span>
+  </div>
+  <div class="section-content">
+    <p>Inizia con una domanda aperta alla classe, invitando 3–4 risposte (amici, musica, social, sport, ecc.):</p>
+    <div class="question">
+      <strong>Domanda di apertura</strong>
+      «Cosa vi rende felici in questo periodo? Pensate a qualcosa di concreto.»
+    </div>
+    <p>Dopo aver raccolto le risposte, fai una seconda domanda più profonda:</p>
+    <div class="question">
+      <strong>Domanda di transizione</strong>
+      «Queste cose durano per sempre? Cosa succede quando non ci sono più?»
+    </div>
+    <p><strong>Transizione:</strong> «Oggi parliamo di un tipo di gioia che è più profonda e duratura — quella che viene da Gesù Cristo. Non è una felicità momentanea: è qualcosa che può restare dentro di noi anche quando la vita è difficile.»</p>
+    <div class="tip-box">Se la classe è silenziosa, puoi iniziare condividendo tu stessa un piccolo esempio personale per aprire l'atmosfera. Non spingere chi non vuole rispondere.</div>
+  </div>
+</section>
+
+<!-- PARTE 2: SCOPRIAMO IL CAPITOLO -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 2</span>
+    <h2>Scopriamo insieme la parola di Dio</h2>
+    <span class="section-time">10 min</span>
+  </div>
+  <div class="section-content">
+    <div class="activity-box">
+      <strong>Attività a gruppi</strong>
+      Dividi le ragazze in piccoli gruppi (2–3 persone). Assegna loro questa missione: leggete il capitolo e trovate —
+      <ul style="margin-top:6px;">
+        <li>1 frase su cosa <em>è</em> la vera gioia</li>
+        <li>1 cosa che la <em>ostacola</em></li>
+        <li>1 modo concreto per <em>trovarla</em></li>
+      </ul>
+      Dopo 5 minuti, ogni gruppo condivide con tutta la classe.
+    </div>
+
+    <h3>Punti chiave (se non emergono spontaneamente)</h3>
+    <p>Puoi evidenziare questi concetti se non vengono fuori dalla discussione dei gruppi:</p>
+    <ul>
+      <li>La gioia è diversa dalla felicità momentanea: è più stabile e profonda.</li>
+      <li>Viene dal seguire Gesù Cristo, fare scelte giuste e affidarsi all'espiazione.</li>
+      <li>Non significa che la vita è sempre facile — possiamo avere gioia <em>anche</em> nelle difficoltà.</li>
+      <li>La malvagità non dà mai vera gioia: può dare eccitazione, ma non pace.</li>
+    </ul>
+
+    <div class="scripture-inline">
+      «Non fate l'errore, mio figlio, di ritenere che la malvagità sia la felicità — la malvagità non è mai stata felicità.»
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/41?lang=ita&id=p10#p10" target="_blank" rel="noopener" style="color:#c9922a;">Alma 41:10</a></cite>
+    </div>
+
+    <div class="tip-box">Lascia spazio alle ragazze: non correggere subito le risposte imperfette. Ascolta, poi guida delicatamente verso i concetti chiave. Lo Spirito Santo lavora attraverso la loro scoperta personale.</div>
+  </div>
+</section>
+
+<!-- PARTE 3: DISCUSSIONE -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 3</span>
+    <h2>Domande per riflettere insieme</h2>
+    <span class="section-time">10 min</span>
+  </div>
+  <div class="section-content">
+    <p>Scegli 2–3 domande in base all'atmosfera della classe. Non devi usarle tutte:</p>
+
+    <div class="question">
+      <strong>Domanda 1</strong>
+      «Qual è la differenza tra divertirsi e provare vera gioia? Puoi fare un esempio concreto?»
+    </div>
+
+    <div class="question">
+      <strong>Domanda 2</strong>
+      «Perché a volte scegliamo cose che danno felicità momentanea, sapendo che non durano?»
+    </div>
+
+    <div class="question">
+      <strong>Domanda 3</strong>
+      «Come può Gesù Cristo aiutarci quando siamo tristi, stanche o stressate?»
+    </div>
+
+    <div class="question">
+      <strong>Domanda 4 – personale</strong>
+      «Avete mai provato pace o gioia facendo la cosa giusta, anche se era difficile?»
+    </div>
+
+    <div class="scripture-inline">
+      «Nel mondo avrete tribolazione; ma abbiate buon animo, io ho vinto il mondo.»
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=ita&id=p33#p33" target="_blank" rel="noopener" style="color:#c9922a;">Giovanni 16:33</a></cite>
+    </div>
+
+    <div class="tip-box">Se la discussione langue, puoi condividere un piccolo esempio personale — non una storia lunga, solo un momento autentico. L'autenticità del docente apre il cuore della classe più di qualsiasi tecnica.</div>
+  </div>
+</section>
+
+<!-- PARTE 4: ATTIVITÀ PRATICA -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 4</span>
+    <h2>Dove cerco la gioia?</h2>
+    <span class="section-time">4 min</span>
+  </div>
+  <div class="section-content">
+    <div class="activity-box">
+      <strong>Riflessione individuale</strong>
+      Chiedi alle ragazze di pensare in silenzio per un momento:
+      <p style="margin-top:8px; font-style:italic;">«Pensate a una cosa che fate spesso per sentirvi meglio… Vi avvicina davvero a Gesù Cristo, o vi allontana da Lui?»</p>
+    </div>
+
+    <p>Poi invita ciascuna a scrivere (o solo pensare) una cosa concreta per questa settimana:</p>
+    <div class="reflection">
+      «Scrivete una cosa sola che potete fare questa settimana per avvicinarvi di più a Gesù Cristo e a quella gioia duratura.»
+    </div>
+
+    <p style="font-size:0.88em; color:#555; font-family:sans-serif; margin-top:8px;">Esempi: pregare con più intenzione, leggere le Scritture un giorno, essere più gentile con qualcuno, evitare qualcosa che ti allontana dalla pace interiore.</p>
+
+    <div class="tip-box">Non chiedere di condividere questa riflessione a meno che qualcuna lo proponga spontaneamente. È un momento personale e intimo.</div>
+  </div>
+</section>
+
+<!-- PARTE 5: CONCLUSIONE -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Chiusura</span>
+    <h2>Testimonianza e invito finale</h2>
+    <span class="section-time">4 min</span>
+  </div>
+  <div class="section-content">
+    <div class="summary-box">
+      <p>La vera gioia non è solo sentirsi bene per un momento.</p>
+      <p>È sentirsi in pace dentro — anche quando la vita è difficile.</p>
+      <p>E questa gioia viene da Gesù Cristo: dal seguirLo, dall'affidarsi a Lui, dall'aprire il cuore alla Sua espiazione.</p>
+    </div>
+
+    <div class="scripture-inline">
+      «Vi ho detto queste cose, affinché la mia gioia rimanga in voi, e la vostra gioia sia completa.»
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=ita&id=p11#p11" target="_blank" rel="noopener" style="color:#c9922a;">Giovanni 15:11</a></cite>
+    </div>
+
+    <h3>Testimonianza</h3>
+    <div class="reflection">
+      Condividi la tua testimonianza — breve e sincera — che Gesù Cristo è la fonte della vera gioia, e che seguirLo cambia davvero come ci sentiamo dentro.
+    </div>
+
+    <p style="margin-top:12px; text-align:center; font-style:italic; color:#1a3a5c; font-size:1.05em;">«Il mondo offre divertimento.<br>Gesù Cristo offre gioia.»</p>
+  </div>
+</section>
+
+<footer>
+  Lezione preparata per uso personale · Giovani Donne · 2025<br />
+  La Chiesa di Gesù Cristo dei Santi degli Ultimi Giorni
+</footer>
+
+<!-- FAB SCRITTURE -->
+<button class="bottom-sheet-fab" id="fabBtn" onclick="openSheet('scriptureSheet')">
+  <span class="fab-icon">📖</span> Scritture
+</button>
+
+<!-- FAB STUDIO DOCENTE -->
+<button class="bottom-sheet-fab teacher-fab" id="teacherFabBtn" onclick="openSheet('teacherStudySheet')">
+  <span class="fab-icon">📋</span> Studio docente
+</button>
+
+<div class="bottom-sheet-overlay" id="overlay" onclick="closeSheet()"></div>
+
+<!-- BOTTOM SHEET: SCRITTURE -->
+<div class="bottom-sheet" id="scriptureSheet">
+  <div class="bottom-sheet-handle-row" id="sheetHandle">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">Scritture della lezione</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Parte</th>
+          <th>Tema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=ita&id=p25#p25" target="_blank" rel="noopener">2 Nefi 2:25</a></td>
+          <td><span class="book-badge">Intestazione</span></td>
+          <td>La gioia è il fine dell'esistenza umana</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/41?lang=ita&id=p10#p10" target="_blank" rel="noopener">Alma 41:10</a></td>
+          <td><span class="book-badge">Parte 2</span></td>
+          <td>La malvagità non è mai felicità</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=ita&id=p33#p33" target="_blank" rel="noopener">Giovanni 16:33</a></td>
+          <td><span class="book-badge">Parte 3</span></td>
+          <td>Gioia nelle difficoltà: Cristo ha vinto il mondo</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=ita&id=p11#p11" target="_blank" rel="noopener">Giovanni 15:11</a></td>
+          <td><span class="book-badge">Chiusura</span></td>
+          <td>La gioia di Cristo dimora in noi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- BOTTOM SHEET: STUDIO DOCENTE -->
+<div class="bottom-sheet" id="teacherStudySheet">
+  <div class="bottom-sheet-handle-row">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title" style="color:#2a7a2a;">Studio del docente</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+
+    <div class="tip-box">La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione. Nessuna tecnica, attività o schema può sostituire la rivelazione personale che ricevi pregando e studiando prima di insegnare.</div>
+
+    <h3>Scritture da studiare prima di insegnare</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Perché studiarla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/2-ne/2?lang=ita&id=p25#p25" target="_blank" rel="noopener">2 Nefi 2:25</a></td>
+          <td>Il fine dell'esistenza è la gioia — meditare su cosa significa questo per te personalmente.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/15?lang=ita&id=p11#p11" target="_blank" rel="noopener">Giovanni 15:11</a></td>
+          <td>Gesù offre una gioia completa — non temporanea. Cosa significa «completa» nella tua vita?</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/41?lang=ita&id=p10#p10" target="_blank" rel="noopener">Alma 41:10</a></td>
+          <td>La malvagità e la pace interiore sono incompatibili. Come comunicarlo con delicatezza a giovani donne che possono sentirsi giudicate?</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/john/16?lang=ita&id=p33#p33" target="_blank" rel="noopener">Giovanni 16:33</a></td>
+          <td>Cristo ha vinto il mondo — quindi la gioia è possibile anche nelle tribolazioni reali che le ragazze vivono.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/mosiah/2?lang=ita&id=p41#p41" target="_blank" rel="noopener">Mosia 2:41</a></td>
+          <td>Chi segue i comandamenti è benedetto in ogni circostanza — un versetto potente per la preparazione del docente.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Conferenza generale</h3>
+    <div class="scripture-inline">
+      <a href="https://www.churchofjesuschrist.org/study/general-conference/2016/10/joy-and-spiritual-survival?lang=ita" target="_blank" rel="noopener">«La gioia e la sopravvivenza spirituale»</a><br />
+      Presidente Russell M. Nelson · Ottobre 2016
+      <cite>Il profeta insegna che la gioia è una scelta consapevole ancorata in Gesù Cristo, indipendente dalle circostanze. Parla di come coltivare questa gioia anche nelle prove più dure. Lettura essenziale prima di insegnare questo capitolo.</cite>
+    </div>
+
+    <h3>Domande introspettive per la preparazione personale</h3>
+
+    <div class="question">
+      <strong>La mia esperienza personale</strong>
+      In questo momento della mia vita, sto cercando la gioia nelle cose giuste? C'è qualcosa che sto inseguendo pensando che mi darà pace, ma che in realtà non lo fa?
+    </div>
+
+    <div class="question">
+      <strong>Sensibilità della classe</strong>
+      Ci sono ragazze nella classe che stanno attraversando un momento difficile (lutti, problemi familiari, pressioni scolastiche, solitudine)? Come posso presentare la gioia senza sminuire il loro dolore reale?
+    </div>
+
+    <div class="question">
+      <strong>Invito spirituale</strong>
+      Qual è la cosa più importante che voglio che ogni ragazza porti a casa da questa lezione? Cosa sento che lo Spirito vuole comunicare attraverso di me?
+    </div>
+
+    <div class="question">
+      <strong>Testimonianza personale</strong>
+      Ho vissuto personalmente una situazione in cui ho scelto Gesù Cristo e ho trovato gioia nonostante le circostanze? Posso condividerla brevemente e autenticamente?
+    </div>
+
+    <h3>Promemoria pastorali</h3>
+    <div class="tip-box">Alcune ragazze potrebbero associare «gioia» a pressione di dover essere sempre felici. Chiarisci che la gioia non è fingere che tutto vada bene — è trovare pace e senso anche nella tristezza, grazie a Cristo.</div>
+    <div class="tip-box">Evita di opporre la gioia cristiana al divertimento come se il divertimento fosse sbagliato. Il punto è la <em>fonte</em> e la <em>durabilità</em>, non la condanna dei piaceri sani e leciti.</div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sections = document.querySelectorAll('.section');
+    sections.forEach(function (section) {
+      var header = section.querySelector('.section-header');
+      if (!header) return;
+      header.addEventListener('click', function () {
+        section.classList.toggle('collapsed');
+      });
+    });
+  });
+
+  function openSheet(sheetId) {
+    var targetId = sheetId || 'scriptureSheet';
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      sheet.classList.remove('active');
+    });
+    document.getElementById(targetId).classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet() {
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      sheet.classList.remove('active');
+      sheet.style.transform = '';
+    });
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  (function () {
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      var startY = 0;
+      var isDragging = false;
+
+      sheet.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+      }, { passive: true });
+
+      sheet.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        var dy = e.touches[0].clientY - startY;
+        if (dy > 0) sheet.style.transform = 'translateY(' + dy + 'px)';
+      }, { passive: true });
+
+      sheet.addEventListener('touchend', function (e) {
+        if (!isDragging) return;
+        isDragging = false;
+        var dy = e.changedTouches[0].clientY - startY;
+        sheet.style.transform = '';
+        if (dy > 80) closeSheet();
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

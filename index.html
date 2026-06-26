@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="theme-color" content="#1f3b57">
+	<title>Lezione Domenica | Scegli una lezione</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<main class="page">
+		<section class="card" aria-labelledby="main-title">
+			<header class="hero">
+				<div class="eyebrow">Lezione domenicale LDS</div>
+				<h1 id="main-title">Scegli una lezione</h1>
+				<p class="intro">Seleziona una sola lezione per entrare subito nel materiale. La pagina è pensata per dispositivi mobili, con pulsanti grandi e lettura immediata.</p>
+			</header>
+
+			<div class="body">
+				<div class="share-panel" aria-label="Condivisione pagina">
+					<p class="share-label">Condividi questa pagina</p>
+					<div class="share-actions">
+						<button class="share-button" type="button" id="share-button">Condividi URL</button>
+						<button class="share-button secondary" type="button" id="qr-button">Mostra QR code</button>
+					</div>
+				</div>
+
+				<p class="section-title">Lezioni disponibili</p>
+
+				<nav class="lesson-list" aria-label="Elenco lezioni">
+                    
+					<a class="lesson-link" href="lezioni/lezione_profeta_dea138.html">
+						<div class="lesson-title-row">
+							<h2 class="lesson-title">Segui il profeta, egli conosce la retta via</h2>
+							<span class="badge">Nuova</span>
+						</div>
+						<p class="lesson-description">Una lezione che affronta con onestà la fiducia nel profeta, la rivelazione personale e il ruolo dello Spirito Santo.</p>
+						<div class="card-actions">
+							<button class="card-action js-share-lesson" type="button" data-title="Segui il profeta, egli conosce la retta via" data-url="lezioni/lezione_profeta_dea138.html">Condividi</button>
+							<button class="card-action js-qr-lesson" type="button" data-title="Segui il profeta, egli conosce la retta via" data-url="lezioni/lezione_profeta_dea138.html">QR code</button>
+						</div>
+						<span class="lesson-arrow">Apri la lezione →</span>
+					</a>
+                    
+					<a class="lesson-link" href="lezioni/lezione_giovani_donne_gesu_porta_gioia.html">
+						<div class="lesson-title-row">
+							<h2 class="lesson-title">Giovani Donne, Gesù Porta Gioia</h2>
+							<span class="badge">Nuova</span>
+						</div>
+						<p class="lesson-description">Una lezione centrata su Cristo, pensata per un ascolto semplice, sereno e adatto a una classe della Chiesa.</p>
+						<div class="card-actions">
+							<button class="card-action js-share-lesson" type="button" data-title="Giovani Donne, Gesù Porta Gioia" data-url="lezioni/lezione_giovani_donne_gesu_porta_gioia.html">Condividi</button>
+							<button class="card-action js-qr-lesson" type="button" data-title="Giovani Donne, Gesù Porta Gioia" data-url="lezioni/lezione_giovani_donne_gesu_porta_gioia.html">QR code</button>
+						</div>
+						<span class="lesson-arrow">Apri la lezione →</span>
+					</a>
+
+					<a class="lesson-link" href="lezioni/lezione_ia_voce_di_dio.html">
+						<div class="lesson-title-row">
+							<h2 class="lesson-title">IA: Voce di Dio</h2>
+							<span class="badge">Attuale</span>
+						</div>
+						<p class="lesson-description">Una proposta per riflettere con discernimento spirituale su tecnologia, saggezza e ispirazione nel contesto della fede.</p>
+						<div class="card-actions">
+							<button class="card-action js-share-lesson" type="button" data-title="IA: Voce di Dio" data-url="lezioni/lezione_ia_voce_di_dio.html">Condividi</button>
+							<button class="card-action js-qr-lesson" type="button" data-title="IA: Voce di Dio" data-url="lezioni/lezione_ia_voce_di_dio.html">QR code</button>
+						</div>
+						<span class="lesson-arrow">Apri la lezione →</span>
+					</a>
+
+				</nav>
+
+				<p class="footer-note">Tocca una scheda per proseguire. Nessun altro passaggio richiesto.</p>
+			</div>
+		</section>
+	</main>
+
+	<div class="dialog-backdrop" id="qr-dialog" role="dialog" aria-modal="true" aria-labelledby="qr-title" aria-hidden="true">
+		<div class="dialog">
+			<div class="dialog-header">
+				<h2 class="dialog-title" id="qr-title">QR code della pagina</h2>
+				<button class="dialog-close" type="button" id="qr-close" aria-label="Chiudi">×</button>
+			</div>
+			<div class="qr-wrap">
+				<img class="qr-code" id="qr-image" alt="QR code della pagina" loading="lazy">
+				<p class="qr-url" id="qr-url"></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+	<script>
+		const pageUrl = window.location.href;
+		const shareButton = document.getElementById('share-button');
+		const qrButton = document.getElementById('qr-button');
+		const qrDialog = document.getElementById('qr-dialog');
+		const qrTitle = document.getElementById('qr-title');
+		const qrClose = document.getElementById('qr-close');
+		const qrImage = document.getElementById('qr-image');
+		const qrUrl = document.getElementById('qr-url');
+		const toast = document.getElementById('toast');
+		const lessonShareButtons = document.querySelectorAll('.js-share-lesson');
+		const lessonQrButtons = document.querySelectorAll('.js-qr-lesson');
+		let toastTimer;
+		let currentQrUrl = pageUrl;
+		let currentQrTitle = document.title;
+
+		function showToast(message) {
+			toast.textContent = message;
+			toast.classList.add('is-visible');
+			window.clearTimeout(toastTimer);
+			toastTimer = window.setTimeout(() => {
+				toast.classList.remove('is-visible');
+			}, 2400);
+		}
+
+		function setQrTarget(url, title) {
+			currentQrUrl = new URL(url, window.location.href).href;
+			currentQrTitle = title || document.title;
+		}
+
+		function openQrDialog() {
+			qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(currentQrUrl)}`;
+			qrUrl.textContent = currentQrUrl;
+			qrTitle.textContent = `${currentQrTitle} · QR code`;
+			qrDialog.setAttribute('aria-label', `${currentQrTitle} - QR code`);
+			qrDialog.classList.add('is-open');
+			qrDialog.setAttribute('aria-hidden', 'false');
+			qrClose.focus();
+		}
+
+		function closeQrDialog() {
+			qrDialog.classList.remove('is-open');
+			qrDialog.setAttribute('aria-hidden', 'true');
+			qrButton.focus();
+		}
+
+		shareButton.addEventListener('click', async () => {
+			const shareData = {
+				title: document.title,
+				text: 'Scegli una lezione domenicale LDS',
+				url: pageUrl
+			};
+
+			if (navigator.share) {
+				try {
+					await navigator.share(shareData);
+					return;
+				} catch (error) {
+					if (error && error.name === 'AbortError') {
+						return;
+					}
+				}
+			}
+
+			try {
+				await navigator.clipboard.writeText(pageUrl);
+				showToast('Link copiato negli appunti');
+			} catch (error) {
+				openQrDialog();
+				showToast('Condivisione non disponibile: mostra il QR code');
+			}
+		});
+
+		qrButton.addEventListener('click', openQrDialog);
+		qrClose.addEventListener('click', closeQrDialog);
+
+		lessonShareButtons.forEach((button) => {
+			button.addEventListener('click', async (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				const url = new URL(button.dataset.url, window.location.href).href;
+				const title = button.dataset.title || document.title;
+				const shareData = {
+					title,
+					text: title,
+					url
+				};
+
+				if (navigator.share) {
+					try {
+						await navigator.share(shareData);
+						return;
+					} catch (error) {
+						if (error && error.name === 'AbortError') {
+							return;
+						}
+					}
+				}
+
+				try {
+					await navigator.clipboard.writeText(url);
+					showToast('Link della lezione copiato');
+				} catch (error) {
+					setQrTarget(url, title);
+					openQrDialog();
+					showToast('Condivisione non disponibile: mostra il QR code');
+				}
+			});
+		});
+
+		lessonQrButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				event.stopPropagation();
+				const url = button.dataset.url || pageUrl;
+				const title = button.dataset.title || document.title;
+				setQrTarget(url, title);
+				openQrDialog();
+			});
+		});
+
+		qrDialog.addEventListener('click', (event) => {
+			if (event.target === qrDialog) {
+				closeQrDialog();
+			}
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && qrDialog.classList.contains('is-open')) {
+				closeQrDialog();
+			}
+		});
+	</script>
+</body>
+</html>

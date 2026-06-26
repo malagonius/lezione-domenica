@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Voce di Dio nell'Era dell'Intelligenza Artificiale</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.4em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.85em;
+      opacity: 0.85;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid #c9922a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite,
+    .scripture-inline cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: #c9922a;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .section-header:hover { opacity: 0.8; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: #1a3a5c;
+      font-weight: bold;
+      margin-left: -8px;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      max-height: 3000px;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge {
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+
+    .section-badge {
+      background: #1a3a5c;
+      color: #fff;
+    }
+
+    .section-time,
+    .book-badge {
+      background: #e8f0fb;
+      color: #1a3a5c;
+    }
+
+    h2 {
+      font-size: 1.05em;
+      color: #1a3a5c;
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 0.9em;
+      color: #555;
+      margin: 14px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: sans-serif;
+    }
+
+    p { margin-bottom: 10px; }
+
+    .question {
+      background: #eef4ff;
+      border-left: 4px solid #1a3a5c;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.78em;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid #c9922a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid #2a7a2a;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: sans-serif;
+    }
+
+    .tip-box::before {
+      content: "Nota per il docente: ";
+      font-weight: bold;
+      color: #2a7a2a;
+    }
+
+    .summary-box {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .summary-box p { margin-bottom: 6px; }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed #c9922a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      font-family: sans-serif;
+    }
+
+    th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0d8cc;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #888;
+      margin-top: 24px;
+      margin-bottom: 100px;
+      font-family: sans-serif;
+    }
+
+    /* Floating action buttons */
+    .bottom-sheet-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .bottom-sheet-fab:hover { background: #254f7a; }
+    .bottom-sheet-fab .fab-icon { font-size: 1.1em; }
+
+    .bottom-sheet-fab.teacher-fab {
+      bottom: 74px;
+      background: #2a7a2a;
+    }
+    .bottom-sheet-fab.teacher-fab:hover { background: #246724; }
+
+    /* Overlay */
+    .bottom-sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+    .bottom-sheet-overlay.active { display: block; }
+
+    /* Bottom sheet */
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+    .bottom-sheet.active { transform: translateY(0); }
+
+    .bottom-sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+      cursor: grab;
+      touch-action: none;
+    }
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+    }
+    .bottom-sheet-title {
+      font-family: sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: #1a3a5c;
+    }
+    .bottom-sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+      border-radius: 50%;
+    }
+    .bottom-sheet-close:hover { background: #f0f0f0; }
+
+    .bottom-sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 32px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .bottom-sheet-body a {
+      color: #1a3a5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .bottom-sheet-body a:hover { color: #c9922a; }
+
+    .bottom-sheet-body .tip-box {
+      font-size: 0.85em;
+    }
+
+    .warning-box {
+      background: #fff8e7;
+      border: 2px solid #c9922a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.82em;
+      font-family: sans-serif;
+      color: #7a5a10;
+    }
+    .warning-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #c9922a;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.85em;
+    }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+      footer { margin-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     INTESTAZIONE
+     ═══════════════════════════════════════ -->
+<header>
+  <h1>La Voce di Dio nell'Era dell'Intelligenza Artificiale</h1>
+  <p>Fede, Dignità e Sviluppo Umano<br />
+  <strong>Dottrina e Alleanze 93:36</strong></p>
+  <p style="margin-top:8px; font-size:0.78em; opacity:0.7;">Lesson Plan · Adulti / Giovani Adulti · 2025</p>
+</header>
+
+<!-- Scrittura chiave -->
+<div class="verse-box">
+  "La gloria di Dio è l'intelligenza, ovvero, in altre parole, la luce e la verità."
+  <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=ita&id=p36#p36" target="_blank" rel="noopener" style="color:#c9922a;">Dottrina e Alleanze 93:36</a></cite>
+</div>
+
+<!-- ═══════════════════════════════════════
+     OBIETTIVO
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Obiettivo</span>
+  </div>
+  <div class="section-content">
+    <p>Questa lezione aiuta la classe a riflettere su come l'intelligenza artificiale influenza le nostre quattro relazioni fondamentali: con Dio (<em>Tu</em>), con noi stessi (<em>Io</em>), con gli altri (<em>Loro</em>) e con il creato (<em>Esso</em>).</p>
+    <p>L'obiettivo non è giudicare la tecnologia, ma imparare a usarla come discepoli di Gesù Cristo — lasciando che lo Spirito Santo guidi le nostre scelte, la nostra crescita e le nostre relazioni.</p>
+    <p><strong>Percorso:</strong> Dio non può essere sostituito → La tua identità sacra → Relazioni autentiche → Il creato come testimonianza → Tre principi guida → Inviti pratici.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PARTE 1 — L'IA NON PUÒ SOSTITUIRE DIO
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 1</span>
+    <h2>L'IA Non Può Sostituire Dio</h2>
+    <span class="section-time">12 min</span>
+  </div>
+  <div class="section-content">
+    <p>Viviamo in un'epoca in cui ci rivolgiamo agli algoritmi per avere risposte, guida e persino conforto. Ma l'intelligenza artificiale può rispondere a domande; non può rispondere alle preghiere.</p>
+
+    <div class="scripture-inline">
+      "In principio Iddio creò i cieli e la terra. … E Iddio disse: Sia la luce! E la luce fu. E Iddio vide che la luce era buona."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/1?lang=ita&id=p1#p1" target="_blank" rel="noopener">Genesi 1:1, 3–4</a></cite>
+    </div>
+
+    <p>Dio è la nostra realtà ultima. È perfetto, compassionevole e onnisciente. Non allucinano mai, non inventa mai nulla, dice sempre la verità. L'IA è matematica — la matematica non è cosciente e non è viva.</p>
+
+    <p>Alcune persone parlano di "IA che diventa Dio" o di "IA simile a Dio." Ma il ragionamento — anche il ragionamento sovrumano — ha dei limiti. L'uomo non è definito solo dalla ragione, e certamente la divinità non lo è. L'IA non può essere e non sarà mai Dio.</p>
+
+    <div class="scripture-inline">
+      "Lo spirito e il corpo sono l'anima dell'uomo."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=ita&id=p15#p15" target="_blank" rel="noopener">Dottrina e Alleanze 88:15</a></cite>
+    </div>
+
+    <p>Come essere umano, possiamo creare l'IA; l'IA non può creare Dio. Le piattaforme e le tecnologie non possono sostituire la connessione autentica, divina e umana.</p>
+
+    <div class="question">
+      <strong>Domanda di riflessione</strong>
+      In quali momenti della tua vita hai cercato risposte o conforto in tecnologie o algoritmi invece di rivolgerti a Dio? Come è stata diversa quella esperienza rispetto alla preghiera sincera?
+    </div>
+
+    <div class="question">
+      <strong>Domanda per la classe</strong>
+      L'IA può organizzare informazioni, ma non può offrire rivelazione, connessione di alleanza o verità divina. Cosa significa per te, concretamente, questa distinzione nella tua vita quotidiana?
+    </div>
+
+    <div class="tip-box">Invita la classe a fare una breve pausa di riflessione prima di rispondere. Questa domanda può toccare esperienze personali delicate. Crea uno spazio sicuro e non forzare risposte immediate.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PARTE 2 — LA TUA IDENTITÀ SACRA (IO)
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 2</span>
+    <h2>La Tua Identità Sacra</h2>
+    <span class="section-time">12 min</span>
+  </div>
+  <div class="section-content">
+    <p>Man mano che l'IA diventa sempre più capace, siamo tentati di ridefinire noi stessi in base a ciò che le macchine non possono fare. Eppure la nostra identità non si trova lì.</p>
+
+    <p>Tu non sei un punto dati casuale in un algoritmo privo di sentimenti. Sei un amato figlio di Dio, un figlio dell'alleanza, un discepolo di Gesù Cristo. Il tuo valore eterno non si calcola con i "mi piace", le tendenze o le analisi predittive. Nessuna macchina può misurare il tuo potenziale divino.</p>
+
+    <div class="scripture-inline">
+      "Qualunque principio d'intelligenza che raggiungiamo in questa vita si leverà con noi nella resurrezione. E se una persona acquista in questa vita più conoscenza e intelligenza, mediante la sua diligenza e obbedienza che un'altra, avrà tale vantaggio nel mondo a venire."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/130?lang=ita&id=p18#p18" target="_blank" rel="noopener">Dottrina e Alleanze 130:18–19</a></cite>
+    </div>
+
+    <p>Questo principio ci dice qualcosa di importante: la vera intelligenza che acquisiamo attraverso la nostra diligenza, la nostra fatica onesta e la nostra obbedienza, ci appartiene per sempre. Quella dell'IA, no.</p>
+
+    <h3>L'IA come strumento, non come sostituto della crescita</h3>
+    <p>Se lasciamo che l'IA faccia il nostro lavoro senza uno sforzo personale, perdiamo la crescita che quella fatica avrebbe prodotto. Non lasciare che l'IA ti sostituisca in ciò che altrimenti ti aiuterebbe a svilupparti e crescere. Non attribuirti il merito di ciò che sai che l'IA ha principalmente fatto.</p>
+
+    <div class="scripture-inline">
+      "Gli elementi sono eterni, e spirito ed elemento, inseparabilmente connessi, ricevono una pienezza di gioia."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=ita&id=p33#p33" target="_blank" rel="noopener">Dottrina e Alleanze 93:33</a></cite>
+    </div>
+
+    <div class="question">
+      <strong>Domanda di riflessione</strong>
+      In che modo la consapevolezza di essere figlio di Dio cambia il modo in cui usi — o potresti usare — l'intelligenza artificiale? Dove tracci il confine tra "IA che mi aiuta ad imparare" e "IA che impara al posto mio"?
+    </div>
+
+    <div class="question">
+      <strong>Domanda per la classe</strong>
+      Quali caratteristiche profondamente umane — fede, compassione, umiltà, perdono, amore — l'IA non potrà mai possedere davvero? Come possiamo valorizzarle di più nella nostra vita quotidiana?
+    </div>
+
+    <div class="tip-box">Puoi condividere l'analogia del tris-scacchi-go presentata nel discorso originale: anche quando le macchine battono i campioni del mondo, questo non sminuisce la dignità, l'anima e il potenziale eterno dell'essere umano. Il campione di scacchi non è meno persona dopo la sconfitta con Deep Blue.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PARTE 3 — RELAZIONI AUTENTICHE (LORO)
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 3</span>
+    <h2>Relazioni Autentiche nell'Era Digitale</h2>
+    <span class="section-time">10 min</span>
+  </div>
+  <div class="section-content">
+    <p>La nostra relazione con "Tu" (Dio) ci insegna che apparteniamo a una comunità con gli altri. Compassione, gentilezza, ottimismo — queste richiedono esperienza vissuta e relazioni autentiche.</p>
+
+    <p>Nessuno dovrebbe sentirsi solo — spiritualmente o emotivamente — confidandosi per ore con un chatbot IA, pensando che quel chatbot ascolti o li conosca davvero. Un chatbot IA non lo fa. Il monologo con un algoritmo è diverso dal dialogo con un amico o un familiare.</p>
+
+    <div class="question">
+      <strong>Domanda di riflessione</strong>
+      C'è qualcuno nella tua vita che potrebbe sentirsi più ascoltato da un chatbot che da te? Come potresti cambiare questo?
+    </div>
+
+    <p>Entriamo in una zona grigia quando pensiamo che l'IA possa consigliarci su domande personali — quale lavoro scegliere, chi sposare, dove trovare Dio.</p>
+
+    <div class="scripture-inline">
+      "La Torre di Babele" — quando gli uomini piangevano di più per i mattoni rotti che per gli esseri umani che li facevano, Dio si addolorò. Quando promuoviamo le cose materiali al di sopra del valore degli individui, perdiamo qualcosa di essenziale.
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/11?lang=ita&id=p1#p1" target="_blank" rel="noopener">Genesi 11 — La Torre di Babele</a></cite>
+    </div>
+
+    <h3>"Nessuno siede solo"</h3>
+    <p>Fede e autenticità si manifestano quando ci impegniamo affinché nessuno sieda solo — spiritualmente o emotivamente. Nessuno dovrebbe dipendere emotivamente da un chatbot IA invece di una persona reale che li conosce e li ama.</p>
+
+    <p>L'IA può aiutarci a connetterci con la famiglia nella storia genealogica, a pianificare attività, a tradurre messaggi. Ma la nostra energia migliore deve andare alle persone.</p>
+
+    <div class="question">
+      <strong>Domanda per la classe</strong>
+      Se qualcuno vicino a te si confidasse con un chatbot IA più che con un amico o genitore, cosa gli diresti? Come possiamo creare nella nostra famiglia e nella nostra classe uno spazio dove le persone vogliano condividere con noi?
+    </div>
+
+    <div class="tip-box">Il discorso originale invita i presenti a mettere il dito sul naso come promessa simbolica: non lasciare mai che qualcuno si senta più ascoltato da un chatbot che da te. Puoi adattare questo gesto come momento leggero ma significativo nella classe.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PARTE 4 — IL CREATO COME TESTIMONIANZA (ESSO)
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 4</span>
+    <h2>Il Creato Come Testimonianza di Dio</h2>
+    <span class="section-time">8 min</span>
+  </div>
+  <div class="section-content">
+    <p>Bellezza, ordine e scopo nelle creazioni di Dio testimoniano il Suo amore e ispirano la nostra riverenza. Eppure, a meno che non facciamo attenzione, possiamo perdere il contatto con il mondo naturale nell'era dell'artificiale.</p>
+
+    <div class="scripture-inline">
+      "E Iddio vide tutto ciò ch'egli aveva fatto; ed ecco, era molto buono."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/1?lang=ita&id=p31#p31" target="_blank" rel="noopener">Genesi 1:31</a></cite>
+    </div>
+
+    <div class="scripture-inline">
+      "Tutte le cose denotano che c'è un Dio; sì, persino la terra, e tutte le cose che sono sulla sua faccia, sì, e il suo moto, sì, e anche tutti i pianeti che si muovono nella loro forma regolare testimoniano che c'è un Creatore Supremo."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/30?lang=ita&id=p44#p44" target="_blank" rel="noopener">Alma 30:44</a></cite>
+    </div>
+
+    <p>L'IA non può sostituire la luce del sole, il vento e la meraviglia naturale. Gli schermi digitali possono servirci, ma non possono sostituire le testimonianze della natura e del mondo naturale.</p>
+
+    <div class="scripture-inline">
+      "Sì, tutte le cose che vengono dalla terra, nella loro stagione, sono fatte per il beneficio e l'uso dell'uomo, sia per rallegrare l'occhio che per rallegare il cuore."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/59?lang=ita&id=p18#p18" target="_blank" rel="noopener">Dottrina e Alleanze 59:18</a></cite>
+    </div>
+
+    <p>Gli adulti statunitensi trascorrono in media cinque-sei ore al giorno su telefoni, computer e televisori. Gli adolescenti otto-nove ore davanti agli schermi. Sappiamo che il tempo eccessivo davanti agli schermi può contribuire a depressione e ansia.</p>
+
+    <div class="scripture-inline">
+      "Fermatevi e sapete ch'io sono Iddio."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/46?lang=ita&id=p10#p10" target="_blank" rel="noopener">Salmi 46:10</a></cite>
+    </div>
+
+    <div class="question">
+      <strong>Domanda di riflessione</strong>
+      Quando hai fatto silenzio — in mezzo alla natura, in un momento di quiete — hai sentito qualcosa che nessun algoritmo poteva darti? Cosa è stato?
+    </div>
+
+    <div class="question">
+      <strong>Domanda per la classe</strong>
+      Come possiamo usare l'IA per approfondire la nostra esperienza con la natura (identificare piante, trovare percorsi, esplorare genealogie di famiglia) senza lasciarla diventare un sostituto dell'esperienza reale?
+    </div>
+
+    <div class="tip-box">La bellezza è la "firma di Dio" (Marilynne Robinson). Incoraggia la classe a pensare a un luogo naturale specifico dove hanno sentito la presenza di Dio. Lascia che qualcuno condivida prima di proseguire.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PARTE 5 — TRE PRINCIPI GUIDA
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 5</span>
+    <h2>Tre Principi Guida per il Discepolo</h2>
+    <span class="section-time">8 min</span>
+  </div>
+  <div class="section-content">
+    <p>Tre punti di riferimento evangelici possono guidare il nostro uso personale dell'IA come discepoli di Gesù Cristo.</p>
+
+    <h3>1. Fai affidamento sullo Spirito</h3>
+    <p>Lascia che la tecnologia supporti, non sostituisca, la rivelazione, lo studio personale e la vita di alleanza. Non c'è sostituto per "studiare la cosa nella propria mente" e sentire la conferma spirituale del Signore nel proprio cuore e nella propria mente.</p>
+
+    <div class="scripture-inline">
+      "Sì, ecco, ti dirò nella tua mente e nel tuo cuore, mediante lo Spirito Santo, che verrà su di te e che dimorerà nel tuo cuore."
+      <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/8?lang=ita&id=p2#p2" target="_blank" rel="noopener">Dottrina e Alleanze 8:2</a></cite>
+    </div>
+
+    <h3>2. Esercita la saggezza</h3>
+    <p>Applica un giudizio saggio informato dalla dottrina e dalla propria esperienza vissuta. La tecnologia può informarci, ma senza lo Spirito non può trasformare la nostra natura o il nostro essere.</p>
+
+    <h3>3. Scegli fonti affidabili</h3>
+    <p>Ancòra la tua comprensione nelle scritture, nei consigli dei profeti e nelle informazioni affidabili. Non lasciare che l'IA formi la tua immagine di Dio a propria immagine. Impara chi è Dio davvero attraverso la Sua Parola e il Suo Spirito.</p>
+
+    <div class="question">
+      <strong>Domanda di riflessione</strong>
+      Di questi tre principi — fare affidamento sullo Spirito, esercitare la saggezza, scegliere fonti affidabili — quale trovi più difficile da applicare quando usi la tecnologia? Perché?
+    </div>
+
+    <div class="question">
+      <strong>Domanda per la classe</strong>
+      Come decidi quando un contenuto generato dall'IA è uno "strumento utile" e quando invece rischia di prendere il posto dello studio personale delle scritture o della preghiera?
+    </div>
+
+    <div class="tip-box">Puoi invitare la classe a riflettere su un esempio concreto: scrivere un discorso di sacrament meeting con l'IA vs. scrivere un discorso personale ispirato dallo Spirito. La crescita spirituale viene dal processo, non solo dal prodotto finale.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CHIUSURA — INVITI PRATICI
+     ═══════════════════════════════════════ -->
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Chiusura</span>
+    <h2>Inviti Pratici</h2>
+    <span class="section-time">5 min</span>
+  </div>
+  <div class="section-content">
+    <div class="summary-box">
+      <p>Il discepolato è un cammino di alleanza. L'IA è uno strumento.</p>
+      <p>Quando facciamo affidamento sullo Spirito, esercitiamo la saggezza e scegliamo fonti affidabili, la tecnologia può aiutarci ad approfondire le nostre relazioni con Dio (Tu), con noi stessi (Io), con gli altri (Loro) e con il creato (Esso).</p>
+    </div>
+
+    <h3>Quattro inviti concreti</h3>
+
+    <div class="question">
+      <strong>Invito 1</strong>
+      Stabilisci le linee guida personali per il tuo uso dell'IA — in modo che non si interponga tra te e il tuo rapporto personale con Dio.
+    </div>
+
+    <div class="question">
+      <strong>Invito 2</strong>
+      Scrivi tre verità su chi sei: un figlio di Dio, un figlio dell'alleanza, un discepolo di Gesù Cristo. Mettile in un posto visibile.
+    </div>
+
+    <div class="question">
+      <strong>Invito 3</strong>
+      Invia un messaggio riflessivo, scritto da te stesso, o fa' una visita personale e significativa a un familiare, amico, coinquilino o vicino.
+    </div>
+
+    <div class="question">
+      <strong>Invito 4</strong>
+      Trascorri del tempo significativo nella natura. Metti a tacere le notifiche. Offri una preghiera di gratitudine per la bellezza e la testimonianza di tutto ciò che denota l'ordine naturale e gli scopi amorevoli di Dio.
+    </div>
+
+    <h3>Riflessione finale</h3>
+    <div class="reflection">
+      "In un mondo di tecnologia accelerante e intelligenza artificiale, possa noi non perdere mai l'intelligenza divina che conta di più: la voce di Dio. Possa noi ascoltare il Suo sussurro in mezzo al rumore. Amate gli uni gli altri al di là degli algoritmi, e custodite la creazione con riverenza."
+      <br /><br />
+      — Elder Gerrit W. Gong
+    </div>
+  </div>
+</section>
+
+<footer>
+  Lezione preparata per uso personale · Dottrina e Alleanze 93:36 · 2025<br />
+  Basata sul discorso di Elder Gerrit W. Gong: "Faith, Dignity, and Human Flourishing: Hearing God's Voice in an Age of Artificial Intelligence"
+</footer>
+
+<!-- ═══════════════════════════════════════
+     PULSANTI FAB
+     ═══════════════════════════════════════ -->
+<button class="bottom-sheet-fab teacher-fab" id="teacherFabBtn" onclick="openSheet('teacherStudySheet')" aria-label="Studio del docente">
+  <span class="fab-icon">📖</span> Studio docente
+</button>
+
+<button class="bottom-sheet-fab" id="fabBtn" onclick="openSheet('scriptureSheet')" aria-label="Scritture della lezione">
+  <span class="fab-icon">📜</span> Scritture
+</button>
+
+<!-- Overlay -->
+<div class="bottom-sheet-overlay" id="overlay" onclick="closeSheet()"></div>
+
+<!-- ═══════════════════════════════════════
+     BOTTOM SHEET — SCRITTURE
+     ═══════════════════════════════════════ -->
+<div class="bottom-sheet" id="scriptureSheet" role="dialog" aria-label="Scritture della lezione">
+  <div class="bottom-sheet-handle-row" id="scriptureSheetHandle">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">📜 Scritture della Lezione</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Parte</th>
+          <th>Tema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=ita&id=p36#p36" target="_blank" rel="noopener">D&amp;A 93:36</a></td>
+          <td><span class="book-badge">Chiave</span></td>
+          <td>La gloria di Dio è l'intelligenza</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/1?lang=ita&id=p1#p1" target="_blank" rel="noopener">Genesi 1:1, 3–4</a></td>
+          <td><span class="book-badge">Parte 1</span></td>
+          <td>Dio creatore; la luce era buona</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=ita&id=p15#p15" target="_blank" rel="noopener">D&amp;A 88:15</a></td>
+          <td><span class="book-badge">Parte 1</span></td>
+          <td>Spirito e corpo sono l'anima dell'uomo</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=ita&id=p33#p33" target="_blank" rel="noopener">D&amp;A 93:33</a></td>
+          <td><span class="book-badge">Parte 2</span></td>
+          <td>Spirito ed elemento: pienezza di gioia</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/130?lang=ita&id=p18#p18" target="_blank" rel="noopener">D&amp;A 130:18–19</a></td>
+          <td><span class="book-badge">Parte 2</span></td>
+          <td>L'intelligenza guadagnata si leverà con noi</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/11?lang=ita&id=p1#p1" target="_blank" rel="noopener">Genesi 11</a></td>
+          <td><span class="book-badge">Parte 3</span></td>
+          <td>Torre di Babele — i valori materiali sopra le persone</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/gen/1?lang=ita&id=p31#p31" target="_blank" rel="noopener">Genesi 1:31</a></td>
+          <td><span class="book-badge">Parte 4</span></td>
+          <td>Il creato: era molto buono</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/30?lang=ita&id=p44#p44" target="_blank" rel="noopener">Alma 30:44</a></td>
+          <td><span class="book-badge">Parte 4</span></td>
+          <td>Tutte le cose testimoniano un Creatore Supremo</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/59?lang=ita&id=p18#p18" target="_blank" rel="noopener">D&amp;A 59:18</a></td>
+          <td><span class="book-badge">Parte 4</span></td>
+          <td>Il creato per il beneficio e la gioia dell'uomo</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/ps/46?lang=ita&id=p10#p10" target="_blank" rel="noopener">Salmi 46:10</a></td>
+          <td><span class="book-badge">Parte 4</span></td>
+          <td>"Fermatevi e sapete ch'io sono Iddio"</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/8?lang=ita&id=p2#p2" target="_blank" rel="noopener">D&amp;A 8:2</a></td>
+          <td><span class="book-badge">Parte 5</span></td>
+          <td>Lo Spirito parla alla mente e al cuore</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     BOTTOM SHEET — STUDIO DEL DOCENTE
+     ═══════════════════════════════════════ -->
+<div class="bottom-sheet" id="teacherStudySheet" role="dialog" aria-label="Studio del docente">
+  <div class="bottom-sheet-handle-row" id="teacherSheetHandle">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title" style="color:#2a7a2a;">📖 Studio del Docente</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">✕</button>
+  </div>
+  <div class="bottom-sheet-body">
+
+    <div class="tip-box">La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione.</div>
+
+    <div class="warning-box">
+      <strong>⚠ Nota importante — Contenuto assistito dall'IA</strong>
+      Questo materiale di studio è un ausilio per la preparazione personale del docente. Non è dottrina ufficiale della Chiesa, non sostituisce le scritture, i manuali ufficiali, i profeti viventi né i dirigenti autorizzati. Non deve essere venduto, presentato o distribuito come dottrina o materiale ufficiale della Chiesa de La Chiesa di Gesù Cristo dei Santi degli Ultimi Giorni.
+    </div>
+
+    <h3>Sorgente della lezione</h3>
+    <p style="font-family: sans-serif; font-size: 0.87em; margin-bottom: 12px;">
+      Questa lezione è basata su una serie di video di Elder Gerrit W. Gong dell'Apostolato dei Dodici, intitolata <em>"Faith, Dignity, and Human Flourishing: Hearing God's Voice in an Age of Artificial Intelligence"</em> (sei episodi brevi). Per trovare i suoi discorsi ufficiali di Conferenza generale, visita <a href="https://www.churchofjesuschrist.org/search?lang=ita&query=Gerrit+Gong" target="_blank" rel="noopener">churchofjesuschrist.org</a>.
+    </p>
+
+    <h3>Scritture da studiare prima di insegnare</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Perché studiarla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/93?lang=ita&id=p36#p36" target="_blank" rel="noopener">D&amp;A 93:36–40</a></td>
+          <td>La gloria di Dio è l'intelligenza; i figli di Dio hanno una luce inerente che l'IA non può avere.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/9?lang=ita&id=p7#p7" target="_blank" rel="noopener">D&amp;A 9:7–9</a></td>
+          <td>Il processo di "studiare la cosa nella propria mente" prima di ricevere conferma dallo Spirito.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/130?lang=ita&id=p18#p18" target="_blank" rel="noopener">D&amp;A 130:18–19</a></td>
+          <td>L'intelligenza guadagnata con diligenza e obbedienza è permanente — non può essere sostituita dall'IA.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/30?lang=ita&id=p44#p44" target="_blank" rel="noopener">Alma 30:44</a></td>
+          <td>La creazione stessa testimonia Dio — riflessione sulla cura del creato nell'era digitale.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/88?lang=ita&id=p15#p15" target="_blank" rel="noopener">D&amp;A 88:15, 33–40</a></td>
+          <td>Lo spirito e il corpo formano l'anima — perché l'IA non può essere un'anima.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Domande per la tua preparazione personale</h3>
+
+    <div class="question">
+      <strong>Preparazione spirituale</strong>
+      Come uso personalmente l'intelligenza artificiale? Ci sono modi in cui ha preso il posto della preghiera, dello studio delle scritture o del servizio personale? Cosa voglio cambiare prima di insegnare questa lezione?
+    </div>
+
+    <div class="question">
+      <strong>Relazioni nella classe</strong>
+      C'è qualcuno nella mia classe che potrebbe sentirsi solo o dipendente emotivamente dalla tecnologia? Come posso creare uno spazio in cui si senta visto e amato da una persona reale oggi?
+    </div>
+
+    <div class="question">
+      <strong>Crescita personale e IA</strong>
+      Ho permesso all'IA di fare lavoro che mi avrebbe aiutato a crescere spiritualmente o intellettualmente? Come posso distinguere "usare lo strumento con saggezza" da "delegare la mia crescita"?
+    </div>
+
+    <div class="question">
+      <strong>Invito spirituale</strong>
+      Quale invito sento lo Spirito che mi guida a estendere alla classe oggi? C'è qualcosa di specifico che devo condividere dalla mia esperienza personale? Sono disposto a essere vulnerabile per creare connessione autentica?
+    </div>
+
+    <h3>Possibili sensibilità della classe</h3>
+    <p style="font-family: sans-serif; font-size: 0.85em; margin-bottom: 8px;">
+      <strong>Uso eccessivo della tecnologia:</strong> alcuni membri della classe potrebbero riconoscersi in questo problema. Tratta l'argomento con gentilezza, senza giudizio.
+    </p>
+    <p style="font-family: sans-serif; font-size: 0.85em; margin-bottom: 8px;">
+      <strong>Solitudine e dipendenza dai chatbot:</strong> questo è più comune di quanto sembri, anche tra i giovani adulti. Non sminuire chi si trova in questa situazione.
+    </p>
+    <p style="font-family: sans-serif; font-size: 0.85em; margin-bottom: 8px;">
+      <strong>Lavoro e occupazione:</strong> alcune persone potrebbero temere di perdere il lavoro a causa dell'IA. Riconosci questa preoccupazione reale prima di passare ai principi spirituali.
+    </p>
+    <p style="font-family: sans-serif; font-size: 0.85em; margin-bottom: 8px;">
+      <strong>Onestà accademica:</strong> tra studenti, la questione dell'uso dell'IA nei compiti è delicata. Invita alla riflessione senza fare la morale.
+    </p>
+
+    <h3>Promemoria finale per il docente</h3>
+    <div class="reflection" style="font-family: sans-serif; font-size: 0.87em;">
+      Questa lezione non è un manuale tecnico sull'IA. È un'opportunità per aiutare le persone a ricordare chi sono, a chi appartengono, e perché le relazioni autentiche — con Dio, con sé stessi, con gli altri e con il creato — sono eternamente più importanti di qualsiasi algoritmo.
+      <br /><br />
+      Insegna con lo Spirito. Tutto il resto è solo uno strumento.
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════ -->
+<script>
+  // Collapsible sections
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.section').forEach(function (section) {
+      var header = section.querySelector('.section-header');
+      if (!header) return;
+      header.addEventListener('click', function () {
+        section.classList.toggle('collapsed');
+      });
+    });
+  });
+
+  // Bottom sheet open/close
+  var currentSheet = null;
+
+  function openSheet(sheetId) {
+    closeSheet();
+    var sheet = document.getElementById(sheetId || 'scriptureSheet');
+    if (!sheet) return;
+    currentSheet = sheet;
+    sheet.classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet() {
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      sheet.classList.remove('active');
+      sheet.style.transform = '';
+    });
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+    currentSheet = null;
+  }
+
+  // Swipe-to-close only from handle area
+  (function () {
+    var handleIds = ['scriptureSheetHandle', 'teacherSheetHandle'];
+    handleIds.forEach(function (handleId) {
+      var handle = document.getElementById(handleId);
+      if (!handle) return;
+      var sheet = handle.closest('.bottom-sheet');
+      var startY = 0;
+      var isDragging = false;
+
+      handle.addEventListener('touchstart', function (e) {
+        startY = e.touches[0].clientY;
+        isDragging = true;
+      }, { passive: true });
+
+      handle.addEventListener('touchmove', function (e) {
+        if (!isDragging) return;
+        var dy = e.touches[0].clientY - startY;
+        if (dy > 0) sheet.style.transform = 'translateY(' + dy + 'px)';
+      }, { passive: true });
+
+      handle.addEventListener('touchend', function (e) {
+        if (!isDragging) return;
+        isDragging = false;
+        var dy = e.changedTouches[0].clientY - startY;
+        sheet.style.transform = '';
+        if (dy > 80) closeSheet();
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
