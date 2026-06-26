@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lezione: Io abbandonero tutti i miei peccati per conoscerti</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f5f0e8;
+      --ink: #2c2c2c;
+      --navy: #1a3a5c;
+      --gold: #c9922a;
+      --green: #2a7a2a;
+      --card: #ffffff;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 { font-size: 1.35em; margin-bottom: 6px; }
+    header p { font-size: 0.86em; opacity: 0.88; }
+
+    .purpose-box {
+      background: #fff8e7;
+      border-left: 5px solid var(--gold);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    .purpose-box strong {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.76em;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .section {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+
+    .section-header:hover { opacity: 0.82; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: var(--navy);
+      font-weight: bold;
+      margin-left: -8px;
+    }
+
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      max-height: 2800px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge {
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .section-badge { background: var(--navy); color: #fff; }
+    .section-time, .book-badge { background: #e8f0fb; color: var(--navy); }
+
+    h2 { font-size: 1.03em; color: var(--navy); flex: 1; }
+    p { margin-bottom: 10px; }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .scripture-inline a,
+    .sheet-body a {
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .scripture-inline a:hover,
+    .sheet-body a:hover { color: var(--gold); }
+
+    .question {
+      background: #eef4ff;
+      border-left: 4px solid var(--navy);
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.78em;
+      color: var(--navy);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid var(--green);
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .tip-box::before {
+      content: "Nota per il docente: ";
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    .summary-box {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #777;
+      margin-top: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .sheet-fab {
+      position: fixed;
+      right: 20px;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      letter-spacing: 0.03em;
+      color: #fff;
+    }
+
+    #fabScripture {
+      bottom: 20px;
+      background: var(--navy);
+    }
+
+    #fabTeacher {
+      bottom: 74px;
+      background: var(--green);
+    }
+
+    .sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+
+    .sheet-overlay.active { display: block; }
+
+    .sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+
+    .sheet.active { transform: translateY(0); }
+
+    .sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .sheet-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+
+    .sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-top: 10px;
+    }
+
+    th {
+      background: var(--navy);
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #e0d8cc;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    .teacher-warning {
+      background: #fff3f3;
+      border-left: 4px solid #b03333;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      font-size: 0.88em;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #5a2222;
+    }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .sheet-fab, .sheet-overlay, .sheet { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Io abbandonero tutti i miei peccati per conoscerti</h1>
+  <p>Lezione per Giovani Adulti (45 minuti)</p>
+  <p style="margin-top:8px; font-size:0.78em; opacity:0.75;">Base: discorso della Conferenza generale 2026 (link fornito dall'utente)</p>
+</header>
+
+<div class="purpose-box">
+  <strong>Scopo</strong>
+  Aiutare la classe a riconoscere che il vero pentimento non seleziona solo i peccati "comodi" da lasciare, ma ci conduce a consegnare al Signore anche le aree nascoste di autosufficienza spirituale e autogiustizia.
+</div>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Obiettivo</span>
+  </div>
+  <div class="section-content">
+    <p><strong>Idea centrale:</strong> L'importanza di abbandonare tutti i peccati, non solo quelli che scegliamo noi, riconoscendo e sradicando anche la self-righteousness.</p>
+    <p><strong>Percorso della lezione:</strong> dal linguaggio del "mi manca ancora" a un esame sincero del cuore, fino a un invito concreto di conversione personale durante la settimana.</p>
+    <div class="scripture-inline">
+      Riferimento di base del tema:
+      <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/22?lang=ita&id=p18#p18" target="_blank" rel="noopener">Alma 22:18</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 1</span>
+    <h2>Quando diciamo "tutto": il cuore della resa</h2>
+    <span class="section-time">10 min</span>
+  </div>
+  <div class="section-content">
+    <p>Introduci il tema con una distinzione semplice: cambiare alcune abitudini non e uguale a consegnare interamente il cuore al Signore. L'espressione "abbandonero tutti i miei peccati" non lascia zone protette.</p>
+    <div class="scripture-inline">
+      Scrittura: <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/22?lang=ita&id=p18#p18" target="_blank" rel="noopener">Alma 22:18</a>
+    </div>
+    <div class="question">
+      <strong>Domanda di apertura</strong>
+      In quali aree della vita spirituale e piu facile "negoziare" con il Signore invece di arrendersi completamente?
+    </div>
+    <div class="tip-box">Tieni un tono umile e personale: evita il "voi dovete" e usa "noi" per favorire sincerita e sicurezza spirituale nella classe.</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 2</span>
+    <h2>"Che mi manca ancora?": diagnosi, non autocompiacimento</h2>
+    <span class="section-time">12 min</span>
+  </div>
+  <div class="section-content">
+    <p>Porta la classe dal confronto con gli altri all'esame con Cristo. La domanda giusta non e "sono meglio di ieri?" ma "cosa mi manca ancora davanti al Signore?".</p>
+    <div class="scripture-inline">
+      Scrittura: <a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/19?lang=ita&id=p20#p20" target="_blank" rel="noopener">Matteo 19:20</a>
+    </div>
+    <div class="question">
+      <strong>Domanda di approfondimento</strong>
+      Quando pensi alla tua vita reale (studio, lavoro, relazioni, social), quale "mi manca ancora" senti che il Signore ti sta mostrando oggi?
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 3</span>
+    <h2>La trave invisibile: combattere la self-righteousness</h2>
+    <span class="section-time">10 min</span>
+  </div>
+  <div class="section-content">
+    <p>Collega il rischio dell'autogiustizia al linguaggio del Vangelo: possiamo fare piccoli gesti buoni e intanto trascurare conversioni profonde. L'obiettivo non e colpevolizzarsi, ma lasciarsi correggere dal Signore.</p>
+    <div class="scripture-inline">
+      Scrittura: <a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=ita&id=p3-p5#p3" target="_blank" rel="noopener">Matteo 7:3-5</a>
+    </div>
+    <div class="question">
+      <strong>Domanda di sincerita</strong>
+      Quale "trave" personale potrei non vedere perche mi confronto con i peccati degli altri invece che con il cuore di Cristo?
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 4</span>
+    <h2>Dalla consapevolezza all'azione spirituale</h2>
+    <span class="section-time">8 min</span>
+  </div>
+  <div class="section-content">
+    <p>Invita ciascuno a scegliere un'area concreta in cui smettere di giustificarsi e iniziare a cercare aiuto dal Signore con umilta quotidiana. Sottolinea che la grazia di Cristo rende possibile un cambiamento reale e continuo.</p>
+    <div class="scripture-inline">
+      Scrittura: <a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=ita&id=p27#p27" target="_blank" rel="noopener">Ether 12:27</a>
+    </div>
+    <div class="question">
+      <strong>Domanda di impegno</strong>
+      Quale passo preciso compirai questa settimana per passare da "faccio alcune cose giuste" a "consegno davvero tutto al Signore"?
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Chiusura</span>
+    <h2>Invito finale alla classe</h2>
+    <span class="section-time">5 min</span>
+  </div>
+  <div class="section-content">
+    <div class="summary-box">
+      Gesu Cristo non ci chiede un miglioramento cosmetico, ma un cuore spezzato e uno spirito contrito. La domanda "che mi manca ancora" non e condanna: e una porta verso una conversione piu profonda.
+    </div>
+    <div class="reflection">
+      Invito: durante questa settimana, chiedi in preghiera "Signore, che mi manca ancora?" e scrivi una sola area da consegnarGli senza riserve. Agisci su quella area con un passo concreto entro 7 giorni.
+    </div>
+  </div>
+</section>
+
+<footer>
+  Lezione preparata per uso personale e didattico locale · 2026
+</footer>
+
+<button class="sheet-fab" id="fabScripture" type="button" onclick="openSheet('scriptureSheet')">Scritture</button>
+<button class="sheet-fab" id="fabTeacher" type="button" onclick="openSheet('teacherSheet')">Studio docente</button>
+
+<div class="sheet-overlay" id="overlay" onclick="closeSheets()"></div>
+
+<div class="sheet" id="scriptureSheet" aria-label="Scritture della lezione">
+  <div class="sheet-handle-row" data-handle-for="scriptureSheet">
+    <div class="sheet-handle"></div>
+  </div>
+  <div class="sheet-title-row">
+    <span class="sheet-title">Scritture della lezione</span>
+    <button class="sheet-close" type="button" onclick="closeSheets()" aria-label="Chiudi">x</button>
+  </div>
+  <div class="sheet-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Parte</th>
+          <th>Tema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/22?lang=ita&id=p18#p18" target="_blank" rel="noopener">Alma 22:18</a></td>
+          <td><span class="book-badge">Parte 1</span></td>
+          <td>Resa totale al Signore</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/19?lang=ita&id=p20#p20" target="_blank" rel="noopener">Matteo 19:20</a></td>
+          <td><span class="book-badge">Parte 2</span></td>
+          <td>"Che mi manca ancora"</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=ita&id=p3-p5#p3" target="_blank" rel="noopener">Matteo 7:3-5</a></td>
+          <td><span class="book-badge">Parte 3</span></td>
+          <td>Trave e autogiustizia</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/ether/12?lang=ita&id=p27#p27" target="_blank" rel="noopener">Ether 12:27</a></td>
+          <td><span class="book-badge">Parte 4</span></td>
+          <td>Umilta e dipendenza da Cristo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="sheet" id="teacherSheet" aria-label="Studio del docente">
+  <div class="sheet-handle-row" data-handle-for="teacherSheet">
+    <div class="sheet-handle"></div>
+  </div>
+  <div class="sheet-title-row">
+    <span class="sheet-title">Studio del docente</span>
+    <button class="sheet-close" type="button" onclick="closeSheets()" aria-label="Chiudi">x</button>
+  </div>
+  <div class="sheet-body">
+    <div class="tip-box">La parte piu importante della lezione e la preparazione del docente e la compagnia dello Spirito Santo. Questo documento e solo uno strumento per aiutare quella preparazione.</div>
+
+    <div class="teacher-warning">
+      Avviso sui contenuti assistiti da AI: questo materiale e un aiuto per la preparazione personale del docente. Non e dottrina ufficiale della Chiesa, non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati, e non deve essere venduto, presentato o distribuito come materiale ufficiale della Chiesa.
+    </div>
+
+    <h3 style="margin-top:12px; color:#1a3a5c; font-family:Arial, Helvetica, sans-serif; font-size:0.9em; text-transform:uppercase; letter-spacing:0.05em;">Scritture di preparazione</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Perche studiarla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/alma/22?lang=ita&id=p18#p18" target="_blank" rel="noopener">Alma 22:18</a></td>
+          <td>Aiuta a insegnare il linguaggio della consacrazione piena, non parziale.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/19?lang=ita&id=p16-p22#p16" target="_blank" rel="noopener">Matteo 19:16-22</a></td>
+          <td>Mostra il contrasto tra obbedienza visibile e resa del cuore.</td>
+        </tr>
+        <tr>
+          <td><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/7?lang=ita&id=p1-p5#p1" target="_blank" rel="noopener">Matteo 7:1-5</a></td>
+          <td>Aiuta a trattare con delicatezza il tema del giudizio e dell'autogiustizia.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:14px; color:#1a3a5c; font-family:Arial, Helvetica, sans-serif; font-size:0.9em; text-transform:uppercase; letter-spacing:0.05em;">Conferenza generale</h3>
+    <div class="scripture-inline" style="font-style:normal;">
+      <a href="https://www.churchofjesuschrist.org/study/general-conference/2026/04/25wu?lang=ita" target="_blank" rel="noopener">Io abbandonero tutti i miei peccati per conoscerti</a>
+      <div style="margin-top:6px; font-size:0.9em;">Usalo come testo principale per preparare applicazioni pratiche su pentimento integrale e sincerita del discepolato.</div>
+    </div>
+
+    <h3 style="margin-top:14px; color:#1a3a5c; font-family:Arial, Helvetica, sans-serif; font-size:0.9em; text-transform:uppercase; letter-spacing:0.05em;">Domande introspettive per il docente</h3>
+    <div class="question">
+      <strong>Preghiera personale</strong>
+      Quale area della mia vita sto ancora proteggendo da una resa piena al Signore?
+    </div>
+    <div class="question">
+      <strong>Sensibilita della classe</strong>
+      Come posso parlare di peccato e autogiustizia con chiarezza dottrinale e insieme con misericordia cristiana?
+    </div>
+    <div class="question">
+      <strong>Invito guidato dallo Spirito</strong>
+      Quale invito semplice, praticabile e misurabile sento di estendere a questi Giovani Adulti questa domenica?
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".section").forEach(function (section) {
+      var header = section.querySelector(".section-header");
+      if (!header) return;
+      header.addEventListener("click", function () {
+        section.classList.toggle("collapsed");
+      });
+    });
+
+    setupHandleClose("scriptureSheet");
+    setupHandleClose("teacherSheet");
+  });
+
+  function openSheet(sheetId) {
+    closeSheets();
+    var sheet = document.getElementById(sheetId);
+    var overlay = document.getElementById("overlay");
+    if (!sheet || !overlay) return;
+    sheet.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeSheets() {
+    document.querySelectorAll(".sheet").forEach(function (sheet) {
+      sheet.classList.remove("active");
+      sheet.style.transform = "";
+    });
+    var overlay = document.getElementById("overlay");
+    if (overlay) overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  function setupHandleClose(sheetId) {
+    var sheet = document.getElementById(sheetId);
+    if (!sheet) return;
+
+    var handleRow = sheet.querySelector(".sheet-handle-row");
+    if (!handleRow) return;
+
+    var startY = 0;
+    var dragging = false;
+
+    handleRow.addEventListener("touchstart", function (event) {
+      startY = event.touches[0].clientY;
+      dragging = true;
+    }, { passive: true });
+
+    handleRow.addEventListener("touchmove", function (event) {
+      if (!dragging) return;
+      var dy = event.touches[0].clientY - startY;
+      if (dy > 0) {
+        sheet.style.transform = "translateY(" + dy + "px)";
+      }
+    }, { passive: true });
+
+    handleRow.addEventListener("touchend", function (event) {
+      if (!dragging) return;
+      dragging = false;
+      var dy = event.changedTouches[0].clientY - startY;
+      sheet.style.transform = "";
+      if (dy > 80) closeSheets();
+    });
+  }
+</script>
+
+</body>
+</html>
