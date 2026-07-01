@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lezione: Fedelta al Signore in mezzo all'apostasia</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f5f0e8;
+      --ink: #2c2c2c;
+      --navy: #1a3a5c;
+      --gold: #c9922a;
+      --green: #2a7a2a;
+      --card: #ffffff;
+      --mist: #eef4ff;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.32em;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.85em;
+      opacity: 0.9;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid var(--gold);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite,
+    .scripture-inline cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: var(--gold);
+    }
+
+    .section {
+      background: var(--card);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+
+    .section-header:hover { opacity: 0.84; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: var(--navy);
+      font-weight: bold;
+      margin-left: -8px;
+    }
+
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      max-height: 3200px;
+      overflow: hidden;
+      transition: max-height 0.35s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge {
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .section-badge {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .section-time,
+    .book-badge {
+      background: #e8f0fb;
+      color: var(--navy);
+    }
+
+    h2 {
+      font-size: 1.05em;
+      color: var(--navy);
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 0.9em;
+      color: #555;
+      margin: 14px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    p { margin-bottom: 10px; }
+
+    .question {
+      background: var(--mist);
+      border-left: 4px solid var(--navy);
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.78em;
+      color: var(--navy);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+
+    .scripture-inline a,
+    .bottom-sheet-body a,
+    .verse-box a {
+      color: var(--navy);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .scripture-inline a:hover,
+    .bottom-sheet-body a:hover,
+    .verse-box a:hover {
+      color: var(--gold);
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid var(--green);
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .tip-box::before {
+      content: "Nota per il docente: ";
+      font-weight: bold;
+      color: var(--green);
+    }
+
+    .summary-box {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    ul {
+      margin: 10px 0 12px 18px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    th {
+      background: var(--navy);
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0d8cc;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #888;
+      margin-top: 24px;
+      margin-bottom: 100px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .bottom-sheet-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--navy);
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+    }
+
+    .bottom-sheet-fab.teacher-fab {
+      bottom: 74px;
+      background: var(--green);
+    }
+
+    .bottom-sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+
+    .bottom-sheet-overlay.active { display: block; }
+
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 78vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+
+    .bottom-sheet.active { transform: translateY(0); }
+
+    .bottom-sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+      touch-action: none;
+    }
+
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+    }
+
+    .bottom-sheet-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: var(--navy);
+    }
+
+    .bottom-sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 4px 8px;
+      line-height: 1;
+      border-radius: 50%;
+    }
+
+    .bottom-sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 32px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .warning-box {
+      background: #fff8e7;
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.82em;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #7a5a10;
+    }
+
+    .warning-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.85em;
+    }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+      footer { margin-bottom: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>La fedelta al Signore in mezzo all'apostasia</h1>
+    <p>Scuola Domenicale · 1 Re 12-22 · 60 minuti<br />
+    <strong>Messaggio principale: fedelta, obbedienza e discernimento anche quando attorno a noi crescono idolatria e ipocrisia</strong></p>
+    <p style="margin-top:8px; font-size:0.78em; opacity:0.72;">Invito finale: cercare la voce calma e sommessa del Signore ogni giorno</p>
+  </header>
+
+  <div class="verse-box">
+    "Se il Signore e Dio, seguitelo; se invece lo e Baal, seguite lui."
+    <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/18?lang=ita&id=p21#p21" target="_blank" rel="noopener">1 Re 18:21</a></cite>
+  </div>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Obiettivo</span>
+    </div>
+    <div class="section-content">
+      <p>Questa lezione vuole aiutare la classe a riconoscere che la vera fedelta al Signore non si vede solo quando tutto va bene, ma soprattutto quando siamo circondati da pressioni, compromessi spirituali, apparenze religiose o voci contrarie.</p>
+      <p>Seguendo il filo di 1 Re 12-22, vedremo come l'apostasia spesso nasce da piccoli compromessi, come l'ipocrisia puo travestirsi da religione e come il Signore continua a guidare i Suoi servi tramite l'obbedienza e la Sua voce calma e sommessa.</p>
+      <div class="summary-box">
+        <p><strong>Percorso della lezione:</strong> compromesso -> coraggio profetico -> obbedienza personale -> smascherare l'ipocrisia -> ascoltare la voce del Signore.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Parte 1</span>
+      <h2>Quando il compromesso diventa apostasia</h2>
+      <span class="section-time">12 min</span>
+    </div>
+    <div class="section-content">
+      <p>Dopo Salomone, Roboamo indurisce il giogo sul popolo e il regno si divide. Geroboamo, per paura di perdere consenso, costruisce una religione comoda e controllabile. Non chiede: "Cosa vuole Dio?" ma "Cosa mi conviene?"</p>
+      <div class="scripture-inline">
+        Leggere insieme il momento in cui Geroboamo stabilisce un culto alternativo per trattenere il popolo e consolidare il suo potere.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/12?lang=ita&id=p28-p30#p28" target="_blank" rel="noopener">1 Re 12:28-30</a></cite>
+      </div>
+      <p>L'apostasia qui non comincia con una ribellione rumorosa ma con un compromesso presentato come soluzione pratica. Questo la rende pericolosa anche oggi: qualcosa puo sembrarci utile, efficiente o meno impegnativo, eppure allontanarci lentamente dal Signore.</p>
+      <div class="question">
+        <strong>Domanda di riflessione</strong>
+        In quali aree della vita spirituale il compromesso si presenta piu facilmente come qualcosa di ragionevole o innocuo?
+      </div>
+      <div class="question">
+        <strong>Domanda per la classe</strong>
+        Qual e la differenza tra adattarsi saggiamente alle circostanze e modificare la fedelta per convenienza?
+      </div>
+      <div class="tip-box">Puoi invitare la classe a notare che Geroboamo non chiede apertamente di rinnegare Dio: crea un sostituto. Spesso l'idolatria moderna non elimina Dio; lo rimpiazza con priorita piu comode.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Parte 2</span>
+      <h2>L'obbedienza non e selettiva</h2>
+      <span class="section-time">10 min</span>
+    </div>
+    <div class="section-content">
+      <p>In 1 Re 13 il profeta porta un messaggio vero, potente e persino profetico sul futuro di Giosia. Ma poi disobbedisce personalmente al comandamento ricevuto. Il capitolo ci ricorda che non basta dire parole giuste; il servo di Dio deve anche perseverare nell'obbedienza.</p>
+      <div class="scripture-inline">
+        Esaminare il contrasto tra il messaggio corretto del profeta e la sua successiva disobbedienza.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/13?lang=ita&id=p21-p24#p21" target="_blank" rel="noopener">1 Re 13:21-24</a></cite>
+      </div>
+      <p>Questo punto parla anche dell'ipocrisia in noi stessi. Possiamo difendere la verita in pubblico e poi fare eccezioni private quando pensiamo che nessuno veda. Il potere spirituale dell'obbedienza si perde quando diventa parziale o intermittente.</p>
+      <div class="question">
+        <strong>Domanda di riflessione</strong>
+        Dove rischio di essere serio nella testimonianza ma permissivo nell'obbedienza personale?
+      </div>
+      <div class="question">
+        <strong>Domanda per la classe</strong>
+        Perche e facile pensare che un grande incarico, un'esperienza spirituale forte o una conoscenza corretta compensino una disobbedienza personale?
+      </div>
+      <div class="tip-box">Evita un tono accusatorio. L'obiettivo non e cercare colpe negli altri, ma invitare ognuno a verificare se la propria fedelta e intera o frammentata.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Parte 3</span>
+      <h2>Fedelta quando la maggioranza sceglie altro</h2>
+      <span class="section-time">14 min</span>
+    </div>
+    <div class="section-content">
+      <p>Con Acab e Gezabele, l'idolatria raggiunge una forma pubblica, aggressiva e sostenuta dal potere. In quel contesto Elia si trova spesso da solo o quasi. Sul Carmelo non vince perche e piu popolare, ma perche resta dalla parte del Signore.</p>
+      <div class="scripture-inline">
+        Fermarsi sulla sfida di Elia al popolo: il problema non e solo quale dio esista, ma per quanto tempo il popolo continuera a esitare tra due vie.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/18?lang=ita&id=p21#p21" target="_blank" rel="noopener">1 Re 18:21</a></cite>
+      </div>
+      <p>La fedelta al Signore richiede chiarezza interiore. Non possiamo stare a lungo in una doppia lealta: una parte per Dio e una parte per l'idolo del momento, che sia approvazione sociale, paura, immagine, successo o controllo.</p>
+      <div class="scripture-inline">
+        Il Libro di Mormon mostra lo stesso principio: il Signore parla spesso con una voce sottile che richiede attenzione spirituale, non rumore esteriore.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/hel/5?lang=ita&id=p29-p30#p30" target="_blank" rel="noopener">Helaman 5:29-30</a></cite>
+      </div>
+      <div class="question">
+        <strong>Domanda di riflessione</strong>
+        Quali sono oggi le forme piu comuni di esitazione spirituale tra il Signore e "Baal" nella vita quotidiana?
+      </div>
+      <div class="question">
+        <strong>Domanda per la classe</strong>
+        Come possiamo restare fedeli senza diventare orgogliosi, aggressivi o autosufficienti verso chi sceglie diversamente?
+      </div>
+      <div class="tip-box">Puoi far notare che Elia non invita a una fedelta superficiale ma a una scelta intera. Questo puo aprire una conversazione profonda su alleanza, identita e priorita spirituali.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Parte 4</span>
+      <h2>Ipocrisia, inganno e verita profetica</h2>
+      <span class="section-time">12 min</span>
+    </div>
+    <div class="section-content">
+      <p>I capitoli 21 e 22 mostrano due forme di ipocrisia. Nel caso della vigna di Nabot, l'ingiustizia viene mascherata con una procedura religiosa e pubblica. Nel caso di Micaia, molti profeti parlano di vittoria mentre la vera parola del Signore e diversa.</p>
+      <div class="scripture-inline">
+        Leggere come il giudizio del Signore raggiunge Acab e Gezabele dopo il delitto contro Nabot.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/21?lang=ita&id=p17-p20#p17" target="_blank" rel="noopener">1 Re 21:17-20</a></cite>
+      </div>
+      <div class="scripture-inline">
+        Leggere la scena in cui Micaia resta fedele alla parola del Signore anche contro l'opinione dominante.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/22?lang=ita&id=p19-p23#p19" target="_blank" rel="noopener">1 Re 22:19-23</a></cite>
+      </div>
+      <p>La verita non si misura dal numero di voci che la sostengono. L'ipocrisia spesso usa linguaggio spirituale, forme religiose e consenso umano per coprire un cuore lontano da Dio. Per questo la fedelta richiede onesta davanti al Signore.</p>
+      <div class="question">
+        <strong>Domanda di riflessione</strong>
+        Come posso distinguere tra cio che conferma i miei desideri e cio che veramente viene dal Signore?
+      </div>
+      <div class="question">
+        <strong>Domanda per la classe</strong>
+        In che modo l'ipocrisia spirituale puo manifestarsi non solo nei grandi scandali, ma anche nelle piccole giustificazioni quotidiane?
+      </div>
+      <div class="tip-box">Questa sezione funziona bene se il docente modella umilta. La classe risponde meglio quando percepisce un invito all'esame di coscienza, non una lezione "contro gli altri".</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Parte 5</span>
+      <h2>Cercare ogni giorno la voce calma e sommessa</h2>
+      <span class="section-time">12 min</span>
+    </div>
+    <div class="section-content">
+      <p>Dopo il Carmelo, Elia attraversa paura, esaurimento e scoraggiamento. Il Signore lo ristora e poi gli insegna che la Sua guida non passa sempre attraverso il clamoroso. La fedelta duratura si nutre di attenzione spirituale quotidiana.</p>
+      <div class="scripture-inline">
+        Rileggere il momento in cui Elia riconosce la manifestazione del Signore non nel fragore, ma nella voce sottile e calma.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/19?lang=ita&id=p11-p12#p12" target="_blank" rel="noopener">1 Re 19:11-12</a></cite>
+      </div>
+      <div class="scripture-inline">
+        Collegare questo principio con l'apparizione del Salvatore, preceduta da una voce che il popolo deve imparare ad ascoltare con attenzione.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=ita&id=p3#p3" target="_blank" rel="noopener">3 Nefi 11:3</a></cite>
+      </div>
+      <p>Se vogliamo restare fedeli in tempi di apostasia e ipocrisia, non basta riconoscere il male intorno a noi. Dobbiamo coltivare una vita interiore che sappia udire il Signore, obbedirGli e tornare a Lui ogni giorno.</p>
+      <div class="question">
+        <strong>Domanda di riflessione</strong>
+        Quali abitudini rendono piu facile sentire la voce del Signore nella mia giornata concreta?
+      </div>
+      <div class="question">
+        <strong>Domanda per la classe</strong>
+        Come possiamo insegnare ai nostri figli, ai nostri amici o a noi stessi a distinguere la voce del Signore dal rumore, dalla fretta e dall'impulso del momento?
+      </div>
+      <div class="reflection">
+        Invito finale: questa settimana scegli un momento quotidiano, anche breve, in cui spegnere il rumore e cercare consapevolmente la voce calma e sommessa del Signore tramite preghiera, Scritture e obbedienza concreta.
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-toggle">▼</span>
+      <span class="section-badge">Conclusione</span>
+    </div>
+    <div class="section-content">
+      <p>1 Re 12-22 mostra che l'apostasia non e solo un problema storico e che l'ipocrisia non e solo il peccato di altri. Il Signore cerca persone fedeli che Gli obbediscano con il cuore intero, che non si lascino comprare dal consenso e che imparino a riconoscere la Sua voce.</p>
+      <p>La domanda di Elia resta attuale: chi seguiremo davvero? E la risposta matura ogni giorno nella nostra obbedienza personale.</p>
+    </div>
+  </section>
+
+  <button class="bottom-sheet-fab teacher-fab" type="button" data-sheet-open="teacher-sheet">
+    <span>Studio del docente</span>
+  </button>
+  <button class="bottom-sheet-fab" type="button" data-sheet-open="scripture-sheet">
+    <span>Tabella scritture</span>
+  </button>
+
+  <div class="bottom-sheet-overlay" id="sheet-overlay"></div>
+
+  <div class="bottom-sheet" id="teacher-sheet" aria-hidden="true">
+    <div class="bottom-sheet-handle-row">
+      <div class="bottom-sheet-handle"></div>
+      <div class="bottom-sheet-title-row">
+        <div class="bottom-sheet-title">Studio del docente</div>
+        <button class="bottom-sheet-close" type="button" data-sheet-close aria-label="Chiudi">×</button>
+      </div>
+    </div>
+    <div class="bottom-sheet-body">
+      <div class="tip-box">La parte piu importante della lezione e la preparazione del docente e la compagnia dello Spirito Santo. Questo documento e solo uno strumento per aiutare quella preparazione.</div>
+      <div class="warning-box">
+        <strong>Avviso sui contenuti AI</strong>
+        Questo materiale, se assistito o generato da AI, e un aiuto per la preparazione personale. Non e dottrina ufficiale della Chiesa, non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati, e non deve essere venduto, presentato o distribuito come dottrina o materiale ufficiale della Chiesa.
+      </div>
+
+      <h3>Scritture di preparazione</h3>
+      <ul>
+        <li><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/18?lang=ita&id=p21#p21" target="_blank" rel="noopener">1 Re 18:21</a> - per meditare sulla doppia lealta.</li>
+        <li><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/19?lang=ita&id=p11-p12#p12" target="_blank" rel="noopener">1 Re 19:11-12</a> - per cercare la voce del Signore nel silenzio.</li>
+        <li><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/hel/5?lang=ita&id=p29-p30#p30" target="_blank" rel="noopener">Helaman 5:29-30</a> - per riflettere su come il Signore parla al cuore.</li>
+        <li><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=ita&id=p3#p3" target="_blank" rel="noopener">3 Nefi 11:3</a> - per considerare il bisogno di ascoltare con attenzione spirituale.</li>
+      </ul>
+
+      <h3>Discorsi rilevanti da studiare</h3>
+      <ul>
+        <li><a href="https://www.churchofjesuschrist.org/study/liahona/2017/11/sunday-afternoon-session/the-voice-of-the-lord?lang=ita" target="_blank" rel="noopener">La voce del Signore</a> - utile per preparare una lezione centrata sull'ascolto spirituale.</li>
+        <li><a href="https://www.churchofjesuschrist.org/study/liahona/2014/05/sunday-afternoon-session/obedience-through-our-faithfulness?lang=ita" target="_blank" rel="noopener">L'obbedienza tramite la nostra fedelta</a> - utile per collegare fedelta e obbedienza quotidiana.</li>
+      </ul>
+
+      <h3>Domande di preparazione per il docente</h3>
+      <ul>
+        <li>Dove sto chiedendo al Signore di purificare la mia obbedienza, non solo il mio linguaggio religioso?</li>
+        <li>Quale forma di compromesso spirituale devo riconoscere piu chiaramente nella mia vita?</li>
+        <li>Questa lezione aiutera la classe a venire a Cristo oppure solo a fare analisi sugli errori degli altri?</li>
+        <li>Che esperienza personale o testimonianza semplice posso condividere senza spostare il centro dalla parola di Dio?</li>
+      </ul>
+
+      <h3>Sensibilita possibili</h3>
+      <ul>
+        <li>Alcuni potrebbero interpretare il tema dell'apostasia in modo polemico verso altre persone. Riporta la discussione alla conversione personale.</li>
+        <li>Il tema dell'ipocrisia puo toccare ferite legate a delusioni vissute in contesti religiosi. Mantieni un tono umile e pastorale.</li>
+        <li>Quando parli di obbedienza, evita un linguaggio meccanico. Collega sempre l'obbedienza alla fiducia nel Signore e alla compagnia dello Spirito.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bottom-sheet" id="scripture-sheet" aria-hidden="true">
+    <div class="bottom-sheet-handle-row">
+      <div class="bottom-sheet-handle"></div>
+      <div class="bottom-sheet-title-row">
+        <div class="bottom-sheet-title">Tabella delle scritture</div>
+        <button class="bottom-sheet-close" type="button" data-sheet-close aria-label="Chiudi">×</button>
+      </div>
+    </div>
+    <div class="bottom-sheet-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Parte</th>
+            <th>Scrittura</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/12?lang=ita&id=p28-p30#p28" target="_blank" rel="noopener">1 Re 12:28-30</a></td>
+            <td>Compromesso che porta all'idolatria</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/13?lang=ita&id=p21-p24#p21" target="_blank" rel="noopener">1 Re 13:21-24</a></td>
+            <td>Il costo della disobbedienza personale</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/18?lang=ita&id=p21#p21" target="_blank" rel="noopener">1 Re 18:21</a></td>
+            <td>Scegliere chi seguire</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/hel/5?lang=ita&id=p29-p30#p30" target="_blank" rel="noopener">Helaman 5:29-30</a></td>
+            <td>La voce del Signore e sottile</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/21?lang=ita&id=p17-p20#p17" target="_blank" rel="noopener">1 Re 21:17-20</a></td>
+            <td>Giudizio su ingiustizia e ipocrisia</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/22?lang=ita&id=p19-p23#p19" target="_blank" rel="noopener">1 Re 22:19-23</a></td>
+            <td>La verita non dipende dalla maggioranza</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/1-kgs/19?lang=ita&id=p11-p12#p12" target="_blank" rel="noopener">1 Re 19:11-12</a></td>
+            <td>La voce calma e sommessa</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="https://www.churchofjesuschrist.org/study/scriptures/bofm/3-ne/11?lang=ita&id=p3#p3" target="_blank" rel="noopener">3 Nefi 11:3</a></td>
+            <td>Ascoltare con attenzione spirituale</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    Lezione standalone per smartphone · Scuola Domenicale · Scritture e link ufficiali ChurchofJesusChrist.org
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const overlay = document.getElementById('sheet-overlay');
+    const sheetButtons = document.querySelectorAll('[data-sheet-open]');
+    const closeButtons = document.querySelectorAll('[data-sheet-close]');
+    const sheets = document.querySelectorAll('.bottom-sheet');
+    let activeSheet = null;
+
+    sections.forEach((section) => {
+      const header = section.querySelector('.section-header');
+      if (!header) {
+        return;
+      }
+      header.addEventListener('click', () => {
+        section.classList.toggle('collapsed');
+      });
+    });
+
+    function openSheet(sheetId) {
+      const target = document.getElementById(sheetId);
+      if (!target) {
+        return;
+      }
+      sheets.forEach((sheet) => {
+        sheet.classList.remove('active');
+        sheet.setAttribute('aria-hidden', 'true');
+      });
+      target.classList.add('active');
+      target.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('active');
+      activeSheet = target;
+    }
+
+    function closeSheet() {
+      if (!activeSheet) {
+        return;
+      }
+      activeSheet.classList.remove('active');
+      activeSheet.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('active');
+      activeSheet = null;
+    }
+
+    sheetButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        openSheet(button.getAttribute('data-sheet-open'));
+      });
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', closeSheet);
+    });
+
+    overlay.addEventListener('click', closeSheet);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeSheet();
+      }
+    });
+  </script>
+</body>
+</html>
