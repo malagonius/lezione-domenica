@@ -101,7 +101,16 @@
       flex: 1;
     }
 
-    .section-content { overflow: hidden; }
+    .section-content {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
 
     .section ul {
       margin: 6px 0 6px 20px;
@@ -147,24 +156,24 @@
 
   <header>
     <h1>Strumenti per creare e fare lezioni</h1>
-    <p>Una guida per chi prepara la lezione &mdash; non una lezione da insegnare.</p>
+    <p>Manuale per i preparatori di lezione &mdash; non una lezione da insegnare.</p>
   </header>
 
   <div class="intro">
-    <p><strong>Questa pagina è diversa dalle altre.</strong> Le lezioni normali seguono un percorso preciso: un argomento, domande stimolanti, una traccia che collega i punti, le scritture e una domanda finale. Questa pagina <strong>non</strong> segue quello schema. È uno strumento: serve a chi deve <em>creare</em> una lezione, non a chi la ascolta. Leggi le sezioni, applicale mentre prepari, poi costruisci la tua lezione seguendo questi principi.</p>
+    <p><strong>La presente pagina si distingue dalle altre.</strong> Le lezioni seguono un percorso definito: un argomento, domande stimolanti, un filo conduttore, le Scritture e una domanda conclusiva. Essa non adotta tale schema: costituisce uno strumento per chi prepara la lezione, non per chi la ascolta. Si invita il preparatore a leggerne le sezioni e ad applicarle durante la preparazione, per poi costruire la lezione secondo questi principi.</p>
   </div>
 
   <!-- SEZIONE 1 -->
   <div class="section">
     <div class="section-header">
       <span class="section-toggle">▾</span>
-      <h2>1. Il filtro Cristo &mdash; di che parliamo?</h2>
+      <h2>1. Il filtro Cristo &mdash; di che cosa si parla?</h2>
     </div>
     <div class="section-content">
-      <p>Prima di scegliere un argomento, fatti una domanda onesta: <em>questa lezione parla di Cristo e dei Suoi insegnamenti, o stiamo solo parlando?</em></p>
-      <p>Conosciamo Cristo attraverso le Scritture. La fonte è la Bibbia, e il materiale della Chiesa: il Libro di Mormon e Dottrina e Alleanze. Una lezione o una discussione deve essere <strong>fondata sulle scritture</strong> e deve <strong>aspettarsi un riferimento a Cristo</strong> (o a qualcosa di ad essa collegato).</p>
+      <p>Prima di scegliere un argomento, occorre porsi una domanda preliminare: questa lezione tratta di Cristo e dei Suoi insegnamenti, o si limita a un discorso generico?</p>
+      <p>La conoscenza di Cristo deriva dalle Scritture. La fonte è la Bibbia e il materiale ufficiale della Chiesa: il Libro di Mormon e Dottrina e Alleanze. Ogni lezione o discussione deve essere fondata sulle Scritture e deve includere un riferimento a Cristo (o a un principio a Esso collegato).</p>
       <div class="nota">
-        <p><strong>Regola pratica:</strong> l'argomento deve potersi legare a Cristo ed essere ancorato alla Scrittura. Se il tema è solo un bel soggetto generale senza legame con Lui o con la parola scritta, non è ancora una lezione &mdash; è una chiacchierata.</p>
+        <p><strong>Regola:</strong> l'argomento deve essere riconducibile a Cristo e ancorato alla Scrittura. Se il tema è un soggetto generale privo di legame con Lui o con la parola rivelata, non costituisce una lezione, bensì una conversazione occasionale.</p>
       </div>
     </div>
   </div>
@@ -176,15 +185,15 @@
       <h2>2. Dottrina o opinione personale?</h2>
     </div>
     <div class="section-content">
-      <p>Mentre prepari, distingui sempre due cose:</p>
+      <p>Durante la preparazione, è necessario distinguere nettamente due categorie:</p>
       <ul>
-        <li><strong>Dottrina</strong> &mdash; ciò che presenti come verità della Chiesa.</li>
-        <li><strong>Opinione personale</strong> &mdash; ciò che pensi tu.</li>
+        <li><strong>Dottrina</strong> &mdash; ciò che si presenta come verità della Chiesa.</li>
+        <li><strong>Opinione personale</strong> &mdash; ciò che il preparatore ritiene.</li>
       </ul>
       <div class="nota">
-        <p><strong>La regola:</strong> tutto ciò che viene presentato <em>come dottrina</em> deve essere sostenuto da una fonte o da un materiale (scritture, materiale della Chiesa). Tutto il resto può essere condiviso liberamente, <strong>purché si dica chiaramente che è opinione personale</strong>.</p>
+        <p><strong>La regola:</strong> tutto ciò che viene presentato come dottrina deve essere sostenuto da una fonte ufficiale (Scritture o materiale della Chiesa). Il resto può essere condiviso liberamente, a condizione che venga esplicitamente qualificato come opinione personale.</p>
       </div>
-      <p>In pratica: se dici "la Chiesa insegna che&hellip;", cita da dove viene. Se dici "io credo che&hellip;", dichiaralo come pensiero tuo. Non far passare la tua idea per dottrina.</p>
+      <p>In pratica: ove si affermi «la Chiesa insegna che&hellip;», se ne citi la fonte. Ove si affermi «io credo che&hellip;», lo si dichiari come convinzione personale. Non si deve presentare una propria idea come dottrina.</p>
     </div>
   </div>
 
@@ -192,19 +201,19 @@
   <div class="section">
     <div class="section-header">
       <span class="section-toggle">▾</span>
-      <h2>3. I tre "I" &mdash; Interessante, Importante, Indispensabile</h2>
+      <h2>3. I tre &laquo;I&raquo; &mdash; Interessante, Importante, Indispensabile</h2>
     </div>
     <div class="section-content">
-      <p>Esiste un modo per valutare il peso di ciò che vuoi mettere nella lezione: i tre "I". Per ora basta sapere che <strong>esistono</strong> e che, "a vibrazione", si distinguono così:</p>
+      <p>Per valutare il peso di ciò che si intende inserire nella lezione, si applica il criterio dei tre «I». Per il momento è sufficiente conoscerne l'esistenza e la distinzione di massima:</p>
       <ul>
-        <li><strong>Indispensabile</strong> = la dottrina. È ciò di cui non si può fare a meno. (Esempio: <em>dobbiamo ravvederci dei nostri peccati</em>.)</li>
-        <li><strong>Importante</strong> = non è dottrina, ma ci aiuta a diventare migliori. (Esempio: <em>dire "ti voglio bene" alla famiglia è importante perché mostra amore</em> &mdash; ma se uno non lo fa non sbaglia; ognuno esprime amore come preferisce, purché con amore.)</li>
-        <li><strong>Interessante</strong> = tutto il resto che riguarda la religione. (Esempio: <em>nella zona ci sono 1000 mormoni, potremmo fare di meglio</em> &mdash; fatto curioso, non mi avvicina a Cristo: è tema di conversazione, <strong>non</strong> materiale di lezione.)</li>
+        <li><strong>Indispensabile</strong> = la dottrina, ciò di cui non si può prescindere. (Esempio: è necessario ravvedersi dei propri peccati.)</li>
+        <li><strong>Importante</strong> = ciò che non è dottrina, ma contribuisce al progresso. (Esempio: esprimere affetto alla famiglia è importante in quanto manifestazione d'amore &mdash; ma chi non lo fa in tal modo non pecca; ciascuno esprime l'amore secondo la propria indole, purché con amore.)</li>
+        <li><strong>Interessante</strong> = tutto il resto di argomento religioso. (Esempio: nel territorio vi sono 1000 membri della Chiesa e si potrebbe fare di più &mdash; dato curioso che non avvicina a Cristo: è materia di conversazione, non di lezione.)</li>
       </ul>
       <div class="nota">
-        <p>Non è sbagliato parlare di ciò che è "interessante", ma la lezione deve essere costruita su qualcosa di <strong>indispensabile</strong>. L'interessante può fare da sfondo o da aggancio, l'indispensabile è la colonna portante.</p>
+        <p>Non è errato trattare ciò che è «interessante», ma la lezione deve poggiare su un contenuto indispensabile. L'interessante può fungere da sfondo o da introduzione; l'indispensabile ne è la struttura portante.</p>
       </div>
-      <p class="nota"><em>Nota: una spiegazione più dettagliata della differenza tra i tre "I" arriverà in seguito, in un documento a parte dedicato proprio a questo.</em></p>
+      <p class="nota"><em>Nota: una trattazione pi&ugrave; approfondita della distinzione tra i tre «I» sar&agrave; fornita in seguito, in un documento separato a esso dedicato.</em></p>
     </div>
   </div>
 
@@ -215,26 +224,26 @@
       <h2>4. Strumenti di insegnamento</h2>
     </div>
     <div class="section-content">
-      <p>Per le abilità pratiche di insegnamento ci si può appoggiare a <strong>Predica il Vangelo</strong> (il manuale dei missionari, capitolo su <em>come insegnare</em>). I principi lì dentro sono i veri strumenti; qui li ricordiamo in sintesi:</p>
+      <p>Per le capacità pratiche di insegnamento ci si attiene a <strong>Predica il Vangelo</strong> (il manuale missionario, capitolo dedicato all'insegnamento). I principi ivi contenuti costituiscono gli strumenti fondamentali; se ne propone qui una sintesi:</p>
       <ul>
-        <li><strong>Insegnare per lo Spirito</strong> &mdash; preparati e lascia che lo Spirito guidi, non solo la tua preparazione.</li>
-        <li><strong>Usare le scritture</strong> &mdash; torna alla fonte (vedi sezione 5).</li>
+        <li><strong>Insegnare per lo Spirito</strong> &mdash; prepararsi e lasciare che lo Spirito guidi, oltre la sola preparazione umana.</li>
+        <li><strong>Usare le Scritture</strong> &mdash; fare ritorno alla fonte (cfr. sezione 5).</li>
         <li><strong>Usare le parole dei profeti</strong> &mdash; il materiale della Chiesa sostiene la dottrina.</li>
-        <li><strong>Porre domande ispirate</strong> &mdash; le domande fanno pensare, non solo ascoltare.</li>
-        <li><strong>Amore per chi insegniamo</strong> &mdash; chi insegna deve voler bene a chi ascolta.</li>
-        <li><strong>Essere centrati in Cristo</strong> &mdash; tutto torna a Lui (vedi sezione 1).</li>
-        <li><strong>Ascoltare</strong> &mdash; insegnare è anche saper ricevere.</li>
+        <li><strong>Porre domande ispirate</strong> &mdash; le domande inducono al pensiero, non alla sola ricezione.</li>
+        <li><strong>Amore per coloro che si insegnano</strong> &mdash; chi insegna deve amare chi ascolta.</li>
+        <li><strong>Essere centrati in Cristo</strong> &mdash; ogni cosa riconduce a Lui (cfr. sezione 1).</li>
+        <li><strong>Ascoltare</strong> &mdash; insegnare comprende anche il saper ricevere.</li>
       </ul>
 
-      <p><strong>Alcune abilità su cui soffermarsi:</strong></p>
+      <p><strong>Alcune capacit&agrave; meritevoli di attenzione:</strong></p>
       <ul>
-        <li><em>Leggere le scritture</em> &mdash; non basta citarle di memoria: aprile, mostrale, leggi il contesto. La Scrittura è la base, non un ornamento.</li>
-        <li><em>Come iniziare a insegnare</em> &mdash; apri con una domanda o un breve aggancio che inviti, non che chiuda. L'inizio decide se sarà dialogo o predica.</li>
-        <li><em>L'importanza dell'ascolto</em> &mdash; il compito di chi insegna include recepire ciò che gli altri dicono, davvero, senza preparare già la risposta successiva.</li>
-        <li><em>Il silenzio</em> &mdash; il silenzio è uno strumento. Dopo una domanda, lascia spazio: chi riflette ha bisogno di tempo, non di essere riempito subito.</li>
+        <li><em>Leggere le Scritture</em> &mdash; non basta citarle a memoria: aprirle, mostrarle, leggerne il contesto. La Scrittura è il fondamento, non un ornamento.</li>
+        <li><em>Come iniziare</em> &mdash; aprire con una domanda o un breve richiamo che inviti alla partecipazione, non che la chiuda. L'esordio determina se vi sarà dialogo o predica.</li>
+        <li><em>L'importanza dell'ascolto</em> &mdash; il compito di chi insegna include il recepire ciò che gli altri dicono, in modo genuino, senza predisporre già la risposta successiva.</li>
+        <li><em>Il silenzio</em> &mdash; il silenzio è uno strumento. Dopo una domanda, occorre lasciare spazio: chi riflette necessita di tempo, non di essere subito riempito.</li>
       </ul>
       <div class="nota">
-        <p>Consulta direttamente il capitolo "Come migliorare le mie capacità di insegnamento" in <em>Predica il Vangelo</em> per il testo completo e autorevole.</p>
+        <p>Si consulti direttamente il capitolo «Come migliorare le mie capacità di insegnamento» in <em>Predica il Vangelo</em> per il testo completo e autorevole.</p>
       </div>
     </div>
   </div>
@@ -243,14 +252,14 @@
   <div class="section">
     <div class="section-header">
       <span class="section-toggle">▾</span>
-      <h2>5. Le scritture al centro</h2>
+      <h2>5. Le Scritture al centro</h2>
     </div>
     <div class="section-content">
-      <p>Quando insegniamo, capita di dimenticare di citare le scritture. E mentre crediamo di usare la dottrina, rischiamo invece di mettere la nostra credenza sopra la dottrina.</p>
+      <p>Nell'insegnamento accade di tralasciare la citazione delle Scritture. E, nel ritenere di esporre la dottrina, si corre il rischio di anteporre la propria convinzione alla dottrina stessa.</p>
       <div class="nota">
-        <p><strong>Promemoria, non legge:</strong> fatti spesso questa domanda &mdash; <em>"Sto usando le scritture?"</em>. Una buona regola (consigliata, non obbligatoria) è avere almeno <strong>una scrittura che fa riferimento all'argomento</strong> che vuoi trattare.</p>
+        <p><strong>Promemoria, non norma:</strong> porsi frequentemente la domanda &mdash; <em>«Sto usando le Scritture?»</em>. Una regola opportuna (consigliata, non vincolante) è disporre di almeno una Scrittura attinente all'argomento trattato.</p>
       </div>
-      <p>Se ti accorgi di stare parlando solo "dalla tua esperienza" senza ancoraggio scritto, fermati e chiediti: sto insegnando dottrina o sto esponendo me stesso?</p>
+      <p>Qualora ci si accorga di parlare sulla sola base della propria esperienza, senza ancoraggio scritto, ci si fermi e si domandi: sto insegnando la dottrina o sto esponendo me stesso?</p>
     </div>
   </div>
 
@@ -261,31 +270,36 @@
       <h2>6. La lezione è una conversazione, non una predica</h2>
     </div>
     <div class="section-content">
-      <p>Il punto più importante: la lezione <strong>non deve essere una lezione</strong>, bensì una conversazione. Chi crea la lezione deve aspettarsi che gli studenti abbiano già studiato il tema. Non "predicare" all'uditorio, ma essere colui che <strong>gestisce come va la conversazione</strong>.</p>
+      <p>Il principio fondamentale: la lezione non deve essere una lezione nel senso dell'esposizione, bensì una conversazione. Chi prepara la lezione deve presupporre che gli studenti abbiano già studiato il tema. Non si tratta di predicare all'uditorio, ma di governare lo svolgimento della conversazione.</p>
       <ul>
-        <li><strong>Come si apre</strong> &mdash; con una domanda che chiede agli altri, non con una tesi tua. Esempio: "Cosa vi ha colpito di quello che avete studiato questa settimana?" apre; "Oggi vi spiego questo" chiude.</li>
-        <li><strong>Il compito di chi guida</strong> &mdash; non è riempire il tempo, è far circolare. Gira le domande, richiama chi tace, modera chi parla troppo.</li>
-        <li><strong>Se non hanno studiato</strong> &mdash; la conversazione vive dello studio preparato. Se è chiaro che nessuno ha studiato, non forzare una finta discussione: puoi brevemente richiamare il brano di base, oppure invitare a studiare e riprendere, invece di trasformarti in un oratore.</li>
+        <li><strong>L'apertura</strong> &mdash; con una domanda rivolta agli altri, non con una propria tesi. Esempio: «Cosa vi ha colpito di ciò che avete studiato questa settimana?» apre; «Oggi vi spiego questo» chiude.</li>
+        <li><strong>Il compito di chi guida</strong> &mdash; non è riempire il tempo, ma far circolare la parola. Rivolgere le domande, richiamare chi tace, moderare chi eccede.</li>
+        <li><strong>Se non hanno studiato</strong> &mdash; la conversazione si fonda sullo studio preparatorio. Se è evidente che nessuno ha studiato, non si forzi una discussione fittizia: si può brevemente richiamare il passo di base, oppure invitare allo studio e riprendere, anziché trasformarsi in oratore.</li>
       </ul>
 
       <div class="esempio">
-        <p><strong>Esempio reale (illustrativo, non dottrina):</strong> poni "Cosa significa per voi perdonare?" e uno risponde. Invece di dare subito la tua definizione, ribaltala: "Interessante &mdash; e secondo il brano di oggi, il perdono da cosa parte?". Così resti guida, non protagonista, e la Scrittura torna al centro (sezioni 1 e 5).</p>
+        <p><strong>Esempio (illustrativo, non dottrina):</strong> si ponga «Cosa significa per voi perdonare?» e un partecipante risponde. Anziché offrire subito la propria definizione, la si rilanci: «Interessante &mdash; e, secondo il brano di oggi, da cosa trae origine il perdono?». Così si resta guida, non protagonista, e la Scrittura ritorna al centro (sezioni 1 e 5).</p>
       </div>
       <div class="esempio">
-        <p><strong>Altro esempio:</strong> dopo una domanda, resta in silenzio anche se il silenzio dura qualche secondo. Chi insegna spesso ha paura del vuoto e lo riempie; quel vuoto è invece lo spazio in cui gli altri pensano (vedi il silenzio nella sezione 4).</p>
+        <p><strong>Altro esempio:</strong> dopo una domanda, si mantenga il silenzio anche se dura alcuni secondi. Chi insegna teme spesso il vuoto e lo colma; quel vuoto è invece lo spazio in cui gli altri pensano (cfr. il silenzio nella sezione 4).</p>
       </div>
 
-      <p>La regola di fondo: tu guidi il <em>come</em>, loro portano il <em>cosa</em>. Se parli solo tu, non è una lezione &mdash; è un monologo.</p>
+      <p>La regola di fondo: tu guidi il <em>come</em>, essi portano il <em>cosa</em>. Se parli solo tu, non è una lezione &mdash; è un monologo.</p>
     </div>
   </div>
 
   <a class="home-link" href="../index.html">&larr; Torna alle lezioni</a>
-  <p class="footer-note">Pagina strumento &mdash; preparata per chi costruisce le lezioni, non per chi le ascolta.</p>
+  <p class="footer-note">Pagina di strumenti &mdash; redatta per i preparatori di lezioni, non per chi le ascolta.</p>
 
   <script>
-    document.querySelectorAll('.section-header').forEach(function (header) {
-      header.addEventListener('click', function () {
-        header.parentElement.classList.toggle('collapsed');
+    document.addEventListener('DOMContentLoaded', function () {
+      var sections = document.querySelectorAll('.section');
+      sections.forEach(function (section) {
+        var header = section.querySelector('.section-header');
+        if (!header) return;
+        header.addEventListener('click', function () {
+          section.classList.toggle('collapsed');
+        });
       });
     });
   </script>
