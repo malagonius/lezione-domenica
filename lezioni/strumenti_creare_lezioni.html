@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Strumenti per creare e fare lezioni</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 22px 18px;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    header p {
+      font-size: 0.9em;
+      opacity: 0.9;
+    }
+
+    .intro {
+      background: #eef4f7;
+      border-left: 5px solid #1a3a5c;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      font-size: 0.95em;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid #c9922a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 0 0 16px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: #c9922a;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .section-header:hover { opacity: 0.85; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 1em;
+      transition: transform 0.25s ease;
+      color: #1a3a5c;
+      font-weight: bold;
+      flex: none;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section h2 {
+      font-size: 1.1em;
+      color: #1a3a5c;
+      flex: 1;
+    }
+
+    .section-content { overflow: hidden; }
+
+    .section ul {
+      margin: 6px 0 6px 20px;
+    }
+    .section li { margin-bottom: 8px; }
+
+    .esempio {
+      background: #f3f7f9;
+      border: 1px dashed #1a3a5c;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 12px 0;
+      font-size: 0.92em;
+    }
+    .esempio strong { color: #1a3a5c; }
+
+    .nota {
+      background: #fff3e6;
+      border-left: 4px solid #c9922a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 12px 0;
+      font-size: 0.9em;
+    }
+
+    .home-link {
+      display: block;
+      text-align: center;
+      margin: 18px 0 6px;
+      color: #1a3a5c;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.82em;
+      color: #777;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Strumenti per creare e fare lezioni</h1>
+    <p>Una guida per chi prepara la lezione &mdash; non una lezione da insegnare.</p>
+  </header>
+
+  <div class="intro">
+    <p><strong>Questa pagina è diversa dalle altre.</strong> Le lezioni normali seguono un percorso preciso: un argomento, domande stimolanti, una traccia che collega i punti, le scritture e una domanda finale. Questa pagina <strong>non</strong> segue quello schema. È uno strumento: serve a chi deve <em>creare</em> una lezione, non a chi la ascolta. Leggi le sezioni, applicale mentre prepari, poi costruisci la tua lezione seguendo questi principi.</p>
+  </div>
+
+  <!-- SEZIONE 1 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>1. Il filtro Cristo &mdash; di che parliamo?</h2>
+    </div>
+    <div class="section-content">
+      <p>Prima di scegliere un argomento, fatti una domanda onesta: <em>questa lezione parla di Cristo e dei Suoi insegnamenti, o stiamo solo parlando?</em></p>
+      <p>Conosciamo Cristo attraverso le Scritture. La fonte è la Bibbia, e il materiale della Chiesa: il Libro di Mormon e Dottrina e Alleanze. Una lezione o una discussione deve essere <strong>fondata sulle scritture</strong> e deve <strong>aspettarsi un riferimento a Cristo</strong> (o a qualcosa di ad essa collegato).</p>
+      <div class="nota">
+        <p><strong>Regola pratica:</strong> l'argomento deve potersi legare a Cristo ed essere ancorato alla Scrittura. Se il tema è solo un bel soggetto generale senza legame con Lui o con la parola scritta, non è ancora una lezione &mdash; è una chiacchierata.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEZIONE 2 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>2. Dottrina o opinione personale?</h2>
+    </div>
+    <div class="section-content">
+      <p>Mentre prepari, distingui sempre due cose:</p>
+      <ul>
+        <li><strong>Dottrina</strong> &mdash; ciò che presenti come verità della Chiesa.</li>
+        <li><strong>Opinione personale</strong> &mdash; ciò che pensi tu.</li>
+      </ul>
+      <div class="nota">
+        <p><strong>La regola:</strong> tutto ciò che viene presentato <em>come dottrina</em> deve essere sostenuto da una fonte o da un materiale (scritture, materiale della Chiesa). Tutto il resto può essere condiviso liberamente, <strong>purché si dica chiaramente che è opinione personale</strong>.</p>
+      </div>
+      <p>In pratica: se dici "la Chiesa insegna che&hellip;", cita da dove viene. Se dici "io credo che&hellip;", dichiaralo come pensiero tuo. Non far passare la tua idea per dottrina.</p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 3 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>3. I tre "I" &mdash; Interessante, Importante, Indispensabile</h2>
+    </div>
+    <div class="section-content">
+      <p>Esiste un modo per valutare il peso di ciò che vuoi mettere nella lezione: i tre "I". Per ora basta sapere che <strong>esistono</strong> e che, "a vibrazione", si distinguono così:</p>
+      <ul>
+        <li><strong>Indispensabile</strong> = la dottrina. È ciò di cui non si può fare a meno. (Esempio: <em>dobbiamo ravvederci dei nostri peccati</em>.)</li>
+        <li><strong>Importante</strong> = non è dottrina, ma ci aiuta a diventare migliori. (Esempio: <em>dire "ti voglio bene" alla famiglia è importante perché mostra amore</em> &mdash; ma se uno non lo fa non sbaglia; ognuno esprime amore come preferisce, purché con amore.)</li>
+        <li><strong>Interessante</strong> = tutto il resto che riguarda la religione. (Esempio: <em>nella zona ci sono 1000 mormoni, potremmo fare di meglio</em> &mdash; fatto curioso, non mi avvicina a Cristo: è tema di conversazione, <strong>non</strong> materiale di lezione.)</li>
+      </ul>
+      <div class="nota">
+        <p>Non è sbagliato parlare di ciò che è "interessante", ma la lezione deve essere costruita su qualcosa di <strong>indispensabile</strong>. L'interessante può fare da sfondo o da aggancio, l'indispensabile è la colonna portante.</p>
+      </div>
+      <p class="nota"><em>Nota: una spiegazione più dettagliata della differenza tra i tre "I" arriverà in seguito, in un documento a parte dedicato proprio a questo.</em></p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 4 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>4. Strumenti di insegnamento</h2>
+    </div>
+    <div class="section-content">
+      <p>Per le abilità pratiche di insegnamento ci si può appoggiare a <strong>Predica il Vangelo</strong> (il manuale dei missionari, capitolo su <em>come insegnare</em>). I principi lì dentro sono i veri strumenti; qui li ricordiamo in sintesi:</p>
+      <ul>
+        <li><strong>Insegnare per lo Spirito</strong> &mdash; preparati e lascia che lo Spirito guidi, non solo la tua preparazione.</li>
+        <li><strong>Usare le scritture</strong> &mdash; torna alla fonte (vedi sezione 5).</li>
+        <li><strong>Usare le parole dei profeti</strong> &mdash; il materiale della Chiesa sostiene la dottrina.</li>
+        <li><strong>Porre domande ispirate</strong> &mdash; le domande fanno pensare, non solo ascoltare.</li>
+        <li><strong>Amore per chi insegniamo</strong> &mdash; chi insegna deve voler bene a chi ascolta.</li>
+        <li><strong>Essere centrati in Cristo</strong> &mdash; tutto torna a Lui (vedi sezione 1).</li>
+        <li><strong>Ascoltare</strong> &mdash; insegnare è anche saper ricevere.</li>
+      </ul>
+
+      <p><strong>Alcune abilità su cui soffermarsi:</strong></p>
+      <ul>
+        <li><em>Leggere le scritture</em> &mdash; non basta citarle di memoria: aprile, mostrale, leggi il contesto. La Scrittura è la base, non un ornamento.</li>
+        <li><em>Come iniziare a insegnare</em> &mdash; apri con una domanda o un breve aggancio che inviti, non che chiuda. L'inizio decide se sarà dialogo o predica.</li>
+        <li><em>L'importanza dell'ascolto</em> &mdash; il compito di chi insegna include recepire ciò che gli altri dicono, davvero, senza preparare già la risposta successiva.</li>
+        <li><em>Il silenzio</em> &mdash; il silenzio è uno strumento. Dopo una domanda, lascia spazio: chi riflette ha bisogno di tempo, non di essere riempito subito.</li>
+      </ul>
+      <div class="nota">
+        <p>Consulta direttamente il capitolo "Come migliorare le mie capacità di insegnamento" in <em>Predica il Vangelo</em> per il testo completo e autorevole.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEZIONE 5 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>5. Le scritture al centro</h2>
+    </div>
+    <div class="section-content">
+      <p>Quando insegniamo, capita di dimenticare di citare le scritture. E mentre crediamo di usare la dottrina, rischiamo invece di mettere la nostra credenza sopra la dottrina.</p>
+      <div class="nota">
+        <p><strong>Promemoria, non legge:</strong> fatti spesso questa domanda &mdash; <em>"Sto usando le scritture?"</em>. Una buona regola (consigliata, non obbligatoria) è avere almeno <strong>una scrittura che fa riferimento all'argomento</strong> che vuoi trattare.</p>
+      </div>
+      <p>Se ti accorgi di stare parlando solo "dalla tua esperienza" senza ancoraggio scritto, fermati e chiediti: sto insegnando dottrina o sto esponendo me stesso?</p>
+    </div>
+  </div>
+
+  <!-- SEZIONE 6 -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-toggle">▾</span>
+      <h2>6. La lezione è una conversazione, non una predica</h2>
+    </div>
+    <div class="section-content">
+      <p>Il punto più importante: la lezione <strong>non deve essere una lezione</strong>, bensì una conversazione. Chi crea la lezione deve aspettarsi che gli studenti abbiano già studiato il tema. Non "predicare" all'uditorio, ma essere colui che <strong>gestisce come va la conversazione</strong>.</p>
+      <ul>
+        <li><strong>Come si apre</strong> &mdash; con una domanda che chiede agli altri, non con una tesi tua. Esempio: "Cosa vi ha colpito di quello che avete studiato questa settimana?" apre; "Oggi vi spiego questo" chiude.</li>
+        <li><strong>Il compito di chi guida</strong> &mdash; non è riempire il tempo, è far circolare. Gira le domande, richiama chi tace, modera chi parla troppo.</li>
+        <li><strong>Se non hanno studiato</strong> &mdash; la conversazione vive dello studio preparato. Se è chiaro che nessuno ha studiato, non forzare una finta discussione: puoi brevemente richiamare il brano di base, oppure invitare a studiare e riprendere, invece di trasformarti in un oratore.</li>
+      </ul>
+
+      <div class="esempio">
+        <p><strong>Esempio reale (illustrativo, non dottrina):</strong> poni "Cosa significa per voi perdonare?" e uno risponde. Invece di dare subito la tua definizione, ribaltala: "Interessante &mdash; e secondo il brano di oggi, il perdono da cosa parte?". Così resti guida, non protagonista, e la Scrittura torna al centro (sezioni 1 e 5).</p>
+      </div>
+      <div class="esempio">
+        <p><strong>Altro esempio:</strong> dopo una domanda, resta in silenzio anche se il silenzio dura qualche secondo. Chi insegna spesso ha paura del vuoto e lo riempie; quel vuoto è invece lo spazio in cui gli altri pensano (vedi il silenzio nella sezione 4).</p>
+      </div>
+
+      <p>La regola di fondo: tu guidi il <em>come</em>, loro portano il <em>cosa</em>. Se parli solo tu, non è una lezione &mdash; è un monologo.</p>
+    </div>
+  </div>
+
+  <a class="home-link" href="../index.html">&larr; Torna alle lezioni</a>
+  <p class="footer-note">Pagina strumento &mdash; preparata per chi costruisce le lezioni, non per chi le ascolta.</p>
+
+  <script>
+    document.querySelectorAll('.section-header').forEach(function (header) {
+      header.addEventListener('click', function () {
+        header.parentElement.classList.toggle('collapsed');
+      });
+    });
+  </script>
+
+</body>
+</html>
