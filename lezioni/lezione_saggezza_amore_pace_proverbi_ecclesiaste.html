@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lezione: Saggezza, amore e pace</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --paper: #f5f0e8; --ink: #2c2c2c; --navy: #1a3a5c; --gold: #c9922a; --green: #2a7a2a; --card: #fff; --mist: #eef4ff; --bridge: #fdf3e3; }
+    body { font-family: Georgia, "Times New Roman", serif; background: var(--paper); color: var(--ink); padding: 16px 16px 92px; line-height: 1.65; font-size: 16px; }
+    header { background: var(--navy); color: #fff; border-radius: 10px; padding: 22px 18px; margin-bottom: 18px; text-align: center; }
+    header h1 { font-size: 1.42em; margin-bottom: 7px; }
+    header p { font-size: .86em; opacity: .9; }
+    .purpose, .verse-box { background: #fff8e7; border-left: 5px solid var(--gold); border-radius: 6px; padding: 14px 16px; margin-bottom: 18px; }
+    .purpose strong { color: #7a5a10; }
+    .source { font-size: .84em; margin-top: 8px; }
+    a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+    .section { background: var(--card); border-radius: 10px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.08); overflow: hidden; }
+    .section-header { display: flex; align-items: center; gap: 9px; cursor: pointer; user-select: none; }
+    .section-toggle { width: 20px; color: var(--navy); font-weight: bold; transition: transform .25s ease; }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+    .section-content { max-height: 2600px; overflow: hidden; transition: max-height .35s ease, opacity .3s ease; opacity: 1; }
+    .section.collapsed .section-content { max-height: 0; opacity: 0; }
+    .section-badge, .section-time { border-radius: 20px; padding: 3px 9px; font: .72em Arial, sans-serif; white-space: nowrap; }
+    .section-badge { background: var(--navy); color: #fff; }
+    .section-time { background: #e8f0fb; color: var(--navy); }
+    h2 { font-size: 1.06em; color: var(--navy); flex: 1; }
+    h3 { color: #555; font: bold .78em Arial, sans-serif; letter-spacing: .05em; text-transform: uppercase; margin: 15px 0 6px; }
+    p { margin-bottom: 10px; }
+    .question { background: var(--mist); border-left: 4px solid var(--navy); border-radius: 4px; padding: 10px 12px; margin: 10px 0; }
+    .question strong { display: block; color: var(--navy); font: bold .75em Arial, sans-serif; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 3px; }
+    .scripture-inline { background: #fff8e7; border-left: 3px solid var(--gold); border-radius: 4px; padding: 8px 12px; margin: 10px 0; font-size: .91em; }
+    .tip-box { background: #f0faf0; border-left: 4px solid var(--green); border-radius: 4px; padding: 10px 12px; margin: 10px 0; font: .88em Arial, sans-serif; }
+    .tip-box strong { color: var(--green); }
+    .bridge-box { background: var(--bridge); border: 2px dashed var(--gold); border-radius: 8px; padding: 10px 12px; margin: 10px 0; font-size: .9em; }
+    .summary-box { background: var(--navy); color: #fff; border-radius: 10px; padding: 16px; margin-top: 18px; }
+    ul { margin: 8px 0 12px 19px; } li { margin-bottom: 7px; }
+    .floating-actions { position: fixed; z-index: 5; right: 14px; bottom: 14px; display: flex; gap: 8px; }
+    .floating-actions button { border: 0; border-radius: 22px; padding: 10px 13px; color: #fff; background: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,.2); font: bold .78em Arial, sans-serif; cursor: pointer; }
+    .floating-actions button:last-child { background: var(--green); }
+    .overlay { display: none; position: fixed; inset: 0; z-index: 10; background: rgba(15,28,42,.52); }
+    .overlay.open { display: block; }
+    .bottom-sheet { position: fixed; z-index: 11; left: 0; right: 0; bottom: 0; max-height: 88vh; background: var(--paper); border-radius: 16px 16px 0 0; transform: translateY(105%); transition: transform .3s ease; overflow: hidden; }
+    .bottom-sheet.open { transform: translateY(0); }
+    .sheet-handle { width: 44px; height: 5px; border-radius: 4px; background: #aaa; margin: 9px auto; }
+    .sheet-header { display: flex; align-items: center; justify-content: space-between; padding: 0 16px 12px; color: var(--navy); }
+    .sheet-header h2 { flex: initial; }
+    .sheet-header button { border: 0; background: transparent; color: var(--navy); font-size: 1.35em; cursor: pointer; }
+    .sheet-body { overflow-y: auto; max-height: calc(88vh - 55px); padding: 0 16px 24px; }
+    table { width: 100%; border-collapse: collapse; font: .84em Arial, sans-serif; }
+    th { background: var(--navy); color: #fff; text-align: left; padding: 8px; }
+    td { border-bottom: 1px solid #ddd; padding: 8px; vertical-align: top; }
+    .warning { background: #fff4e5; border-left: 4px solid #b86b00; padding: 10px 12px; margin: 12px 0; font: .86em Arial, sans-serif; }
+    @media (min-width: 700px) { body { max-width: 760px; margin: auto; } }
+    @media print { .floating-actions, .overlay, .bottom-sheet { display: none !important; } body { padding: 0; } .section.collapsed .section-content { max-height: none; opacity: 1; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Saggezza, amore e pace</h1>
+    <p>Scuola domenicale · 20 minuti · conversazione guidata</p>
+  </header>
+
+  <div class="purpose">
+    <strong>Scopo:</strong> esplorare come la saggezza e l’amore, alla luce di Gesù Cristo, possano guidarci verso la pace anche in una situazione scomoda.
+    <p class="source"><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/37?lang=ita">Manuale Vieni e seguimi</a> · scritture: Proverbi ed Ecclesiaste</p>
+  </div>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">1</span><h2>Che cosa significa vivere bene?</h2><span class="section-time">3 min</span></div>
+    <div class="section-content">
+      <p>Iniziamo osservando la nostra vita con un po’ di distanza. Non cerchiamo subito una risposta corretta: proviamo a riconoscere ciò che sta davvero orientando le nostre scelte.</p>
+      <div class="scripture-inline"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/1?lang=ita">Ecclesiaste 1–3</a><br />Leggere o richiamare un passaggio scelto dal docente.</div>
+      <div class="question"><strong>Domanda per la classe</strong>Quando ci accorgiamo che un obiettivo, una preoccupazione o un’attività sta occupando troppo spazio nella nostra vita?</div>
+      <div class="question"><strong>Per approfondire</strong>Che cosa cambia quando guardiamo il nostro tempo e le nostre relazioni con una prospettiva più ampia?</div>
+      <div class="tip-box"><strong>Nota per il docente:</strong> lasciare spazio al silenzio. Non correggere subito le risposte: raccogliere le parole che la classe usa per descrivere ciò che conta.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">2</span><h2>Dove cerchiamo la saggezza?</h2><span class="section-time">5 min</span></div>
+    <div class="section-content">
+      <p>La saggezza non è soltanto sapere molte cose. In questa conversazione possiamo esplorare come si manifesta nelle decisioni, nelle reazioni e nella disponibilità ad ascoltare.</p>
+      <div class="scripture-inline"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/1?lang=ita">Proverbi 1–4</a> · <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/15?lang=ita">15–16</a></div>
+      <div class="question"><strong>Domanda per la classe</strong>Come riconosciamo la differenza tra una reazione impulsiva e una risposta saggia?</div>
+      <div class="question"><strong>Domanda per la classe</strong>Quale tipo di consiglio facciamo più fatica ad accettare, e perché?</div>
+      <div class="question"><strong>Collegamento</strong>Che cosa cambia quando cerchiamo la saggezza prima di cercare di avere ragione?</div>
+      <div class="bridge-box"><strong>Passaggio:</strong> se la saggezza influenza il modo in cui rispondiamo, allora anche le nostre parole possono diventare uno strumento di amore o di conflitto.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">3</span><h2>Amore, parole e conflitto</h2><span class="section-time">5 min</span></div>
+    <div class="section-content">
+      <div class="scripture-inline"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/15?lang=ita">Proverbi 15</a> · <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/16?lang=ita">Proverbi 16</a> · <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/22?lang=ita">Proverbi 22</a></div>
+      <div class="question"><strong>Domanda per la classe</strong>Perché una cosa vera può essere pronunciata nel modo sbagliato?</div>
+      <div class="question"><strong>Domanda per la classe</strong>Che cosa significa amare una persona senza approvare necessariamente ogni sua scelta?</div>
+      <div class="question"><strong>Applicazione</strong>In una situazione scomoda, quale risposta potrebbe riflettere meglio l’amore di Gesù Cristo?</div>
+      <div class="tip-box"><strong>Nota per il docente:</strong> invitare la classe a parlare di scelte e atteggiamenti, non a raccontare dettagli personali che potrebbero esporre altre persone.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">4</span><h2>Che cosa conta davvero?</h2><span class="section-time">4 min</span></div>
+    <div class="section-content">
+      <div class="scripture-inline"><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/31?lang=ita">Proverbi 31</a> · <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/11?lang=ita">Ecclesiaste 11–12</a></div>
+      <div class="question"><strong>Domanda per la classe</strong>Quali qualità meritano di essere coltivate anche quando nessuno le nota?</div>
+      <div class="question"><strong>Domanda per la classe</strong>Alla fine della settimana, che tipo di persona vorremmo essere stati nelle nostre relazioni?</div>
+      <p>Riportiamo il discorso al tema iniziale: saggezza e amore non restano idee astratte; diventano il modo in cui scegliamo di trattare le persone.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">5</span><h2>Scegliere una risposta di pace</h2><span class="section-time">3 min</span></div>
+    <div class="section-content">
+      <div class="summary-box">Invito: scegliere una situazione scomoda in cui cercare di pacificare, con una frase concreta, un ascolto più sincero o una risposta meno reattiva.</div>
+      <div class="question"><strong>Domanda conclusiva</strong>Quale piccolo atto di pace posso scegliere questa settimana senza aspettare che sia l’altra persona a fare il primo passo?</div>
+      <p>Lasciare un momento per la riflessione personale e, se appropriato, invitare chi desidera a condividere un’intenzione senza dover raccontare la situazione.</p>
+    </div>
+  </section>
+
+  <div class="floating-actions"><button type="button" data-open="scriptures">Scritture</button><button type="button" data-open="teacher">Studio docente</button></div>
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="bottom-sheet" id="scriptures" aria-hidden="true">
+    <div class="sheet-handle"></div><div class="sheet-header"><h2>Scritture usate</h2><button type="button" data-close="scriptures" aria-label="Chiudi">×</button></div>
+    <div class="sheet-body"><table><thead><tr><th>Parte</th><th>Riferimento</th><th>Tema</th></tr></thead><tbody>
+      <tr><td>1</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/1?lang=ita">Ecclesiaste 1–3</a></td><td>Prospettiva sul tempo e sulla vita</td></tr>
+      <tr><td>2</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/1?lang=ita">Proverbi 1–4</a></td><td>Cercare la saggezza</td></tr>
+      <tr><td>2–3</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/15?lang=ita">Proverbi 15–16</a></td><td>Parole, reazioni e scelte</td></tr>
+      <tr><td>3</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/22?lang=ita">Proverbi 22</a></td><td>Relazioni e atteggiamenti</td></tr>
+      <tr><td>4</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/31?lang=ita">Proverbi 31</a></td><td>Qualità da coltivare</td></tr>
+      <tr><td>4</td><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/11?lang=ita">Ecclesiaste 11–12</a></td><td>Ciò che conta nel tempo</td></tr>
+    </tbody></table></div>
+  </aside>
+
+  <aside class="bottom-sheet" id="teacher" aria-hidden="true">
+    <div class="sheet-handle"></div><div class="sheet-header"><h2>Studio del docente</h2><button type="button" data-close="teacher" aria-label="Chiudi">×</button></div>
+    <div class="sheet-body">
+      <p><strong>La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione.</strong></p>
+      <div class="warning">Questo materiale è stato generato o assistito dall’AI: è un aiuto per la preparazione personale, non dottrina ufficiale della Chiesa e non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati. Non deve essere venduto, presentato o distribuito come dottrina della Chiesa o materiale ufficiale.</div>
+      <h3>Prima della lezione</h3>
+      <ul><li>Studiare <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/1?lang=ita">Proverbi 1–4</a>, <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/15?lang=ita">15–16</a>, <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/22?lang=ita">22</a>, <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/prov/31?lang=ita">31</a>, <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/1?lang=ita">Ecclesiaste 1–3</a> e <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/eccl/11?lang=ita">11–12</a>.</li><li>Rileggere il <a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/37?lang=ita">capitolo del manuale indicato</a>.</li></ul>
+      <h3>Domande per la preghiera</h3>
+      <ul><li>Quale aspetto di saggezza, amore o pace ha bisogno di diventare più personale per me?</li><li>Quale domanda può aiutare la classe a riflettere senza sentirsi giudicata?</li><li>In quale momento devo ascoltare di più e parlare di meno?</li><li>Quale invito concreto potrei estendere se mi sentissi guidato dallo Spirito?</li></ul>
+      <h3>Nota sulle fonti</h3><p>Non è stato aggiunto un discorso della Conferenza generale: non ne è stato indicato uno e non vengono inventati titoli, autori o citazioni.</p>
+    </div>
+  </aside>
+
+  <script>
+    const overlay = document.getElementById('overlay');
+    const sheets = document.querySelectorAll('.bottom-sheet');
+    function closeSheets() { sheets.forEach(sheet => { sheet.classList.remove('open'); sheet.setAttribute('aria-hidden', 'true'); }); overlay.classList.remove('open'); }
+    document.querySelectorAll('[data-open]').forEach(button => button.addEventListener('click', () => { closeSheets(); const sheet = document.getElementById(button.dataset.open); sheet.classList.add('open'); sheet.setAttribute('aria-hidden', 'false'); overlay.classList.add('open'); }));
+    document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', closeSheets));
+    overlay.addEventListener('click', closeSheets);
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') closeSheets(); });
+    document.querySelectorAll('.section-header').forEach(header => { const toggle = () => { const section = header.parentElement; const expanded = header.getAttribute('aria-expanded') === 'true'; header.setAttribute('aria-expanded', String(!expanded)); section.classList.toggle('collapsed', expanded); }; header.addEventListener('click', toggle); header.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); } }); });
+  </script>
+</body>
+</html>
