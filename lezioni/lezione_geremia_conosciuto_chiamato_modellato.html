@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lezione: Conosciuto, chiamato, modellato</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --paper:#f5f0e8; --ink:#2c2c2c; --navy:#1a3a5c; --gold:#c9922a; --green:#2a7a2a; --card:#fff; --mist:#eef4ff; --bridge:#fdf3e3; }
+    body { font-family: Georgia, "Times New Roman", serif; background:var(--paper); color:var(--ink); padding:16px 16px 92px; line-height:1.65; font-size:16px; }
+    header { background:var(--navy); color:#fff; border-radius:10px; padding:22px 18px; margin-bottom:18px; text-align:center; }
+    header h1 { font-size:1.42em; margin-bottom:7px; }
+    header p { font-size:.86em; opacity:.9; }
+    .purpose,.verse-box { background:#fff8e7; border-left:5px solid var(--gold); border-radius:6px; padding:14px 16px; margin-bottom:18px; }
+    .purpose strong { color:#7a5a10; }
+    .source { font-size:.84em; margin-top:8px; }
+    a { color:var(--navy); text-decoration:underline; text-underline-offset:2px; }
+    .section { background:var(--card); border-radius:10px; padding:16px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,.08); overflow:hidden; }
+    .section-header { display:flex; align-items:center; gap:9px; cursor:pointer; user-select:none; }
+    .section-toggle { width:20px; color:var(--navy); font-weight:bold; transition:transform .25s ease; }
+    .section.collapsed .section-toggle { transform:rotate(-90deg); }
+    .section-content { max-height:2600px; overflow:hidden; transition:max-height .35s ease, opacity .3s ease; opacity:1; }
+    .section.collapsed .section-content { max-height:0; opacity:0; }
+    .section-badge,.section-time { border-radius:20px; padding:3px 9px; font:.72em Arial,sans-serif; white-space:nowrap; }
+    .section-badge { background:var(--navy); color:#fff; }
+    .section-time { background:#e8f0fb; color:var(--navy); }
+    h2 { font-size:1.06em; color:var(--navy); flex:1; }
+    h3 { color:#555; font:bold .78em Arial,sans-serif; letter-spacing:.05em; text-transform:uppercase; margin:15px 0 6px; }
+    p { margin-bottom:10px; }
+    .question { background:var(--mist); border-left:4px solid var(--navy); border-radius:4px; padding:10px 12px; margin:10px 0; }
+    .question strong { display:block; color:var(--navy); font:bold .75em Arial,sans-serif; letter-spacing:.04em; text-transform:uppercase; margin-bottom:3px; }
+    .scripture-inline { background:#fff8e7; border-left:3px solid var(--gold); border-radius:4px; padding:8px 12px; margin:10px 0; font-size:.91em; }
+    .tip-box { background:#f0faf0; border-left:4px solid var(--green); border-radius:4px; padding:10px 12px; margin:10px 0; font:.88em Arial,sans-serif; }
+    .tip-box strong { color:var(--green); }
+    .bridge-box { background:var(--bridge); border:2px dashed var(--gold); border-radius:8px; padding:10px 12px; margin:10px 0; font-size:.9em; }
+    .summary-box { background:var(--navy); color:#fff; border-radius:10px; padding:16px; margin-top:18px; }
+    ul { margin:8px 0 12px 19px; } li { margin-bottom:7px; }
+    .floating-actions { position:fixed; z-index:5; right:14px; bottom:14px; display:flex; gap:8px; }
+    .floating-actions button { border:0; border-radius:22px; padding:10px 13px; color:#fff; background:var(--navy); box-shadow:0 2px 8px rgba(0,0,0,.2); font:bold .78em Arial,sans-serif; cursor:pointer; }
+    .floating-actions button:last-child { background:var(--green); }
+    .overlay { display:none; position:fixed; inset:0; z-index:10; background:rgba(15,28,42,.52); }
+    .overlay.open { display:block; }
+    .bottom-sheet { position:fixed; z-index:11; left:0; right:0; bottom:0; max-height:88vh; background:var(--paper); border-radius:16px 16px 0 0; transform:translateY(105%); transition:transform .3s ease; overflow:hidden; }
+    .bottom-sheet.open { transform:translateY(0); }
+    .sheet-handle { width:44px; height:5px; border-radius:4px; background:#aaa; margin:9px auto; }
+    .sheet-header { display:flex; align-items:center; justify-content:space-between; padding:0 16px 12px; color:var(--navy); }
+    .sheet-header h2 { flex:initial; }
+    .sheet-header button { border:0; background:transparent; color:var(--navy); font-size:1.35em; cursor:pointer; }
+    .sheet-body { overflow-y:auto; max-height:calc(88vh - 55px); padding:0 16px 24px; }
+    table { width:100%; border-collapse:collapse; font:.84em Arial,sans-serif; }
+    th { background:var(--navy); color:#fff; text-align:left; padding:8px; }
+    td { border-bottom:1px solid #ddd; padding:8px; vertical-align:top; }
+    .warning { background:#fff4e5; border-left:4px solid #b86b00; padding:10px 12px; margin:12px 0; font:.86em Arial,sans-serif; }
+    @media (min-width:700px) { body { max-width:760px; margin:auto; } }
+    @media print { .floating-actions,.overlay,.bottom-sheet { display:none!important; } body { padding:0; } .section.collapsed .section-content { max-height:none; opacity:1; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Conosciuto, chiamato, modellato</h1>
+    <p>Scuola domenicale · 23 minuti · conversazione guidata</p>
+  </header>
+
+  <div class="purpose">
+    <strong>Idea centrale:</strong> Dio mi conosceva prima che nascessi, ma questa verità non serve a farmi sentire "speciale" e basta: serve a darmi il coraggio di rispondere alla Sua chiamata, lasciare le mie false sorgenti e permetterGli di modellarmi.
+    <p class="source"><a href="https://www.churchofjesuschrist.org/study/manual/come-follow-me-for-home-and-church-old-testament-2026/43?lang=ita">Vieni e seguimi · 19–25 ottobre · Geremia 1–3; 7; 16–18; 20</a></p>
+  </div>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">1</span><h2>“Io ti ho conosciuto”: chi sono davvero?</h2><span class="section-time">4 min</span></div>
+    <div class="section-content">
+      <p>Partiamo da una frase che può sembrare rassicurante, ma che diventa molto più esigente se la prendiamo sul serio: Dio non ha iniziato a interessarsi a noi quando siamo nati.</p>
+      <div class="scripture-inline"><strong>Da leggere insieme:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/1?lang=ita&amp;id=p4-p8#p5">Geremia 1:4–8</a><br />Il Signore dice a Geremia che lo conosceva, lo aveva consacrato e che sarebbe stato con lui.</div>
+      <div class="question"><strong>Domanda provocatoria</strong>Se Dio ti conosceva prima che tu nascessi, quanto del tuo valore dipende davvero da quello che oggi pensi di te stesso?</div>
+      <div class="question"><strong>Per andare più a fondo</strong>Qual è la differenza tra pensare “Dio mi ha dato un destino” e pensare “Dio mi conosce e mi invita a partecipare alla Sua opera”?</div>
+      <div class="tip-box"><strong>Nota per il docente:</strong> non cercare una risposta “giusta”. Lascia che la classe distingua identità, capacità e chiamata.</div>
+      <div class="bridge-box"><strong>Collegamento:</strong> se Dio mi conosce, allora la domanda successiva non è “quanto valgo?”, ma “che cosa mi sta chiedendo di fare nonostante le mie paure?”.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">2</span><h2>La chiamata non elimina la paura</h2><span class="section-time">5 min</span></div>
+    <div class="section-content">
+      <p>Geremia non reagisce come un eroe sicuro di sé. Dice: “Io non so parlare”. Il Signore non gli risponde: “Hai ragione, sei pronto quando ti sentirai pronto”. Lo manda comunque e promette la Sua presenza.</p>
+      <div class="scripture-inline"><strong>Da leggere insieme:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/1?lang=ita&amp;id=p6-p10,p17-p19#p6">Geremia 1:6–10, 17–19</a><br />“Non dire: Sono un fanciullo” e “non temerli, perché io sono con te”.</div>
+      <div class="question"><strong>Domanda provocatoria</strong>Quante volte chiamiamo “umiltà” quello che in realtà è paura di provare?</div>
+      <div class="question"><strong>Domanda per la classe</strong>Quale paura potrebbe impedirci di fare qualcosa di buono che il Signore ci sta chiedendo?</div>
+      <div class="question"><strong>Collegamento</strong>Perché la promessa “Io sono con te” può essere più importante della promessa “andrà tutto bene”?</div>
+      <div class="bridge-box"><strong>Passaggio:</strong> Geremia deve parlare, ma il problema di Israele non era soltanto non ascoltare il profeta. Era avere sostituito la sorgente vera con qualcosa che sembrava sufficiente.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">3</span><h2>Le cisterne crepate: da cosa stiamo cercando di bere?</h2><span class="section-time">5 min</span></div>
+    <div class="section-content">
+      <p>Qui la lezione cambia direzione: non basta sapere che Dio ci conosce. Possiamo essere conosciuti da Lui e, allo stesso tempo, continuare a cercare vita, sicurezza e approvazione altrove.</p>
+      <div class="scripture-inline"><strong>Da leggere insieme:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/2?lang=ita&amp;id=p11-p13#p13">Geremia 2:11–13</a><br />Il popolo ha abbandonato “la sorgente d’acqua viva” per scavarsi “cisterne crepate”.</div>
+      <div class="question"><strong>Domanda provocatoria</strong>Qual è una “cisterna crepata” moderna: qualcosa da cui continuiamo a cercare soddisfazione anche se ci ha già dimostrato di non poterci dissetare?</div>
+      <div class="question"><strong>Da non eludere</strong>Una cosa può essere buona — lavoro, successo, famiglia, sport, tecnologia, persino servizio nella Chiesa — e diventare comunque una cisterna crepata?</div>
+      <div class="question"><strong>Applicazione</strong>Come facciamo concretamente a “bere” dalla sorgente del Salvatore invece di limitarci a sapere che esiste?</div>
+      <div class="tip-box"><strong>Nota per il docente:</strong> mantenere la discussione sulle categorie, non chiedere confessioni personali. L'obiettivo è riconoscere i sostituti della sorgente, non giudicarli.</div>
+      <div class="bridge-box"><strong>Collegamento:</strong> se riconosco le mie cisterne, scopro anche che Dio non vuole soltanto riempire ciò che sono: vuole trasformare ciò che sono. Ed ecco il vasaio.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">4</span><h2>Argilla nelle mani del Vasaio</h2><span class="section-time">5 min</span></div>
+    <div class="section-content">
+      <p>La metafora è volutamente scomoda: l'argilla non decide da sola quale forma avere. Essere nelle mani del Signore significa accettare che alcune parti della nostra vita debbano essere ammorbidite, rifatte o cambiate.</p>
+      <div class="scripture-inline"><strong>Da leggere insieme:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/18?lang=ita&amp;id=p1-p6#p1">Geremia 18:1–6</a><br />Come l'argilla nelle mani del vasaio, così siamo nelle mani del Signore.</div>
+      <div class="question"><strong>Domanda provocatoria</strong>Preferiamo davvero che Dio ci modelli, o preferiamo che benedica la forma che abbiamo già scelto per noi stessi?</div>
+      <div class="question"><strong>Per approfondire</strong>Qual è la differenza tra “Dio mi conosce” e “Dio mi conosce abbastanza da sapere che devo ancora cambiare”?</div>
+      <div class="question"><strong>Applicazione</strong>Quale atteggiamento rende una persona più “modellabile”: obbedienza perfetta o disponibilità a lasciarsi correggere?</div>
+      <div class="bridge-box"><strong>Passaggio:</strong> Geremia è conosciuto, chiamato, corretto e modellato. Ma alla fine resta una domanda: che cosa facciamo con la parola che il Signore ci mette davanti quando non ci piace?</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true"><span class="section-toggle">▼</span><span class="section-badge">5</span><h2>Quando la parola diventa un fuoco</h2><span class="section-time">4 min</span></div>
+    <div class="section-content">
+      <p>La conclusione non è “ora so chi sono”. È più dinamica: conosco meglio Dio, riconosco ciò che mi allontana da Lui e divento disposto a lasciarmi usare per riportare altri alla sorgente.</p>
+      <div class="scripture-inline"><strong>Da leggere insieme:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/20?lang=ita&amp;id=p7-p9#p9">Geremia 20:7–9</a><br />Geremia vorrebbe tacere, ma la parola del Signore è “come un fuoco ardente” nel suo cuore.</div>
+      <div class="question"><strong>Domanda finale</strong>Se una verità del Vangelo diventasse davvero “un fuoco” dentro di noi, quale comportamento cambierebbe per primo?</div>
+      <div class="question"><strong>Ultima provocazione</strong>Il raduno di Israele è soltanto qualcosa che i missionari fanno, oppure può iniziare ogni volta che aiutiamo una persona a tornare alla Sorgente?</div>
+      <div class="scripture-inline"><strong>Se c'è tempo:</strong> <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/3?lang=ita&amp;id=p14-p18#p14">Geremia 3:14–18</a><br />Il Signore parla di un raduno del Suo popolo: non solo numeri, ma persone che tornano a Lui.</div>
+      <div class="summary-box"><strong>Invito:</strong> questa settimana scegli una sola situazione in cui normalmente ti affidi a una “cisterna crepata”. Prima di reagire, fermati e chiediti: <em>“Sto bevendo dalla sorgente del Salvatore o sto cercando di dissetarmi altrove?”</em> Poi fai una scelta concreta coerente con la risposta.</div>
+      <p style="margin-top:12px;"><strong>Chiusura:</strong> Dio ci conosce. Questo non significa che ci lascia come siamo. Ci conosce abbastanza da chiamarci, correggerci, modellarci e usarci per aiutare altri a tornare a Lui.</p>
+    </div>
+  </section>
+
+  <div class="floating-actions">
+    <button type="button" id="expand-all">Espandi tutto</button>
+    <button type="button" id="collapse-all">Comprimi tutto</button>
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    sections.forEach((section) => {
+      const header = section.querySelector('.section-header');
+      header.addEventListener('click', () => {
+        const collapsed = section.classList.toggle('collapsed');
+        header.setAttribute('aria-expanded', String(!collapsed));
+      });
+      header.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          header.click();
+        }
+      });
+    });
+    document.getElementById('expand-all').addEventListener('click', () => {
+      sections.forEach((section) => {
+        section.classList.remove('collapsed');
+        section.querySelector('.section-header').setAttribute('aria-expanded', 'true');
+      });
+    });
+    document.getElementById('collapse-all').addEventListener('click', () => {
+      sections.forEach((section) => {
+        section.classList.add('collapsed');
+        section.querySelector('.section-header').setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
