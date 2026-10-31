@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a3a5c">
+  <title>Scritture, pentimento e speranza | Lezione domenicale</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      color-scheme: light;
+      --paper: #f5f0e8;
+      --ink: #2c2c2c;
+      --navy: #1a3a5c;
+      --gold: #c9922a;
+      --green: #2a7a2a;
+      --card: #fff;
+      --line: #e0d8cc;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px 16px calc(110px + env(safe-area-inset-bottom));
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    main { width: min(100%, 760px); margin: 0 auto; }
+
+    .hero {
+      padding: 22px 18px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      background: var(--navy);
+      color: #fff;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      color: #f2d89e;
+      font: 700 0.72rem/1.3 Arial, sans-serif;
+      text-transform: uppercase;
+    }
+
+    h1 { margin: 0 0 10px; font-size: 1.45rem; line-height: 1.25; }
+    .hero p { margin: 0; font-size: 0.88rem; opacity: 0.94; }
+    .hero .hero-topics { margin-bottom: 10px; font-size: 0.92rem; opacity: 1; }
+
+    .purpose {
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      border-left: 5px solid var(--gold);
+      border-radius: 6px;
+      background: #fff8e7;
+    }
+
+    .purpose-label, .question-label, .section-badge, .section-time {
+      font-family: Arial, sans-serif;
+    }
+
+    .purpose-label {
+      display: block;
+      margin-bottom: 5px;
+      color: #8a5a1e;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .purpose p, .lesson-section p { margin: 0 0 10px; }
+
+    .lesson-section {
+      margin-bottom: 14px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--card);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      width: 100%;
+      min-height: 58px;
+      align-items: center;
+      gap: 9px;
+      padding: 12px 14px;
+      border: 0;
+      background: transparent;
+      color: var(--navy);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .section-header:focus-visible, button:focus-visible, a:focus-visible {
+      outline: 3px solid #d59a2c;
+      outline-offset: 3px;
+    }
+
+    .section-toggle { flex: 0 0 auto; font-size: 0.9rem; transition: transform 0.2s ease; }
+    .section-header[aria-expanded="false"] .section-toggle { transform: rotate(-90deg); }
+
+    .section-badge, .section-time, .book-badge {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .section-badge { background: var(--navy); color: #fff; }
+    .section-time, .book-badge { background: #e8f0fb; color: var(--navy); }
+    .section-title { flex: 1; min-width: 0; margin: 0; font-size: 0.98rem; line-height: 1.35; }
+
+    .section-content {
+      max-height: 1600px;
+      overflow: hidden;
+      padding: 0 16px 16px;
+      transition: max-height 0.25s ease, padding 0.25s ease, opacity 0.2s ease;
+      opacity: 1;
+    }
+
+    .section-content.is-collapsed {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      opacity: 0;
+    }
+
+    .scripture-inline {
+      padding: 9px 12px;
+      margin: 10px 0;
+      border-left: 3px solid var(--gold);
+      border-radius: 4px;
+      background: #fff8e7;
+      font-size: 0.9rem;
+    }
+
+    .scripture-inline a, .sheet-body a { color: var(--navy); text-decoration: underline; text-underline-offset: 2px; }
+    .question {
+      padding: 10px 12px;
+      margin: 10px 0;
+      border-left: 4px solid var(--navy);
+      border-radius: 4px;
+      background: #eef4ff;
+      font-size: 0.94rem;
+    }
+
+    .question-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--navy);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .teacher-note {
+      padding: 10px 12px;
+      margin: 10px 0 0;
+      border-left: 4px solid var(--green);
+      border-radius: 4px;
+      background: #f0faf0;
+      font: 0.86rem/1.55 Arial, sans-serif;
+    }
+
+    .closing {
+      padding: 14px;
+      border-radius: 6px;
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .closing strong { color: #f2d89e; }
+    footer { margin: 22px 0 0; color: #777; font: 0.76rem/1.5 Arial, sans-serif; text-align: center; }
+
+    .fab {
+      position: fixed;
+      right: max(16px, env(safe-area-inset-right));
+      z-index: 20;
+      min-height: 44px;
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 24px;
+      color: #fff;
+      font: 700 0.8rem Arial, sans-serif;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+    }
+
+    #scriptureFab { bottom: max(16px, env(safe-area-inset-bottom)); background: var(--navy); }
+    #teacherFab { bottom: max(70px, calc(env(safe-area-inset-bottom) + 70px)); background: var(--green); }
+
+    .sheet-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      background: rgba(0, 0, 0, 0.48);
+    }
+
+    .sheet-overlay[hidden] { display: none; }
+
+    .sheet {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 31;
+      display: flex;
+      max-height: min(80vh, 720px);
+      max-height: min(80dvh, 720px);
+      flex-direction: column;
+      padding-bottom: env(safe-area-inset-bottom);
+      border-radius: 16px 16px 0 0;
+      background: #fff;
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+      transform: translateY(105%);
+      transition: transform 0.28s ease;
+      visibility: hidden;
+    }
+
+    .sheet.is-open { transform: translateY(0); visibility: visible; }
+    .sheet-handle { width: 40px; height: 4px; margin: 10px auto 8px; border-radius: 2px; background: #ccc; }
+
+    .sheet-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 16px 10px;
+      border-bottom: 1px solid var(--line);
+      font: 700 0.95rem Arial, sans-serif;
+      color: var(--navy);
+    }
+
+    .sheet-close {
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: transparent;
+      color: #444;
+      font: 1.5rem Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .sheet-body {
+      overflow-y: auto;
+      padding: 14px 16px 22px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .sheet-body h3 { margin: 18px 0 7px; color: var(--navy); font: 700 0.85rem Arial, sans-serif; }
+    .sheet-body p { margin: 0 0 10px; }
+    .sheet-body .teacher-note { margin: 8px 0 12px; }
+    table { width: 100%; border-collapse: collapse; font: 0.82rem/1.45 Arial, sans-serif; }
+    th { padding: 8px; background: var(--navy); color: #fff; text-align: left; }
+    td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    @media (max-width: 380px) {
+      body { padding-right: 12px; padding-left: 12px; }
+      .section-header { gap: 6px; padding-right: 10px; padding-left: 10px; }
+      .section-title { font-size: 0.9rem; }
+      .section-badge, .section-time { padding: 4px 6px; font-size: 0.64rem; }
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .hero, .closing { print-color-adjust: exact; }
+      .lesson-section { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+      .section-content, .section-content.is-collapsed { max-height: none; padding: 0 16px 16px; opacity: 1; }
+      .section-toggle, .fab, .sheet-overlay, .sheet { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div class="eyebrow">Scuola Domenicale adulti · 15 minuti</div>
+      <h1>Scritture, pentimento e speranza</h1>
+      <p class="hero-topics"><strong>Le Scritture hanno il potere di allontanarmi dal male.</strong><br>Il Signore può alleviare la sofferenza che provo a causa del peccato.</p>
+      <p>26 ottobre–1 novembre · «Io muterò il loro lutto in gioia»</p>
+      <p><strong>Passi scelti: Geremia 36; Lamentazioni 1; 3</strong></p>
+    </header>
+
+    <section class="purpose" aria-labelledby="purpose-heading">
+      <span class="purpose-label" id="purpose-heading">Scopo</span>
+      <p>Aprire una conversazione su come la parola scritta del Signore invita a cambiare direzione e su come la Sua compassione sostiene la speranza nel dolore legato al peccato.</p>
+    </section>
+
+    <section class="lesson-section">
+      <button class="section-header" type="button" aria-expanded="true" aria-controls="part-one">
+        <span class="section-toggle" aria-hidden="true">▼</span>
+        <span class="section-badge">Apertura</span>
+        <span class="section-title">Una domanda per iniziare</span>
+        <span class="section-time">2 min</span>
+      </button>
+      <div class="section-content" id="part-one">
+        <p>Invita la classe a pensare a una volta in cui una Scrittura ha fatto vedere una scelta sotto una luce diversa. Non occorre raccontare esperienze personali delicate: si può parlare del principio o di un esempio generale.</p>
+        <div class="question">
+          <span class="question-label">Domanda per la classe</span>
+          Che cosa può fare una Scrittura perché una persona si fermi, rifletta e scelga una direzione diversa?
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <button class="section-header" type="button" aria-expanded="true" aria-controls="part-two">
+        <span class="section-toggle" aria-hidden="true">▼</span>
+        <span class="section-badge">Parte 1</span>
+        <span class="section-title">Le Scritture possono richiamarmi al cambiamento</span>
+        <span class="section-time">5 min</span>
+      </button>
+      <div class="section-content" id="part-two">
+        <p>Leggete <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p1-p7#p1" target="_blank" rel="noopener">Geremia 36:1–7</a>. Se il tempo lo consente, riassumete la reazione del re in <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p20-p32#p20">Geremia 36:20–32</a>. Il capitolo mostra il motivo per cui le parole vengono scritte e lette, e le diverse reazioni di chi le ascolta.</p>
+        <div class="question">
+          <span class="question-label">Esploriamo il testo</span>
+          Secondo i versetti 2–3 e 6–7, che cosa sperava il Signore che il popolo facesse dopo aver ascoltato le parole scritte?
+        </div>
+        <div class="question">
+          <span class="question-label">Mettiamo a confronto</span>
+          Che cosa noti nelle reazioni dei capi e del re? Che cosa ti insegna il fatto che Geremia e Baruc scrivano di nuovo le parole?
+        </div>
+        <div class="question">
+          <span class="question-label">Colleghiamolo alla vita</span>
+          In che modo le Scritture ti hanno aiutato a riconoscere una scelta o a cambiare direzione?
+        </div>
+        <div class="teacher-note">Lascia che la conversazione resti volontaria e rispettosa. Non chiedere a nessuno di confessare o descrivere pubblicamente peccati personali.</div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <button class="section-header" type="button" aria-expanded="true" aria-controls="part-three">
+        <span class="section-toggle" aria-hidden="true">▼</span>
+        <span class="section-badge">Parte 2</span>
+        <span class="section-title">Il dolore può lasciare spazio alla speranza</span>
+        <span class="section-time">5 min</span>
+      </button>
+      <div class="section-content" id="part-three">
+        <p>Leggete alcuni versetti di <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/1?lang=ita&id=p1-p2%2Cp16#p1" target="_blank" rel="noopener">Lamentazioni 1:1–2, 16</a> per ascoltare il linguaggio del dolore. Poi leggete <a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/3?lang=ita&id=p20-p33#p20" target="_blank" rel="noopener">Lamentazioni 3:20–33</a>, dove il lamento si accompagna al ricordo della compassione del Signore e alla speranza.</p>
+        <div class="question">
+          <span class="question-label">Osserviamo il cambiamento</span>
+          Quali parole o immagini descrivono il dolore in Lamentazioni 1? Che cosa cambia nel modo di parlare in Lamentazioni 3:21–26?
+        </div>
+        <div class="question">
+          <span class="question-label">Riflettiamo insieme</span>
+          Che cosa ti colpisce nei versetti 31–33? In che modo queste parole possono convivere con un dolore che non scompare immediatamente?
+        </div>
+        <div class="teacher-note">Rimani vicino al testo: riconosce un dolore profondo e parla della compassione del Signore. Evita di supporre che ogni sofferenza sia causata da un peccato personale o di promettere che tutte le conseguenze spariranno subito.</div>
+      </div>
+    </section>
+
+    <section class="lesson-section">
+      <button class="section-header" type="button" aria-expanded="true" aria-controls="part-four">
+        <span class="section-toggle" aria-hidden="true">▼</span>
+        <span class="section-badge">Chiusura</span>
+        <span class="section-title">Un invito alla preghiera</span>
+        <span class="section-time">3 min</span>
+      </button>
+      <div class="section-content" id="part-four">
+        <div class="closing">
+          <p><strong>Invito:</strong> durante la settimana, scegli una Scrittura letta oggi e portala nella preghiera. Chiedi al Padre Celeste che cosa puoi imparare e quale passo compiere per avvicinarti al Signore.</p>
+          <p>Concludi lasciando qualche secondo di riflessione silenziosa; nessuno deve condividere ad alta voce la propria preghiera.</p>
+        </div>
+        <div class="question">
+          <span class="question-label">Ultimo giro di conversazione</span>
+          Quale parola o immagine di Geremia o Lamentazioni vuoi ricordare nella tua preghiera questa settimana?
+        </div>
+      </div>
+    </section>
+
+    <footer>Lezione di supporto alla preparazione personale · Fonte: Vieni e seguimi – Antico Testamento 2026</footer>
+  </main>
+
+  <button class="fab" id="scriptureFab" type="button" aria-controls="scriptureSheet" aria-expanded="false">Scritture</button>
+  <button class="fab" id="teacherFab" type="button" aria-controls="teacherSheet" aria-expanded="false">Studio del docente</button>
+  <div class="sheet-overlay" id="sheetOverlay" hidden></div>
+
+  <section class="sheet" id="scriptureSheet" role="dialog" aria-modal="true" aria-labelledby="scriptureTitle" aria-hidden="true">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-heading">
+      <span id="scriptureTitle">Scritture della lezione</span>
+      <button class="sheet-close" type="button" aria-label="Chiudi">×</button>
+    </div>
+    <div class="sheet-body">
+      <table>
+        <thead><tr><th>Scrittura</th><th>Parte</th><th>Tema</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p1-p7#p1" target="_blank" rel="noopener">Geremia 36:1–7</a></td><td>1</td><td>Le parole sono scritte e lette perché il popolo possa cambiare direzione.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p20-p32#p20" target="_blank" rel="noopener">Geremia 36:20–32</a></td><td>1</td><td>Le reazioni alle parole del Signore e la loro nuova trascrizione.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/1?lang=ita&id=p1-p2%2Cp16#p1" target="_blank" rel="noopener">Lamentazioni 1:1–2, 16</a></td><td>2</td><td>Il linguaggio del dolore e del bisogno di consolazione.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/3?lang=ita&id=p20-p33#p20" target="_blank" rel="noopener">Lamentazioni 3:20–33</a></td><td>2</td><td>Compassione, fedeltà e speranza nel mezzo dell’afflizione.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="sheet" id="teacherSheet" role="dialog" aria-modal="true" aria-labelledby="teacherTitle" aria-hidden="true">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <div class="sheet-heading">
+      <span id="teacherTitle">Studio del docente</span>
+      <button class="sheet-close" type="button" aria-label="Chiudi">×</button>
+    </div>
+    <div class="sheet-body">
+      <p class="teacher-note">La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione.</p>
+      <p class="teacher-note">Questo materiale è stato preparato con assistenza dell’IA ed è un aiuto per la preparazione personale. Non è dottrina ufficiale della Chiesa e non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati. Non deve essere venduto, presentato o distribuito come dottrina della Chiesa o materiale ufficiale della Chiesa.</p>
+
+      <h3>Scritture da studiare prima della lezione</h3>
+      <table>
+        <thead><tr><th>Riferimento</th><th>Spunto per lo studio</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p1-p7#p1" target="_blank" rel="noopener">Geremia 36:1–7</a></td><td>Osserva lo scopo indicato dal Signore per le parole scritte e lette.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/jer/36?lang=ita&id=p20-p32#p20" target="_blank" rel="noopener">Geremia 36:20–32</a></td><td>Nota le diverse reazioni e il fatto che le parole vengano scritte di nuovo.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/1?lang=ita&id=p1-p2%2Cp16#p1" target="_blank" rel="noopener">Lamentazioni 1:1–2, 16</a></td><td>Ascolta il linguaggio con cui viene espresso il dolore.</td></tr>
+          <tr><td><a href="https://www.churchofjesuschrist.org/study/scriptures/ot/lam/3?lang=ita&id=p20-p33#p20" target="_blank" rel="noopener">Lamentazioni 3:20–33</a></td><td>Medita sul passaggio dal ricordo dell’afflizione alla speranza e alla compassione.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Conferenza generale</h3>
+      <div class="scripture-inline">
+        <a href="https://www.churchofjesuschrist.org/study/general-conference/1992/10/the-joy-of-hope-fulfilled?lang=ita" target="_blank" rel="noopener">La gioia della speranza</a><br>
+        M. Russell Ballard · Conferenza generale di ottobre 1992
+        <p>Il discorso affronta la speranza in Cristo, anche per chi sente di averla perduta a causa del peccato. Leggilo per prepararti a condurre la conversazione con sensibilità e speranza.</p>
+      </div>
+
+      <h3>Domande per la preparazione personale</h3>
+      <div class="question"><span class="question-label">Preghiera e studio</span>Quale Scrittura mi ha aiutato a riconoscere una scelta e a tornare al Signore? Che cosa sento di dover imparare o ricordare mentre preparo questa lezione?</div>
+      <div class="question"><span class="question-label">Sensibilità della classe</span>Come posso parlare del peccato e delle sue conseguenze senza presumere che il dolore di una persona dipenda da una colpa personale? Come posso lasciare libertà di non condividere dettagli privati?</div>
+      <div class="question"><span class="question-label">Invito spirituale</span>Quale invito alla preghiera potrebbe aiutare la classe ad avvicinarsi alle Scritture e al Signore senza trasformare la condivisione in un obbligo?</div>
+    </div>
+  </section>
+
+  <script>
+    const overlay = document.getElementById('sheetOverlay');
+    const sheets = document.querySelectorAll('.sheet');
+    const fabButtons = document.querySelectorAll('.fab');
+    let lastFocusedElement = null;
+
+    function closeSheets() {
+      sheets.forEach((sheet) => {
+        sheet.classList.remove('is-open');
+        sheet.setAttribute('aria-hidden', 'true');
+      });
+      fabButtons.forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      overlay.hidden = true;
+      document.body.style.overflow = '';
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    function openSheet(sheetId, trigger) {
+      const target = document.getElementById(sheetId);
+      lastFocusedElement = trigger;
+      sheets.forEach((sheet) => {
+        const isTarget = sheet === target;
+        sheet.classList.toggle('is-open', isTarget);
+        sheet.setAttribute('aria-hidden', String(!isTarget));
+      });
+      fabButtons.forEach((button) => {
+        button.setAttribute('aria-expanded', String(button.getAttribute('aria-controls') === sheetId));
+      });
+      overlay.hidden = false;
+      document.body.style.overflow = 'hidden';
+      target.querySelector('.sheet-close').focus();
+    }
+
+    document.getElementById('scriptureFab').addEventListener('click', (event) => openSheet('scriptureSheet', event.currentTarget));
+    document.getElementById('teacherFab').addEventListener('click', (event) => openSheet('teacherSheet', event.currentTarget));
+    document.querySelectorAll('.sheet-close').forEach((button) => button.addEventListener('click', closeSheets));
+    overlay.addEventListener('click', closeSheets);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !overlay.hidden) closeSheets();
+    });
+
+    document.querySelectorAll('.section-header').forEach((button) => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!isExpanded));
+        document.getElementById(button.getAttribute('aria-controls')).classList.toggle('is-collapsed', isExpanded);
+      });
+    });
+  </script>
+</body>
+</html>
