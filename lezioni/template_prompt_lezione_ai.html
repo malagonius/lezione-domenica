@@ -1,0 +1,617 @@
+<!--
+PROMPT PER CREARE UNA NUOVA LEZIONE
+
+Agisci come assistente alla preparazione di lezioni domenicali della Chiesa di Gesu Cristo dei Santi degli Ultimi Giorni. Usa il template HTML che segue come base concreta e restituisci un unico file HTML completo, in italiano, autonomo e pronto da aprire su uno smartphone. Mantieni la struttura, i colori e le interazioni del modello; sostituisci tutti i segnaposto {{...}} con contenuti finali.
+
+Prima di scrivere, raccogli le idee dell'utente. Non inventare la lezione al suo posto e non colmare in autonomia le informazioni essenziali. Se mancano, chiedi in modo conciso:
+- l'argomento o il link del discorso della Conferenza generale da cui partire; se non c'e', chiedi se preferisce non partire da un discorso o indicare un argomento generico;
+- l'idea centrale che desidera lasciare alla classe;
+- pubblico e durata;
+- scritture, citazioni, esperienze o punti personali da includere;
+- sensibilita o domande difficili da trattare con delicatezza;
+- invito o conclusione desiderati.
+
+Prima di redigere la lezione, riassumi in poche righe obiettivo, pubblico, fonte di partenza e invito, usando soltanto informazioni fornite dall'utente o verificate. Chiedi conferma o chiarimenti se l'intento non e' chiaro.
+
+Verifica ogni riferimento, titolo, relatore, data, citazione, testo scritturale e URL non fornito dall'utente tramite una pagina ufficiale della Chiesa o la Biblioteca evangelica. Per le Scritture usa pagine reali di Gospel Library su https://www.churchofjesuschrist.org/study/scriptures/... e aggiungi lang=ita quando disponibile, con ancore ai versetti se supportate. Se una fonte e' inaccessibile, richiede login o non e' chiara, fermati e chiedi il testo o i riferimenti; non indovinare e non usare fonti non ufficiali al posto di quelle richieste.
+
+La lezione deve:
+- essere interamente in italiano e rimanere fedele alle idee dell'utente;
+- presentare subito l'argomento e uno scopo breve;
+- avere parti numerate, coerenti e con stime di tempo che sommate rispettino la durata richiesta;
+- privilegiare domande aperte che favoriscano una conversazione e la lettura delle Scritture, non domande si/no;
+- citare nel testo tutte le Scritture usate e riportarle nella tabella del pannello mobile, con parte e tema;
+- includere il pulsante flottante Scritture e il secondo pulsante Studio del docente con pannelli separati, scorrevoli su mobile e sempre dotati di pulsante di chiusura;
+- includere nello Studio del docente Scritture di preparazione, uno o piu' discorsi ufficiali pertinenti, domande introspettive e il promemoria: "La parte piu' importante della lezione e' la preparazione del docente e la compagnia dello Spirito Santo. Questo documento e' solo uno strumento per aiutare quella preparazione.";
+- se il contenuto e' stato creato o assistito dall'IA, includere l'avvertenza che e' un aiuto per la preparazione personale, non dottrina ufficiale, non sostituisce Scritture, manuali ufficiali, profeti viventi o dirigenti autorizzati, e non deve essere venduto o presentato/distribuito come materiale ufficiale o dottrina della Chiesa;
+- mantenere CSS e JavaScript inline, senza framework o dipendenze esterne; non aggiungere gesti di chiusura al corpo del pannello o al suo contenuto. Se aggiungi uno swipe per chiudere, deve funzionare solo dal manico superiore. Il pulsante di chiusura deve restare sempre disponibile;
+- aggiungere stili di stampa che nascondano pulsanti, overlay e pannelli mobili.
+
+Non trasformare un tema in un'affermazione dottrinale non verificata. Non attribuire citazioni, applicazioni o promesse all'utente o alla Chiesa senza fonte. Se una domanda sensibile riguarda peccato o sofferenza, non presumere che ogni sofferenza dipenda da una colpa personale e non chiedere confessioni pubbliche.
+
+Se stai lavorando nel repository dell'utente e la nuova lezione va in lezione-domenica/lezioni/, aggiorna anche lezione-domenica/index.html: aggiungi una scheda visibile con titolo, descrizione breve e controlli di condivisione/QR gia' usati nell'indice. Verifica che il link relativo esista e che l'indice non abbia nuovi errori. Non eseguire comandi Git; lascia all'utente commit e push.
+
+Alla fine restituisci il file HTML completo, senza lasciare segnaposto {{...}}. Dichiara brevemente eventuali dettagli che non hai potuto verificare. Se hai creato o aggiornato file nel repository, ricorda che GitHub Pages mostra le modifiche dopo commit e push e chiedi se l'utente vuole preparare una commit.
+-->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITOLO_LEZIONE}}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      padding: 16px;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    header {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 1.4em;
+      margin-bottom: 6px;
+      overflow-wrap: anywhere;
+    }
+
+    header p {
+      font-size: 0.85em;
+      opacity: 0.85;
+    }
+
+    .verse-box {
+      background: #fff8e7;
+      border-left: 5px solid #c9922a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-style: italic;
+      font-size: 0.95em;
+    }
+
+    .verse-box cite,
+    .scripture-inline cite {
+      display: block;
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 0.85em;
+      color: #c9922a;
+    }
+
+    .section {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .section-header:hover { opacity: 0.8; }
+
+    .section-toggle {
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+      font-size: 0.9em;
+      transition: transform 0.25s ease;
+      color: #1a3a5c;
+      font-weight: bold;
+      margin-left: -8px;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+
+    .section-content {
+      max-height: 2000px;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      opacity: 1;
+    }
+    .section.collapsed .section-content {
+      max-height: 0;
+      opacity: 0;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge {
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 0.72em;
+      white-space: nowrap;
+      font-family: sans-serif;
+    }
+
+    .section-badge {
+      background: #1a3a5c;
+      color: #fff;
+    }
+
+    .section-time,
+    .book-badge {
+      background: #e8f0fb;
+      color: #1a3a5c;
+    }
+
+    .section-badge,
+    .section-time,
+    .book-badge,
+    h2,
+    td,
+    th {
+      overflow-wrap: anywhere;
+    }
+
+    .section-time { white-space: normal; }
+
+    h2 {
+      font-size: 1.05em;
+      color: #1a3a5c;
+      flex: 1;
+    }
+
+    h3 {
+      font-size: 0.9em;
+      color: #555;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: sans-serif;
+    }
+
+    p { margin-bottom: 10px; }
+
+    .question {
+      background: #eef4ff;
+      border-left: 4px solid #1a3a5c;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.93em;
+    }
+
+    .question strong {
+      display: block;
+      font-family: sans-serif;
+      font-size: 0.78em;
+      color: #1a3a5c;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .scripture-inline {
+      background: #fff8e7;
+      border-left: 3px solid #c9922a;
+      border-radius: 4px;
+      padding: 8px 12px;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-style: italic;
+    }
+
+    .tip-box {
+      background: #f0faf0;
+      border-left: 4px solid #2a7a2a;
+      border-radius: 4px;
+      padding: 10px 12px;
+      margin: 10px 0;
+      font-size: 0.88em;
+      font-family: sans-serif;
+    }
+
+    .tip-box::before {
+      content: "Nota per il docente: ";
+      font-weight: bold;
+      color: #2a7a2a;
+    }
+
+    .summary-box {
+      background: #1a3a5c;
+      color: #fff;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 10px 0;
+      font-size: 0.93em;
+      line-height: 1.8;
+    }
+
+    .summary-box p { margin-bottom: 6px; }
+
+    .reflection {
+      background: #fdf3e3;
+      border: 2px dashed #c9922a;
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 0.85em;
+      font-family: sans-serif;
+    }
+
+    th {
+      background: #1a3a5c;
+      color: #fff;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #e0d8cc;
+    }
+
+    tr:nth-child(even) td { background: #f9f5ee; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78em;
+      color: #888;
+      margin-top: 24px;
+      font-family: sans-serif;
+    }
+
+    .bottom-sheet-fab {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #1a3a5c;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-size: 0.82em;
+      font-family: sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .bottom-sheet-fab:hover { background: #254f7a; }
+    .bottom-sheet-fab .fab-icon { font-size: 1.1em; }
+    .bottom-sheet-fab.teacher-fab {
+      bottom: 74px;
+      background: #2a7a2a;
+    }
+    .bottom-sheet-fab.teacher-fab:hover { background: #246724; }
+
+    .bottom-sheet-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1001;
+    }
+    .bottom-sheet-overlay.active { display: block; }
+
+    .bottom-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-radius: 18px 18px 0 0;
+      z-index: 1002;
+      max-height: 75vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+    }
+    .bottom-sheet.active { transform: translateY(0); }
+
+    .bottom-sheet-handle-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 16px 0;
+    }
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: #ccc;
+      border-radius: 2px;
+      margin-bottom: 8px;
+    }
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 16px 10px;
+    }
+    .bottom-sheet-title {
+      font-family: sans-serif;
+      font-size: 0.95em;
+      font-weight: bold;
+      color: #1a3a5c;
+    }
+    .bottom-sheet-close {
+      background: none;
+      border: none;
+      font-size: 1.3em;
+      color: #888;
+      cursor: pointer;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+    .bottom-sheet-body {
+      min-width: 0;
+      overflow-y: auto;
+      padding: 0 16px 24px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .bottom-sheet-body a {
+      color: #1a3a5c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .bottom-sheet-body a:hover { color: #c9922a; }
+
+    @media print {
+      body { background: #fff; padding: 10px; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>{{ARGOMENTO_PRINCIPALE}}</h1>
+  <p>{{SOTTOTITOLO_O_SCRITTURA_CHIAVE}}<br />
+  <strong>{{RIFERIMENTO_CHIAVE}}</strong></p>
+  <p style="margin-top:8px; font-size:0.78em; opacity:0.7;">Lesson Plan · {{PUBBLICO}} · {{ANNO}}</p>
+</header>
+
+<div class="verse-box">
+  {{TESTO_SCRITTURA_CHIAVE}}
+  <cite>{{RIFERIMENTO_SCRITTURA_CHIAVE}}</cite>
+</div>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Obiettivo</span>
+  </div>
+  <div class="section-content">
+    <p>{{OBIETTIVO_DELLA_LEZIONE}}</p>
+    <p>{{PERCORSO_DELLA_LEZIONE}}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 1</span>
+    <h2>{{TITOLO_PARTE_1}}</h2>
+    <span class="section-time">{{TEMPO_PARTE_1}}</span>
+  </div>
+  <div class="section-content">
+    <p>{{CONTENUTO_PARTE_1}}</p>
+    <div class="question">
+      <strong>{{ETICHETTA_DOMANDA_1}}</strong>
+      {{DOMANDA_PARTE_1}}
+    </div>
+    <div class="tip-box">{{NOTA_DOCENTE_PARTE_1}}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 2</span>
+    <h2>{{TITOLO_PARTE_2}}</h2>
+    <span class="section-time">{{TEMPO_PARTE_2}}</span>
+  </div>
+  <div class="section-content">
+    <p>{{CONTENUTO_PARTE_2}}</p>
+    <div class="scripture-inline">
+      {{TESTO_SCRITTURA_PARTE_2}}
+      <cite>{{RIFERIMENTO_SCRITTURA_PARTE_2}}</cite>
+    </div>
+    <div class="question">
+      <strong>{{ETICHETTA_DOMANDA_2}}</strong>
+      {{DOMANDA_PARTE_2}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Parte 3</span>
+    <h2>{{TITOLO_PARTE_3}}</h2>
+    <span class="section-time">{{TEMPO_PARTE_3}}</span>
+  </div>
+  <div class="section-content">
+    <p>{{CONTENUTO_PARTE_3}}</p>
+    <div class="question">
+      <strong>{{ETICHETTA_DOMANDA_3}}</strong>
+      {{DOMANDA_PARTE_3}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-header">
+    <span class="section-toggle">▼</span>
+    <span class="section-badge">Chiusura</span>
+    <h2>{{TITOLO_CHIUSURA}}</h2>
+    <span class="section-time">{{TEMPO_CHIUSURA}}</span>
+  </div>
+  <div class="section-content">
+    <div class="summary-box">
+      <p>{{SINTESI_FINALE}}</p>
+    </div>
+    <h3>Riflessione finale</h3>
+    <div class="reflection">{{RIFLESSIONE_FINALE}}</div>
+  </div>
+</section>
+
+<footer>
+  Lezione preparata per uso personale · {{RIFERIMENTO_CHIAVE}} · {{ANNO}}
+</footer>
+
+<button class="bottom-sheet-fab" id="fabBtn" onclick="openSheet()">
+  <span class="fab-icon">Scritture</span>
+</button>
+
+<button class="bottom-sheet-fab teacher-fab" id="teacherFabBtn" onclick="openSheet('teacherStudySheet')">
+  <span class="fab-icon">Studio docente</span>
+</button>
+
+<div class="bottom-sheet-overlay" id="overlay" onclick="closeSheet()"></div>
+
+<div class="bottom-sheet" id="scriptureSheet">
+  <div class="bottom-sheet-handle-row" id="sheetHandle">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">Scritture della Lezione</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">x</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Parte</th>
+          <th>Tema</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="{{URL_GOSPEL_LIBRARY_1}}" target="_blank" rel="noopener">{{RIFERIMENTO_1}}</a></td><td><span class="book-badge">{{PARTE_1}}</span></td><td>{{TEMA_1}}</td></tr>
+        <tr><td><a href="{{URL_GOSPEL_LIBRARY_2}}" target="_blank" rel="noopener">{{RIFERIMENTO_2}}</a></td><td><span class="book-badge">{{PARTE_2}}</span></td><td>{{TEMA_2}}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="bottom-sheet" id="teacherStudySheet">
+  <div class="bottom-sheet-handle-row">
+    <div class="bottom-sheet-handle"></div>
+  </div>
+  <div class="bottom-sheet-title-row">
+    <span class="bottom-sheet-title">Studio del docente</span>
+    <button class="bottom-sheet-close" onclick="closeSheet()" aria-label="Chiudi">x</button>
+  </div>
+  <div class="bottom-sheet-body">
+    <div class="tip-box">La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione.</div>
+    <div class="tip-box">Questo materiale, se creato o assistito dall'IA, è un aiuto per la preparazione personale e non è dottrina ufficiale della Chiesa. Non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati; non deve essere venduto o presentato/distribuito come dottrina o materiale ufficiale della Chiesa.</div>
+
+    <h3>Scritture da studiare</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Scrittura</th>
+          <th>Perché studiarla</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><a href="{{URL_STUDIO_SCRITTURA_1}}" target="_blank" rel="noopener">{{STUDIO_SCRITTURA_1}}</a></td><td>{{MOTIVO_STUDIO_SCRITTURA_1}}</td></tr>
+        <tr><td><a href="{{URL_STUDIO_SCRITTURA_2}}" target="_blank" rel="noopener">{{STUDIO_SCRITTURA_2}}</a></td><td>{{MOTIVO_STUDIO_SCRITTURA_2}}</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Conferenza generale</h3>
+    <div class="scripture-inline">
+      <a href="{{URL_DISCORSO_CONFERENZA_1}}" target="_blank" rel="noopener">{{TITOLO_DISCORSO_CONFERENZA_1}}</a><br />
+      {{AUTORE_DISCORSO_CONFERENZA_1}} · {{CONFERENZA_DISCORSO_1}}
+      <cite>{{MOTIVO_DISCORSO_CONFERENZA_1}}</cite>
+    </div>
+
+    <h3>Domande introspettive</h3>
+    <div class="question">
+      <strong>Preparazione personale</strong>
+      {{DOMANDA_INTROSPETTIVA_DOCENTE_1}}
+    </div>
+    <div class="question">
+      <strong>Sensibilità della classe</strong>
+      {{DOMANDA_INTROSPETTIVA_DOCENTE_2}}
+    </div>
+    <div class="question">
+      <strong>Invito spirituale</strong>
+      {{DOMANDA_INTROSPETTIVA_DOCENTE_3}}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.section');
+    sections.forEach(function (section) {
+      const header = section.querySelector('.section-header');
+      if (!header) return;
+
+      if (!header.querySelector('.section-toggle')) {
+        const toggle = document.createElement('span');
+        toggle.className = 'section-toggle';
+        toggle.textContent = '▼';
+        header.insertBefore(toggle, header.firstChild);
+      }
+
+      header.addEventListener('click', function () {
+        section.classList.toggle('collapsed');
+      });
+    });
+  });
+
+  function openSheet(sheetId) {
+    const targetSheetId = sheetId || 'scriptureSheet';
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      sheet.classList.remove('active');
+    });
+    document.getElementById(targetSheetId).classList.add('active');
+    document.getElementById('overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSheet() {
+    document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+      sheet.classList.remove('active');
+      sheet.style.transform = '';
+    });
+    document.getElementById('overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
+
+</body>
+</html>
