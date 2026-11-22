@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a3a5c" />
+  <title>Insegnare con amore, prepararsi con fede</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 16px 112px;
+      background: #f5f0e8;
+      color: #2c2c2c;
+      font: 16px/1.7 Georgia, 'Times New Roman', serif;
+    }
+
+    header {
+      margin-bottom: 20px;
+      padding: 20px 18px;
+      border-radius: 10px;
+      background: #1a3a5c;
+      color: #fff;
+      text-align: center;
+    }
+    header h1 { margin-bottom: 6px; font-size: 1.4em; }
+    header p { font-size: 0.88em; opacity: 0.9; }
+
+    p { margin-bottom: 10px; }
+    a { color: #1a3a5c; text-underline-offset: 2px; }
+
+    .purpose,
+    .section {
+      margin-bottom: 16px;
+      padding: 16px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .purpose h2 { margin-bottom: 8px; color: #1a3a5c; font-size: 1.05em; }
+
+    .verse-box,
+    .scripture-inline {
+      margin: 10px 0;
+      padding: 12px 14px;
+      border-left: 4px solid #c9922a;
+      border-radius: 5px;
+      background: #fff8e7;
+      font-size: 0.94em;
+      font-style: italic;
+    }
+    .verse-box cite,
+    .scripture-inline cite {
+      display: block;
+      margin-top: 7px;
+      color: #9a6b16;
+      font-size: 0.88em;
+      font-style: normal;
+      font-weight: bold;
+    }
+
+    .section { overflow: hidden; }
+    .section-header {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 9px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
+    .section-header:focus-visible,
+    button:focus-visible,
+    a:focus-visible { outline: 3px solid #c9922a; outline-offset: 3px; }
+    .section-toggle {
+      width: 20px;
+      flex: 0 0 20px;
+      color: #1a3a5c;
+      font: bold 0.9em sans-serif;
+      transition: transform 0.2s ease;
+    }
+    .section.collapsed .section-toggle { transform: rotate(-90deg); }
+    .section-badge,
+    .section-time,
+    .book-badge {
+      flex: 0 0 auto;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font: 0.72em sans-serif;
+      white-space: nowrap;
+    }
+    .section-badge { background: #1a3a5c; color: #fff; }
+    .section-time,
+    .book-badge { background: #e8f0fb; color: #1a3a5c; }
+    .section-header h2 {
+      min-width: 0;
+      flex: 1;
+      color: #1a3a5c;
+      font-size: 1.02em;
+    }
+    .section-content {
+      max-height: 2000px;
+      overflow: hidden;
+      opacity: 1;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+    .section-content > :first-child { margin-top: 12px; }
+    .section.collapsed .section-content { max-height: 0; opacity: 0; }
+
+    h3 {
+      margin: 12px 0 6px;
+      color: #555;
+      font: bold 0.88em sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .question,
+    .tip-box,
+    .warning-box {
+      margin: 10px 0;
+      padding: 10px 12px;
+      border-radius: 4px;
+      font-size: 0.91em;
+    }
+    .question { border-left: 4px solid #1a3a5c; background: #eef4ff; }
+    .question strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #1a3a5c;
+      font: bold 0.78em sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .tip-box {
+      border-left: 4px solid #2a7a2a;
+      background: #f0faf0;
+      font: 0.88em/1.55 sans-serif;
+    }
+    .tip-box::before { content: "Nota per il docente: "; color: #2a7a2a; font-weight: bold; }
+    .tip-box.plain::before { content: none; }
+    .warning-box {
+      border-left: 4px solid #c9922a;
+      background: #fff4e5;
+      font: 0.84em/1.55 sans-serif;
+    }
+    .summary-box {
+      margin: 10px 0;
+      padding: 14px;
+      border-radius: 8px;
+      background: #1a3a5c;
+      color: #fff;
+    }
+    .summary-box p:last-child { margin-bottom: 0; }
+    .reflection {
+      margin-top: 10px;
+      padding: 14px;
+      border: 2px dashed #c9922a;
+      border-radius: 8px;
+      background: #fdf3e3;
+      font-style: italic;
+    }
+
+    .bottom-sheet-fab {
+      position: fixed;
+      right: max(16px, calc((100vw - 760px) / 2 + 16px));
+      bottom: 18px;
+      z-index: 1000;
+      display: flex;
+      min-height: 46px;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border: 0;
+      border-radius: 28px;
+      background: #1a3a5c;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      color: #fff;
+      cursor: pointer;
+      font: bold 0.82em sans-serif;
+    }
+    .bottom-sheet-fab.teacher-fab { bottom: 72px; background: #2a7a2a; }
+    .bottom-sheet-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      display: none;
+      background: rgba(0,0,0,0.45);
+    }
+    .bottom-sheet-overlay.active { display: block; }
+    .bottom-sheet {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1002;
+      display: flex;
+      max-height: 78vh;
+      max-height: 78dvh;
+      flex-direction: column;
+      padding-bottom: env(safe-area-inset-bottom);
+      border-radius: 18px 18px 0 0;
+      background: #fff;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
+      transform: translateY(105%);
+      transition: transform 0.3s ease;
+    }
+    .bottom-sheet.active { transform: translateY(0); }
+    .bottom-sheet-handle-row {
+      display: flex;
+      min-height: 28px;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+      touch-action: none;
+    }
+    .bottom-sheet-handle {
+      width: 40px;
+      height: 4px;
+      margin-bottom: 8px;
+      border-radius: 2px;
+      background: #ccc;
+    }
+    .bottom-sheet-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px 10px;
+    }
+    .bottom-sheet-title { color: #1a3a5c; font: bold 0.95em sans-serif; }
+    .bottom-sheet-close {
+      min-width: 40px;
+      min-height: 40px;
+      border: 0;
+      background: transparent;
+      color: #555;
+      cursor: pointer;
+      font-size: 1.5em;
+    }
+    .bottom-sheet-body {
+      overflow-y: auto;
+      padding: 0 16px 22px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+    }
+    .bottom-sheet-body a { overflow-wrap: anywhere; }
+    .bottom-sheet-body p { font-size: 0.92em; }
+    .scripture-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #e0d8cc;
+    }
+    .scripture-row:last-child { border-bottom: 0; }
+    .scripture-row p { margin: 4px 0 0; color: #555; font-size: 0.85em; }
+    footer {
+      margin-top: 22px;
+      color: #777;
+      font: 0.78em/1.5 sans-serif;
+      text-align: center;
+    }
+    @media (max-width: 380px) {
+      body { padding-right: 12px; padding-left: 12px; }
+      .section { padding: 13px; }
+      .section-header { gap: 6px; }
+      .section-time { padding-right: 7px; padding-left: 7px; }
+      .section-header h2 { font-size: 0.94em; }
+    }
+    @media print {
+      body { max-width: none; padding: 10px; background: #fff; }
+      .section { box-shadow: none; border: 1px solid #ddd; }
+      .bottom-sheet-fab, .bottom-sheet-overlay, .bottom-sheet { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Insegnare con amore, prepararsi con fede</h1>
+    <p>Una lezione non si misura dalla perfezione del copione, ma da come aiuta le persone ad avvicinarsi a Gesù Cristo.</p>
+    <p style="margin-top:8px;font-size:0.78em;">Scuola Domenicale adulti · 20 minuti</p>
+  </header>
+
+  <section class="purpose" aria-labelledby="purpose-title">
+    <h2 id="purpose-title">Scopo</h2>
+    <p>Riflettere su come prepararsi a insegnare facendo tesoro delle parole di vita, conoscendo gli allievi e amandoli, senza cercare una prestazione perfetta. L’obiettivo è che, al termine, gli studenti amino il Salvatore più di quanto amino il nostro modo di insegnare.</p>
+  </section>
+
+  <div class="verse-box">
+    «Non datevi pensiero in anticipo di ciò che dovrete dire; ma fate continuamente tesoro nella vostra mente delle parole di vita».
+    <cite>Dottrina e Alleanze 84:85 · <a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/84?lang=ita&amp;id=p85#p85" target="_blank" rel="noopener">Leggi il versetto</a></cite>
+  </div>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true">
+      <span class="section-toggle" aria-hidden="true">▼</span>
+      <span class="section-badge">Parte 1</span>
+      <h2>Una domanda sincera: sono abbastanza preparato?</h2>
+      <span class="section-time">3 min</span>
+    </div>
+    <div class="section-content">
+      <p>Il fratello Gabriel W. Reid racconta di essersi sentito inadeguato e sopraffatto, e pone la domanda che può sorgere a chiunque insegni: «Sono abbastanza preparato per insegnare il vangelo di Gesù Cristo?»</p>
+      <p>Apri la discussione con sincerità: non è necessario fingere di avere sempre tutte le risposte.</p>
+      <div class="question"><strong>Domanda per la classe</strong>Quale pensiero o timore può farci sentire impreparati quando ci viene chiesto di insegnare?</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true">
+      <span class="section-toggle" aria-hidden="true">▼</span>
+      <span class="section-badge">Parte 2</span>
+      <h2>Prepararsi senza recitare un copione</h2>
+      <span class="section-time">4 min</span>
+    </div>
+    <div class="section-content">
+      <div class="scripture-inline">
+        Leggete Dottrina e Alleanze 84:85. Il versetto non invita a trascurare lo studio: invita a fare tesoro delle parole di vita e a non affidarsi all’ansia di dover preparare in anticipo ogni singola parola.
+        <cite><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/84?lang=ita&amp;id=p85#p85" target="_blank" rel="noopener">Dottrina e Alleanze 84:85</a></cite>
+      </div>
+      <p>La preparazione può essere profonda senza diventare un testo da recitare. Possiamo studiare, pregare e scegliere un obiettivo, lasciando spazio all’ascolto e alle persone presenti.</p>
+      <div class="question"><strong>Riflessione</strong>Qual è la differenza, per te, tra prepararti con cura e cercare di controllare ogni parola della lezione?</div>
+      <div class="tip-box">Mantieni la distinzione: non presentare il versetto come un invito a improvvisare o a non prepararsi. Il punto è fare tesoro della parola e insegnare con fiducia nel Signore.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true">
+      <span class="section-toggle" aria-hidden="true">▼</span>
+      <span class="section-badge">Parte 3</span>
+      <h2>Conoscere gli allievi e insegnare con amore</h2>
+      <span class="section-time">4 min</span>
+    </div>
+    <div class="section-content">
+      <p>Nel discorso, il fratello Reid ricorda gli insegnanti che conoscevano gli studenti personalmente e per nome. Non era la loro perfezione a restare impressa, ma l’amore che aiutava i bambini a sentire l’amore del Salvatore.</p>
+      <p>Il discorso collega questo modo di insegnare ai due grandi comandamenti: amare Dio e amare il prossimo (Matteo 22:36–40).</p>
+      <div class="scripture-inline">
+        <a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/22?lang=ita&amp;id=p36-p40#p36" target="_blank" rel="noopener">Matteo 22:36–40</a>
+        <cite>Amare Dio e il prossimo</cite>
+      </div>
+      <div class="question"><strong>Domanda per la classe</strong>Che cosa può cambiare nella nostra preparazione quando pensiamo a una persona concreta, invece che soltanto a “finire il programma”?</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true">
+      <span class="section-toggle" aria-hidden="true">▼</span>
+      <span class="section-badge">Parte 4</span>
+      <h2>Usare il tempo per avvicinare qualcuno a Cristo</h2>
+      <span class="section-time">5 min</span>
+    </div>
+    <div class="section-content">
+      <p>Il fratello Reid cita la domanda: «Come posso aiutare coloro a cui insegno ad avvicinarsi al Salvatore in meno tempo?». Anche con venti o venticinque minuti non dobbiamo cercare di dire tutto: possiamo scegliere ciò che aiuta davvero le persone a rivolgersi a Cristo.</p>
+      <p>Conoscere gli allievi, ascoltare ciò che condividono e fare spazio alla loro partecipazione sono modi per insegnare con amore, non per dimostrare di essere perfetti.</p>
+      <div class="question"><strong>Applicazione</strong>Se avessi poco tempo, quale domanda, scrittura o invito potrebbe aiutare una persona della classe ad avvicinarsi al Salvatore?</div>
+      <div class="tip-box">Lascia che la classe proponga esempi. Non occorre risolvere ogni situazione: porta la conversazione verso Gesù Cristo e verso un passo possibile.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header" role="button" tabindex="0" aria-expanded="true">
+      <span class="section-toggle" aria-hidden="true">▼</span>
+      <span class="section-badge">Parte 5</span>
+      <h2>Il criterio finale è Cristo</h2>
+      <span class="section-time">4 min</span>
+    </div>
+    <div class="section-content">
+      <p>Il discorso insegna che lo scopo non è far uscire gli studenti parlando dell’insegnante, ma amando e pensando al Salvatore. Questo dà un criterio semplice per valutare la lezione: a chi ha rivolto il cuore?</p>
+      <div class="question"><strong>Riflessione conclusiva</strong>Alla fine di una lezione, che cosa vorresti che gli studenti ricordassero di Gesù Cristo, anche se non ricordassero tutte le attività o le tue parole?</div>
+      <div class="summary-box">
+        <p>Per questa lezione, teniamo a mente questo criterio: se alla fine non abbiamo parlato di Cristo, c’è qualcosa da rivedere. Non serve insegnare perfettamente; serve prepararsi con fede e amore per aiutare qualcuno ad avvicinarsi a Lui.</p>
+      </div>
+      <div class="reflection">Invito: nella prossima occasione d’insegnamento, scegli una persona da conoscere meglio e prepara la lezione pensando a come aiutarla ad avvicinarsi a Cristo, senza cercare la perfezione.</div>
+    </div>
+  </section>
+
+  <footer>
+    Lezione preparata per uso personale · Basata sul discorso «Siete abbastanza preparati per insegnare» di Gabriel W. Reid, Conferenza generale di ottobre 2026.
+  </footer>
+
+  <button class="bottom-sheet-fab" type="button" onclick="openSheet('scriptureSheet')">Scritture</button>
+  <button class="bottom-sheet-fab teacher-fab" type="button" onclick="openSheet('teacherStudySheet')">Studio docente</button>
+  <div class="bottom-sheet-overlay" id="overlay" onclick="closeSheet()" aria-hidden="true"></div>
+
+  <section class="bottom-sheet" id="scriptureSheet" role="dialog" aria-modal="true" aria-labelledby="scripture-title" aria-hidden="true">
+    <div class="bottom-sheet-handle-row" aria-hidden="true"><div class="bottom-sheet-handle"></div></div>
+    <div class="bottom-sheet-title-row">
+      <h2 class="bottom-sheet-title" id="scripture-title">Scritture della lezione</h2>
+      <button class="bottom-sheet-close" type="button" onclick="closeSheet()" aria-label="Chiudi">×</button>
+    </div>
+    <div class="bottom-sheet-body">
+      <div class="scripture-row"><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/84?lang=ita&amp;id=p85#p85" target="_blank" rel="noopener">Dottrina e Alleanze 84:85</a><p>Parte 2 · Fare tesoro delle parole di vita e insegnare senza dipendere da un copione.</p></div>
+      <div class="scripture-row"><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/22?lang=ita&amp;id=p36-p40#p36" target="_blank" rel="noopener">Matteo 22:36–40</a><p>Parte 3 · Amare Dio e il prossimo.</p></div>
+    </div>
+  </section>
+
+  <section class="bottom-sheet" id="teacherStudySheet" role="dialog" aria-modal="true" aria-labelledby="teacher-title" aria-hidden="true">
+    <div class="bottom-sheet-handle-row" aria-hidden="true"><div class="bottom-sheet-handle"></div></div>
+    <div class="bottom-sheet-title-row">
+      <h2 class="bottom-sheet-title" id="teacher-title">Studio del docente</h2>
+      <button class="bottom-sheet-close" type="button" onclick="closeSheet()" aria-label="Chiudi">×</button>
+    </div>
+    <div class="bottom-sheet-body">
+      <div class="tip-box plain">La parte più importante della lezione è la preparazione del docente e la compagnia dello Spirito Santo. Questo documento è solo uno strumento per aiutare quella preparazione.</div>
+      <div class="warning-box"><strong>Avvertenza sull’uso dell’IA:</strong> questo materiale è un aiuto per la preparazione personale, non è dottrina ufficiale della Chiesa e non sostituisce le Scritture, i manuali ufficiali, i profeti viventi o i dirigenti autorizzati. Non deve essere venduto, presentato o distribuito come dottrina o materiale ufficiale della Chiesa.</div>
+
+      <h3>Scritture da studiare</h3>
+      <div class="scripture-row"><a href="https://www.churchofjesuschrist.org/study/scriptures/dc-testament/dc/84?lang=ita&amp;id=p85#p85" target="_blank" rel="noopener">Dottrina e Alleanze 84:85</a><p>Che cosa significa fare tesoro delle parole di vita, invece di affidarsi a un testo da recitare?</p></div>
+      <div class="scripture-row"><a href="https://www.churchofjesuschrist.org/study/scriptures/nt/matt/22?lang=ita&amp;id=p36-p40#p36" target="_blank" rel="noopener">Matteo 22:36–40</a><p>Considera come l’amore per Dio e per il prossimo possa orientare il modo di insegnare.</p></div>
+
+      <h3>Conferenza generale</h3>
+      <div class="scripture-inline">
+        <a href="https://www.churchofjesuschrist.org/study/general-conference/2026/10/58reid?lang=ita" target="_blank" rel="noopener">Siete abbastanza preparati per insegnare</a><br />
+        Gabriel W. Reid · Conferenza generale di ottobre 2026
+        <cite>Rileggi il discorso per intero e cerca in preghiera il principio da enfatizzare per questa classe.</cite>
+      </div>
+
+      <h3>Domande per la preparazione personale</h3>
+      <div class="question"><strong>Preparazione personale</strong>Sto preparando un copione per sentirmi al sicuro, o sto facendo tesoro delle parole di vita per servire chi avrò davanti?</div>
+      <div class="question"><strong>Conoscere gli allievi</strong>Chi nella classe potrei conoscere meglio? Come posso mostrare interesse senza mettere nessuno sotto pressione?</div>
+      <div class="question"><strong>Centro della lezione</strong>Quale parte della lezione può aiutare gli studenti a pensare al Salvatore e a sentirsi invitati ad avvicinarsi a Lui?</div>
+      <div class="question"><strong>Invito spirituale</strong>Quale invito semplice e realistico sento di poter lasciare, e come posso viverlo io per primo?</div>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.section-header').forEach(function (header) {
+      function toggleSection() {
+        var section = header.closest('.section');
+        var isExpanded = section.classList.toggle('collapsed') === false;
+        header.setAttribute('aria-expanded', String(isExpanded));
+      }
+      header.addEventListener('click', toggleSection);
+      header.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleSection();
+        }
+      });
+    });
+
+    function openSheet(sheetId) {
+      document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+        sheet.classList.remove('active');
+        sheet.setAttribute('aria-hidden', 'true');
+      });
+      var sheet = document.getElementById(sheetId);
+      sheet.classList.add('active');
+      sheet.setAttribute('aria-hidden', 'false');
+      document.getElementById('overlay').classList.add('active');
+      document.getElementById('overlay').setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSheet() {
+      document.querySelectorAll('.bottom-sheet').forEach(function (sheet) {
+        sheet.classList.remove('active');
+        sheet.style.transform = '';
+        sheet.setAttribute('aria-hidden', 'true');
+      });
+      document.getElementById('overlay').classList.remove('active');
+      document.getElementById('overlay').setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeSheet();
+    });
+
+    document.querySelectorAll('.bottom-sheet-handle-row').forEach(function (handle) {
+      var sheet = handle.closest('.bottom-sheet');
+      var startY = 0;
+      var dragging = false;
+      handle.addEventListener('touchstart', function (event) {
+        startY = event.touches[0].clientY;
+        dragging = true;
+      }, { passive: true });
+      handle.addEventListener('touchmove', function (event) {
+        if (!dragging) return;
+        var distance = event.touches[0].clientY - startY;
+        if (distance > 0) sheet.style.transform = 'translateY(' + distance + 'px)';
+      }, { passive: true });
+      handle.addEventListener('touchend', function (event) {
+        if (!dragging) return;
+        dragging = false;
+        var distance = event.changedTouches[0].clientY - startY;
+        sheet.style.transform = '';
+        if (distance > 80) closeSheet();
+      });
+      handle.addEventListener('touchcancel', function () {
+        dragging = false;
+        sheet.style.transform = '';
+      });
+    });
+  </script>
+</body>
+</html>
